@@ -294,17 +294,17 @@ public class Sales extends AppCompatActivity {
                         String pcs=rs.getString("pcs"),qty=rs.getString("qty"),
                                 billno=rs.getString("billno"),acid=rs.getString("AcId"),
                                 rate="";
-//                        q2 = "select * from salbilldtl_view where billno='"+billno+"' and AcId='"+acid+"' and  FirmNo='"+fno+"' order by Srno asc;";
-//                        try{
-//                            st2 = con.createStatement();
-//                            rs2 = st2.executeQuery(q2);
-//                            while (rs2.next()) {
-//                                rate=rs2.getString("Rate_Disc");
-//                            }
-//                        }
-//                        catch (Exception e){
-//                            Log.e("error",e.getMessage());
-//                        }
+                        q2 = "select * from salbilldtl_view where billno='"+billno+"' and AcId='"+acid+"' and  FirmNo='"+fno+"' order by Srno asc;";
+                        try{
+                            st2 = con.createStatement();
+                            rs2 = st2.executeQuery(q2);
+                            while (rs2.next()) {
+                                rate=rs2.getString("Rate_Disc");
+                            }
+                        }
+                        catch (Exception e){
+                            Log.e("error",e.getMessage());
+                        }
                         ArrayList.add(new SalesCardG(rs.getString("acname"), billno,
                                 rs.getString("billtype"), rs.getString("chno"),
                                 bdate, df.format(Double.parseDouble(qty)),

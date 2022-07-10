@@ -12,13 +12,6 @@
         android:layout_margin="5dp"
         android:background="@drawable/layout_bg">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="10dp"
-            android:background="@color/white" />
         <TableRow
             android:id="@+id/tr0"
             android:layout_width="match_parent"
