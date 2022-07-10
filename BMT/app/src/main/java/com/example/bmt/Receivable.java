@@ -64,6 +64,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -90,7 +91,6 @@ public class Receivable extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_receivable);
         Receivable.dialog = ProgressDialog.show(this, "", "Please wait...", true);
-
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowCustomEnabled(true);
         actionBar.setTitle("");
@@ -278,21 +278,17 @@ public class Receivable extends AppCompatActivity {
                 RecCard ele = (RecCard)gvdata.getItemAtPosition(position);
                 LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
                 View popupView = inflater.inflate(R.layout.pay_rec_popupcard, null);
-                int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+                int width = LinearLayout.LayoutParams.MATCH_PARENT;
                 int height = LinearLayout.LayoutParams.WRAP_CONTENT;
                 boolean focusable = true; // lets taps outside the popup also dismiss it
                 final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
-                popupWindow.showAtLocation(view,Gravity.CENTER, 0, 50);
-                TextView tcname = popupView.findViewById(R.id.tcname);
-                tcname.setText(ele.tcname);
-                TextView ttotbd = popupView.findViewById(R.id.ttotbd);
-                ttotbd.setText(ele.bamt);
-                TextView tpamtd = popupView.findViewById(R.id.tpamtd);
-                tpamtd.setText(ele.pamt);
-                TextView tupamtd = popupView.findViewById(R.id.tupamtd);
-                tupamtd.setText(ele.upamt);
+                popupWindow.showAtLocation(view,Gravity.CENTER, 0, 0);
+                TextView tpnamed = popupView.findViewById(R.id.tpnamed);
+                tpnamed.setText(ele.tcname);
+                TextView tphone = popupView.findViewById(R.id.tphoned);
+                tphone.setText(ele.phone);
                 GridView gvdata=(GridView) popupView.findViewById(R.id.gvdata);
-                ArrayList<SalesPopUpCardBin> ArrayList = new ArrayList<SalesPopUpCardBin>();
+                ArrayList<RecPopupCardin> ArrayList = new ArrayList<RecPopupCardin>();
                 String q = "select * from SalBillMst_Outstand where FirmNo='"+fno+"' and AcId='"+ele.AcId+"' order by BillNO asc;";
                 try{
                     ConnectionHelper conhelper = new ConnectionHelper();
@@ -300,17 +296,27 @@ public class Receivable extends AppCompatActivity {
                     if (con != null) {
                         Statement st = con.createStatement();
                         ResultSet rs = st.executeQuery(q);
+                        double count=0,sumbamt=0,sumpamt=0,sumuamt=0;
+                        NumberFormat df2 = new DecimalFormat("#0.00");
                         while (rs.next()) {
                             String bdate=rs.getString("BillDate").split(" ")[0];
                             Date date = sdate.parse(bdate);
                             bdate = adate.format(date);
-                            ArrayList.add(new SalesPopUpCardBin(rs.getString("BillNO"), rs.getString("BillAmount")
-                                    , rs.getString("PaidAmt"), rs.getString("UnPaidAmt")
-                                    , bdate));
+                            String billamt=rs.getString("BillAmount"),pamt=rs.getString("PaidAmt"),uamt=rs.getString("UnPaidAmt");
+                            ArrayList.add(new RecPopupCardin(bdate,rs.getString("BillNO"),df2.format(Double.parseDouble(billamt))
+                                    ,rs.getString("days"), df2.format(Double.parseDouble(pamt)), df2.format(Double.parseDouble(uamt))
+                                    , ""));
+                            sumbamt+=Double.parseDouble(billamt);
+                            sumpamt+=Double.parseDouble(pamt);
+                            sumuamt+=Double.parseDouble(uamt);
+                            count++;
                         }
                         con.close();
+                        ArrayList.add(new RecPopupCardin("Total -->>",String.valueOf((int)count) ,df2.format(sumbamt)
+                                ,"", df2.format(sumpamt), df2.format(sumuamt)
+                                , ""));
                     }
-                    sbinadapter ada = new sbinadapter(getApplicationContext(), ArrayList);
+                    recinadapter ada = new recinadapter(getApplicationContext(), ArrayList);
                     gvdata.setAdapter(ada);
                 }
                 catch (Exception e){
@@ -399,7 +405,7 @@ public class Receivable extends AppCompatActivity {
                                         table.addCell(new Cell().add(new Paragraph(rs.getString("days"))).setBorder(Border.NO_BORDER).setBackgroundColor(b ? new DeviceRgb(232,232,232) : ColorConstants.WHITE));
                                         table.addCell(new Cell().add(new Paragraph(rs.getString("paidamt"))).setBorder(Border.NO_BORDER).setBackgroundColor(b ? new DeviceRgb(232,232,232) : ColorConstants.WHITE));
                                         table.addCell(new Cell().add(new Paragraph(rs.getString("unpaidamt"))).setBorder(Border.NO_BORDER).setBackgroundColor(b ? new DeviceRgb(232,232,232) : ColorConstants.WHITE));
-                                        String q1 = "select * from Billmst where FirmNo='"+fno+"' and billno='"+bno+"';";
+                                        String q1 = "select * from salBillmst where FirmNo='"+fno+"' and billno='"+bno+"';";
                                         Statement st1 = con.createStatement();
                                         ResultSet rs1 = st1.executeQuery(q1);
                                         Date pduedate = bdate;

@@ -63,6 +63,7 @@ public class Purchase extends AppCompatActivity {
     DateFormat adate,sdate;
     Dictionary data;
     List<String> list;
+    String gstno;
     public static ProgressDialog dialog;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -247,13 +248,21 @@ public class Purchase extends AppCompatActivity {
     public void getdata() {
         ArrayList<PurchaseCard> ArrayList = new ArrayList<PurchaseCard>();
         gvdata = (GridView) findViewById(R.id.gvdata);
+        String fno = pref.getString("fno", null);
         TextView tfname = (TextView) findViewById(R.id.tcname);
         tfname.setText(pref.getString("fname",null));
         try {
-            ConnectionHelper conhelper = new ConnectionHelper();
-            con = conhelper.connectionclass();
+            ConnectionHelper conhelper= new ConnectionHelper();
+            con=conhelper.connectionclass();
+            String softtype=pref.getString("soft_type",null);
+            String q2="select * from Firm_mst where firmno='"+fno+"'";
+            Statement st2 = con.createStatement();
+            ResultSet rs2 = st2.executeQuery(q2);
+            gstno="";
+            while (rs2.next()){
+                gstno=rs2.getString("gstno");
+            }
             if (con != null) {
-                String fno = pref.getString("fno", null);
                 String q="";
                 if(btype.equals("All")) {
                     q = "select  * from Billmst_view where BillDate between '"+fdate+"' and '"+tdate+"' and FirmNo='"+fno+"' order by BillDate desc,B_Id desc;";
@@ -272,7 +281,7 @@ public class Purchase extends AppCompatActivity {
                             rs.getString("billtype"),bdate,
                             df.format(Double.parseDouble(rs.getString("qty"))),df.format(Double.parseDouble(rs.getString("pcs"))),
                             rs.getString("taxable_amt"), rs.getString("gstrs"),
-                            rs.getString("billamount"), rs.getString("B_Id")));
+                            rs.getString("billamount"), rs.getString("B_Id"),rs.getString("acId")));
                 }
                 con.close();
                 purada = new padapter(this, ArrayList);
@@ -285,25 +294,21 @@ public class Purchase extends AppCompatActivity {
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         PurchaseCard ele = (PurchaseCard) gvdata.getItemAtPosition(position);
                         LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-                        View popupView = inflater.inflate(R.layout.sales_popupcard_b, null);
-                        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+                        View popupView = inflater.inflate(R.layout.purchase_popupcard, null);
+                        int width = LinearLayout.LayoutParams.MATCH_PARENT;
                         int height = LinearLayout.LayoutParams.WRAP_CONTENT;
                         boolean focusable = true; // lets taps outside the popup also dismiss it
                         final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
-                        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 50);
-                        TextView tcname = popupView.findViewById(R.id.tcname);
+                        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+                        TextView tcname = popupView.findViewById(R.id.tpnamed);
                         tcname.setText(ele.tcname);
                         TextView tbnod = popupView.findViewById(R.id.tbnod);
                         tbnod.setText(ele.bno);
                         TextView tbdated = popupView.findViewById(R.id.tbdated);
                         tbdated.setText(ele.bdate);
-                        TextView ttotqd = popupView.findViewById(R.id.ttotqd);
-                        ttotqd.setText(ele.qty);
-                        TextView ttaxad = popupView.findViewById(R.id.ttaxad);
-                        ttaxad.setText(ele.taxa);
-                        TextView tgstad = popupView.findViewById(R.id.tgstad);
-                        tgstad.setText(ele.gsta);
-                        TextView tbillad = popupView.findViewById(R.id.tbillad);
+                        TextView tgstnd = popupView.findViewById(R.id.tgstnd);
+                        tgstnd.setText(gstno);
+                        TextView tbillad = popupView.findViewById(R.id.ttbilld);
                         tbillad.setText(ele.bamt);
                         Button bc = popupView.findViewById(R.id.bclose);
                         GridView gvdata = popupView.findViewById(R.id.gvdata);
@@ -313,17 +318,33 @@ public class Purchase extends AppCompatActivity {
                                 popupWindow.dismiss();
                             }
                         });
-                        ArrayList<SalesPopUpCardBin> ArrayList = new ArrayList<SalesPopUpCardBin>();
-                        String q = "select * from Billdtl_view where B_MstId='"+ele.bno+"' and AcId='"+ele.SB_Id+"' and  FirmNo='"+fno+"' order by Srno asc;";
-                        try{
+                        ArrayList<SalesPopUpCardGin> ArrayList = new ArrayList<>();
+                        String q = "select * from Billdtl_view where B_MstId='"+ele.B_Id+"' and AcId='"+ele.acid+"' and  FirmNo='"+fno+"' order by Srno asc;";
+                        try {
+                            ConnectionHelper conhelper = new ConnectionHelper();
+                            con = conhelper.connectionclass();
                             Statement st = con.createStatement();
                             ResultSet rs = st.executeQuery(q);
+                            int i=1;
+                            NumberFormat df = new DecimalFormat("#0.000");
+                            NumberFormat df2 = new DecimalFormat("#0.00");
+                            NumberFormat df0 = new DecimalFormat("#0");
+                            double sumpcs=0, summtr=0, sumamt=0;
                             while (rs.next()) {
-                                ArrayList.add(new SalesPopUpCardBin(
-                                        rs.getString("Qnty")," X ",rs.getString("Rate_Disc")+" "+rs.getString("CDP")," = ",rs.getString("Amt")));
+                                String pcs=rs.getString("Pcs"),mtr=rs.getString("Mtrs"),amt=rs.getString("Amt");
+                                sumpcs+=Double.parseDouble(pcs);
+                                summtr+=Double.parseDouble(mtr);
+                                sumamt+=Double.parseDouble(amt);
+                                ArrayList.add(new SalesPopUpCardGin(String.valueOf(i), rs.getString("Prodname"), "-", df0.format(Double.parseDouble(rs.getString("Pcs")))
+                                        , df.format(Double.parseDouble(rs.getString("Mtrs"))), "-", df2.format(Double.parseDouble(rs.getString("Rate_Disc")))
+                                        , df2.format(Double.parseDouble(rs.getString("Amt")))));
+                                i++;
                             }
                             con.close();
-                            sbinadapter ada = new sbinadapter(getApplicationContext(), ArrayList);
+                            ArrayList.add(new SalesPopUpCardGin("", "Total -->>", "", df0.format(Double.parseDouble(String.valueOf(sumpcs)))
+                                    , df.format(Double.parseDouble(String.valueOf(summtr))), "",""
+                                    , df2.format(Double.parseDouble(String.valueOf(sumamt)))));
+                            sginadapter ada = new sginadapter(Purchase.this, ArrayList);
                             gvdata.setAdapter(ada);
                         }
                         catch (Exception e){

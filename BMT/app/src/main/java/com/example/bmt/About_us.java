@@ -47,6 +47,7 @@ public class About_us extends AppCompatActivity {
     List<String> list;
     public static ProgressDialog dialog;
     @SuppressLint("ResourceAsColor")
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

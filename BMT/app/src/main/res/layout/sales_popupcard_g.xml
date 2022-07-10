@@ -338,8 +338,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tt"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:numColumns="1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -387,7 +387,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/gvdata"
-            android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp">
             <TextView
@@ -411,15 +410,15 @@
             <TextView
                 android:id="@+id/tdisd"
                 android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight=".4"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
                 android:gravity="right"
-                android:textSize="12dp"
                 android:shadowColor="@color/black"
                 android:shadowDx="-3"
                 android:shadowDy="3"
-                android:shadowRadius="2"/>
+                android:shadowRadius="2"
+                android:textColor="@color/white"
+                android:textSize="12dp" />
                 android:shadowRadius="2"/>
         </TableRow>
         <TableRow
@@ -484,16 +483,16 @@
             <TextView
                 android:id="@+id/tsgstd"
                 android:layout_width="0dp"
+                android:layout_height="16dp"
                 android:layout_weight=".4"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
                 android:ems="10"
                 android:gravity="right"
-                android:textSize="10dp"
                 android:shadowColor="@color/black"
                 android:shadowDx="-3"
                 android:shadowDy="3"
-                android:shadowRadius="2"/>
+                android:shadowRadius="2"
+                android:textColor="@color/white"
+                android:textSize="12dp" />
         </TableRow>
         <TableRow
             android:id="@+id/tr6"
@@ -557,7 +556,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
                 android:ems="10"
-                android:textSize="10dp" />
+                android:textSize="12dp" />
         </TableRow>
         <TableRow
             android:id="@+id/tr7"
@@ -674,7 +673,7 @@
                 android:layout_weight=".4"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
-                android:textSize="10dp"
+                android:textSize="12dp"
                 android:gravity="right"
                 android:shadowColor="@color/black"
                 android:shadowDx="-3"
@@ -716,7 +715,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
                 android:gravity="right"
-                android:textSize="10dp"
+                android:textSize="12dp"
                 android:shadowColor="@color/black"
                 android:shadowDx="-3"
                 android:shadowDy="3"
@@ -761,7 +760,7 @@
                 android:shadowDy="3"
                 android:shadowRadius="2"
                 android:textColor="@color/white"
-                android:textSize="10dp" />
+                android:textSize="12dp" />
         </TableRow>
 
         <View

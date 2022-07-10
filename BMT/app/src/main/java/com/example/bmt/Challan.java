@@ -269,27 +269,17 @@ public class Challan extends AppCompatActivity {
                         ChallanCardG ele = (ChallanCardG) gvdata.getItemAtPosition(position);
                         LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
                         View popupView = inflater.inflate(R.layout.challan_popupcard_g, null);
-                        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+                        int width = LinearLayout.LayoutParams.MATCH_PARENT;
                         int height = LinearLayout.LayoutParams.WRAP_CONTENT;
                         boolean focusable = true; // lets taps outside the popup also dismiss it
                         final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
-                        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 50);
-                        TextView tcname = popupView.findViewById(R.id.tcname);
+                        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+                        TextView tcname = popupView.findViewById(R.id.tpnamed);
                         tcname.setText(ele.tcname);
-                        TextView tchnod = popupView.findViewById(R.id.tchnod);
+                        TextView tchnod = popupView.findViewById(R.id.tbnod);
                         tchnod.setText(ele.chno);
-                        TextView tchdd = popupView.findViewById(R.id.tchdd);
+                        TextView tchdd = popupView.findViewById(R.id.tbdated);
                         tchdd.setText(ele.chd);
-                        TextView tpcsd = popupView.findViewById(R.id.tpcsd);
-                        tpcsd.setText(ele.pcs);
-                        TextView ttotwtd = popupView.findViewById(R.id.ttotwtd);
-                        ttotwtd.setText(ele.weight);
-                        TextView ttomtrsd = popupView.findViewById(R.id.ttomtrsd);
-                        ttomtrsd.setText(ele.mtr);
-                        TextView tchamtd = popupView.findViewById(R.id.tchamtd);
-                        tchamtd.setText(ele.chamt);
-                        TextView tdepd = popupView.findViewById(R.id.tdepd);
-                        tdepd.setText(ele.dp);
                         Button bc = popupView.findViewById(R.id.bclose);
                         GridView gvdata = popupView.findViewById(R.id.gvdata);
                         bc.setOnClickListener(new View.OnClickListener() {
@@ -298,7 +288,7 @@ public class Challan extends AppCompatActivity {
                                 popupWindow.dismiss();
                             }
                         });
-                        ArrayList<SalesPopUpCardBin> ArrayList = new ArrayList<SalesPopUpCardBin>();
+                        ArrayList<PurchasePopupCardin> ArrayList = new ArrayList<PurchasePopupCardin>();
                         String q = "select * from chalandtlview_G where Ch_id='"+ele.C_Id+"' and  FirmNo='"+fno+"' order by Srno asc";
                         try{
                             Statement st = con.createStatement();
@@ -306,13 +296,13 @@ public class Challan extends AppCompatActivity {
                             NumberFormat df = new DecimalFormat("#0.000");
                             NumberFormat df2 = new DecimalFormat("#0.00");
                             while (rs.next()) {
-                                ArrayList.add(new SalesPopUpCardBin(
+                                ArrayList.add(new PurchasePopupCardin(
                                         rs.getString("TakaNO"),df.format(Double.parseDouble(rs.getString("Pcs"))),
                                         df.format(Double.parseDouble(rs.getString("Mtrs"))),
                                         df2.format(Double.parseDouble(rs.getString("Rate"))),
                                         rs.getString("RC2")));
                             }
-                            sbinadapter ada = new sbinadapter(getApplicationContext(), ArrayList);
+                            pinadapter ada = new pinadapter(getApplicationContext(), ArrayList);
                             gvdata.setAdapter(ada);
                         }
                         catch (Exception e){

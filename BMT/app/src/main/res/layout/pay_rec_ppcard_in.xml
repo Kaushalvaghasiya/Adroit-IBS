@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--XML implementation of Card Layout-->
+<androidx.cardview.widget.CardView
+    android:id="@+id/cdv"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardElevation="5dp"
+    app:cardBackgroundColor="@color/white">
+    <LinearLayout
+        android:id="@+id/ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="2pt"
+        android:layout_marginBottom="2pt"
+        android:paddingRight="5dp">
+        <TableLayout
+            android:id="@+id/tt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TableRow
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tdata1"
+                    android:layout_width="0dp"
+                    android:layout_weight=".02"
+                    android:layout_height="wrap_content"
+                    android:text="Date"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="9dp"></TextView>
+
+                <TextView
+                    android:id="@+id/tdata2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Bill No"
+                    android:layout_weight=".015"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="9dp"></TextView>
+
+                <TextView
+                    android:id="@+id/tdata3"
+                    android:layout_width="0dp"
+                    android:layout_weight=".02"
+                    android:layout_height="wrap_content"
+                    android:text="Bill Amount"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="9dp"></TextView>
+
+                <TextView
+                    android:id="@+id/tdata4"
+                    android:layout_width="0dp"
+                    android:layout_weight=".008"
+                    android:layout_height="wrap_content"
+                    android:text="Days"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="9dp"></TextView>
+
+                <TextView
+                    android:id="@+id/tdata5"
+                    android:layout_width="0dp"
+                    android:layout_weight=".02"
+                    android:layout_height="wrap_content"
+                    android:text="Paid Amount"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="9dp"></TextView>
+
+                <TextView
+                    android:id="@+id/tdata6"
+                    android:layout_width="0dp"
+                    android:layout_weight=".02"
+                    android:layout_height="wrap_content"
+                    android:text="Unpaid Amount"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="9dp"></TextView>
+
+                <TextView
+                    android:id="@+id/tdata7"
+                    android:layout_width="0dp"
+                    android:layout_weight=".017"
+                    android:layout_height="wrap_content"
+                    android:text="Intereset Amount"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="9dp"></TextView>
+
+            </TableRow>
+        </TableLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

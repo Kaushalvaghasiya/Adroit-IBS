@@ -3,187 +3,279 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="20dp"
-    android:background="@color/blue">
-
-    <TextView
-        android:id="@+id/tcname"
+    android:fadingEdgeLength="10dp"
+    android:requiresFadingEdge="vertical">
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
-        android:text="Data"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="10dp" />
+        android:layout_margin="5dp"
+        android:background="@drawable/layout_bg">
 
-
-    <TableLayout
-        android:id="@+id/tt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
-        android:layout_below="@+id/tcname"
-        android:stretchColumns="*">
-    <TableRow
-        android:layout_width="0dp"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:text="Bill\nNo"
-            android:textColor="@color/white"
-            android:textAlignment="center"
-            android:textSize="8dp"></TextView>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:text="Bill\nAmount"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="8dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:text="Paid\nAmount"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="8dp"></TextView>
-
-        <TextView
-            android:textColor="@color/white"
-            android:layout_width="wrap_content"
-            android:textAlignment="center"
-            android:text="Unpaid\nAmount"
-            android:textSize="8dp" />
-        <TextView
-            android:textColor="@color/white"
-            android:layout_width="wrap_content"
-            android:textAlignment="center"
-            android:text="Bill\nDate"
-            android:textSize="8dp" />
-    </TableRow>
-    </TableLayout>
-
-    <com.example.bmt.MyGridView
-        android:id="@+id/gvdata"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tt"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
-        android:numColumns="1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tt"
-        app:layout_constraintVertical_bias="0.332" />
-
-
-    <TableRow
-        android:id="@+id/tr2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/gvdata"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp">
-
-        <TextView
-            android:id="@+id/ttotb"
-            android:layout_width="160dp"
+        <TableRow
+            android:id="@+id/tr0"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Total Bill Amount"
-            android:textColor="@color/white"
-            android:textSize="8dp"></TextView>
-        <TextView
-            android:id="@+id/ttotbd"
-            android:layout_height="wrap_content"
-            android:text="data"
-            android:gravity="right"
-            android:textColor="@color/white"
-            android:textSize="8dp"></TextView>
-    </TableRow>
-    <TableRow
-        android:id="@+id/tr3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tr2"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp">
+            android:layout_margin="10dp">
+            <TextView
+                android:id="@+id/tpname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Party : "
+                android:textColor="@color/white"
+                android:textSize="13dp"
+                android:shadowColor="@color/black"
+                android:shadowDx="-3"
+                android:shadowDy="3"
+                android:shadowRadius="2"></TextView>
+            <TextView
+                android:id="@+id/tpnamed"
+                android:layout_width="0dp"
+                android:layout_weight=".98"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:shadowColor="@color/black"
+                android:shadowDx="-3"
+                android:shadowDy="3"
+                android:shadowRadius="2"
+                android:textColor="@color/white"
+                android:textSize="13dp" />
 
-        <TextView
-            android:id="@+id/tpamt"
-            android:layout_width="160dp"
+        </TableRow>
+        <TableRow
+            android:id="@+id/tra2"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Paid Amount"
-            android:textColor="@color/white"
-            android:textSize="8dp"></TextView>
-        <TextView
-            android:id="@+id/tpamtd"
-            android:layout_height="wrap_content"
-            android:text="data"
-            android:gravity="right"
-            android:textColor="@color/white"
-            android:textSize="8dp"></TextView>
-    </TableRow>
-    <TableRow
-        android:id="@+id/tr4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tr3"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp">
+            android:layout_below="@+id/tr0"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
 
-        <TextView
-            android:id="@+id/tupamt"
-            android:layout_width="160dp"
-            android:layout_height="wrap_content"
-            android:text="Unpaid Amount"
-            android:textColor="@color/white"
-            android:textSize="8dp"></TextView>
-        <TextView
-            android:id="@+id/tupamtd"
-            android:layout_height="wrap_content"
-            android:text="data"
-            android:gravity="right"
-            android:textColor="@color/white"
-            android:textSize="8dp"></TextView>
-    </TableRow>
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tr4"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
-        android:gravity="right">
-        <ImageButton
-            android:id="@+id/tdpdf"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@color/blue"
-            android:layout_margin="10dp"
-            android:src="@android:drawable/stat_sys_download_done"
-            android:textSize="10dp" />
-        <Button
-            android:id="@+id/bclose"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:textSize="8dp"
-            android:backgroundTint="@color/red"
-            android:text="Close" />
+            <TextView
+                android:id="@+id/tphone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:shadowColor="@color/black"
+                android:shadowDx="-3"
+                android:shadowDy="3"
+                android:shadowRadius="2"
+                android:text="Phone : "
+                android:textColor="@color/white"
+                android:textSize="13dp"></TextView>
 
-    </TableRow>
+            <TextView
+                android:id="@+id/tphoned"
+                android:layout_width="0dp"
+                android:layout_weight=".98"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:ems="10"
+                android:textSize="13dp"
+                android:shadowColor="@color/black"
+                android:shadowDx="-3"
+                android:shadowDy="3"
+                android:shadowRadius="2"/>
+        </TableRow>
 
+        <TableRow
+            android:id="@+id/tr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tra2"
+            android:layout_margin="10dp">
+
+            <TextView
+                android:id="@+id/tbro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:shadowColor="@color/black"
+                android:shadowDx="-3"
+                android:shadowDy="3"
+                android:shadowRadius="2"
+                android:text="Broker : "
+                android:textColor="@color/white"
+                android:textSize="13dp"></TextView>
+
+            <TextView
+                android:id="@+id/tbrod"
+                android:layout_width="0dp"
+                android:layout_weight=".98"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:ems="10"
+                android:textSize="13dp"
+                android:shadowColor="@color/black"
+                android:shadowDx="-3"
+                android:shadowDy="3"
+                android:shadowRadius="2"/>
+        </TableRow>
+
+
+        <TableLayout
+            android:id="@+id/tt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tr"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/gray"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:stretchColumns="*">
+
+            <TableRow
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".02"
+                    android:shadowColor="@color/black"
+                    android:shadowDx="-3"
+                    android:shadowDy="3"
+                    android:shadowRadius="2"
+                    android:text="Date"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="9dp"
+                    android:textStyle="bold"></TextView>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".015"
+                    android:shadowColor="@color/black"
+                    android:shadowDx="-3"
+                    android:shadowDy="3"
+                    android:shadowRadius="2"
+                    android:text="Bill No"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="9dp"
+                    android:textStyle="bold"></TextView>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".02"
+                    android:shadowColor="@color/black"
+                    android:shadowDx="-3"
+                    android:shadowDy="3"
+                    android:shadowRadius="2"
+                    android:text="Bill Amount"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="9dp"
+                    android:textStyle="bold"></TextView>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".008"
+                    android:shadowColor="@color/black"
+                    android:shadowDx="-3"
+                    android:shadowDy="3"
+                    android:shadowRadius="2"
+                    android:text="Days"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="9dp"
+                    android:textStyle="bold"></TextView>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".02"
+                    android:shadowColor="@color/black"
+                    android:shadowDx="-3"
+                    android:shadowDy="3"
+                    android:shadowRadius="2"
+                    android:text="Paid Amount"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="9dp"
+                    android:textStyle="bold"></TextView>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".02"
+                    android:shadowColor="@color/black"
+                    android:shadowDx="-3"
+                    android:shadowDy="3"
+                    android:shadowRadius="2"
+                    android:text="Unpaid Amount"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="9dp"
+                    android:textStyle="bold"></TextView>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".018"
+                    android:shadowColor="@color/black"
+                    android:shadowDx="-3"
+                    android:shadowDy="3"
+                    android:shadowRadius="2"
+                    android:text="Interest Amount"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="9dp"
+                    android:textStyle="bold"></TextView>
+            </TableRow>
+        </TableLayout>
+        <com.example.bmt.MyGridView
+            android:id="@+id/gvdata"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tt"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:numColumns="1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.504"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tt"
+            app:layout_constraintVertical_bias="0.332" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_below="@+id/gvdata"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@color/white" />
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/gvdata"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:gravity="right">
+
+            <ImageButton
+                android:id="@+id/tdpdf"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@color/blue"
+                android:layout_margin="10dp"
+                android:src="@android:drawable/stat_sys_download_done"
+                android:textSize="10dp" />
+            <Button
+                android:id="@+id/bclose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:backgroundTint="@color/red"
+                android:shadowColor="@color/black"
+                android:shadowDx="-3"
+                android:shadowDy="3"
+                android:shadowRadius="2"
+                android:text="Close"
+                android:textSize="11dp" />
+        </TableRow>
 </RelativeLayout>
 </ScrollView>

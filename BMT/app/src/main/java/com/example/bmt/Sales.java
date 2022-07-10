@@ -290,26 +290,13 @@ public class Sales extends AppCompatActivity {
                         Date date = sdate.parse(bdate);
                         bdate = adate.format(date);
                         NumberFormat df = new DecimalFormat("#0.000");
-                        NumberFormat df2 = new DecimalFormat("#0.00");
                         String pcs=rs.getString("pcs"),qty=rs.getString("qty"),
                                 billno=rs.getString("billno"),acid=rs.getString("AcId"),
                                 rate="";
-//                        q2 = "select * from salbilldtl_view where billno='"+billno+"' and AcId='"+acid+"' and  FirmNo='"+fno+"' order by Srno asc;";
-//                        try{
-//                            st2 = con.createStatement();
-//                            rs2 = st2.executeQuery(q2);
-//                            while (rs2.next()) {
-//                                rate=rs2.getString("Rate_Disc");
-//                            }
-//                        }
-//                        catch (Exception e){
-//                            Log.e("error",e.getMessage());
-//                        }
                         ArrayList.add(new SalesCardG(rs.getString("acname"), billno,
                                 rs.getString("billtype"), rs.getString("chno"),
                                 bdate, df.format(Double.parseDouble(qty)),
-                                df.format(Double.parseDouble(pcs)),"" ,
-//                                df2.format(Double.parseDouble(rate)),
+                                df.format(Double.parseDouble(pcs)),
                                 rs.getString("taxable_amt"), rs.getString("gstrs"),
                                 rs.getString("billamount"),acid));
                     }
@@ -374,7 +361,6 @@ public class Sales extends AppCompatActivity {
                                     , df.format(Double.parseDouble(String.valueOf(summtr))), "",""
                                     , df2.format(Double.parseDouble(String.valueOf(sumamt)))));
                             sginadapter ada = new sginadapter(Sales.this, ArrayList);
-
                             gvdata.setAdapter(ada);
                         }
                         catch (Exception e){

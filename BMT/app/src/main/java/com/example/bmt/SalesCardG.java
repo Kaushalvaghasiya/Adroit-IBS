@@ -18,9 +18,9 @@ import androidx.annotation.RequiresApi;
 import java.util.ArrayList;
 
 public class SalesCardG {
-    String bno,btype,chno,bdate,totmrts,pcs,wt,taxa,gsta,bamt,tcname,AcId;
+    String bno,btype,chno,bdate,totmrts,pcs,taxa,gsta,bamt,tcname,AcId;
 
-    public SalesCardG(String tcname,String bno, String btype,String chno,String bdate,String totmrts,String pcs,String wt,String taxa,String gsta,String bamt,String AcId) {
+    public SalesCardG(String tcname,String bno, String btype,String chno,String bdate,String totmrts,String pcs,String taxa,String gsta,String bamt,String AcId) {
         this.tcname=tcname;
         this.bno = bno;
         this.btype = btype;
@@ -28,7 +28,6 @@ public class SalesCardG {
         this.bdate = bdate;
         this.totmrts = totmrts;
         this.pcs = pcs;
-        this.wt = wt;
         this.taxa = taxa;
         this.gsta = gsta;
         this.bamt = bamt;
@@ -73,7 +72,6 @@ class sgadapter extends BaseAdapter implements Filterable {
         TextView bdate = listitemView.findViewById(R.id.tbilldd);
         TextView totmrts = listitemView.findViewById(R.id.ttomtrsd);
         TextView pcs = listitemView.findViewById(R.id.tpcsd);
-        TextView wt = listitemView.findViewById(R.id.trated);
         TextView taxa = listitemView.findViewById(R.id.ttaxad);
         TextView gsta = listitemView.findViewById(R.id.tgstad);
         TextView bamt = listitemView.findViewById(R.id.tbillad);
@@ -84,7 +82,6 @@ class sgadapter extends BaseAdapter implements Filterable {
         bdate.setText(courseModel.bdate);
         totmrts.setText(courseModel.totmrts);
         pcs.setText(courseModel.pcs);
-        wt.setText(courseModel.wt);
         taxa.setText(courseModel.taxa);
         gsta.setText(courseModel.gsta);
         bamt.setText(courseModel.bamt);

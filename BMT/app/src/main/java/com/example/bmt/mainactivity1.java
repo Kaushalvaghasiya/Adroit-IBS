@@ -31,8 +31,8 @@ public class mainactivity1 extends AppCompatActivity {
     public static ProgressDialog dialog;
 
     private String getMyPhoneNO() {
-//        return "d1e0998448ccbced";
-        return Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
+        return "d1e0998448ccbced";
+//        return Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {

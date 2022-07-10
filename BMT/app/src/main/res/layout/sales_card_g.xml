@@ -110,26 +110,6 @@
             android:paddingRight="5dp">
 
             <TextView
-                android:id="@+id/trate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Rate"
-                android:textSize="15dp" />
-            <TextView
-                android:id="@+id/trated"
-                android:layout_width="fill_parent"
-                android:textSize="15dp"
-                android:gravity="right"
-                android:layout_height="wrap_content"
-                android:text="0.00" />
-        </TableRow>
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp">
-
-            <TextView
                 android:id="@+id/tpcs"
                 android:layout_width="wrap_content"
                 android:textSize="15dp"
