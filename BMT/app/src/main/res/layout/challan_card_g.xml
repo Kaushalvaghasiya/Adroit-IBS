@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--XML implementation of Card Layout-->
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="50pt"
+    app:cardElevation="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tcname"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/app_name"
+            android:textAlignment="center"
+            android:textSize="18dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:background="@color/lightyellow" />
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+
+            <TextView
+                android:id="@+id/tdp"
+                android:layout_width="140dp"
+                android:textSize="15dp"
+                android:layout_height="match_parent"
+                android:text="Delivery Party"/>
+            <TextView
+                android:id="@+id/tdpd"
+                android:textSize="15dp"
+                android:layout_height="wrap_content"
+                android:text="data"
+                android:gravity="right" />
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+
+            <TextView
+                android:id="@+id/ttrans"
+                android:layout_width="140dp"
+                android:layout_height="match_parent"
+                android:text="Transporter"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/ttransd"
+                android:layout_width="match_parent"
+                android:textSize="15dp"
+                android:layout_height="wrap_content"
+                android:text="data"
+                android:gravity="right" />
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+
+            <TextView
+                android:id="@+id/tchno"
+                android:textSize="15dp"
+                android:layout_width="140dp"
+                android:layout_height="match_parent"
+                android:text="Challan No."/>
+            <TextView
+                android:id="@+id/tchnod"
+                android:textSize="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="data"
+                android:gravity="right" />
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+
+            <TextView
+                android:id="@+id/tchd"
+                android:layout_width="140dp"
+                android:textSize="15dp"
+                android:layout_height="match_parent"
+                android:text="Challan Date"/>
+            <TextView
+                android:id="@+id/tchdd"
+                android:layout_width="match_parent"
+                android:textSize="15dp"
+                android:layout_height="wrap_content"
+                android:text="data"
+                android:gravity="right" />
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+
+            <TextView
+                android:id="@+id/trate"
+                android:layout_width="140dp"
+                android:textSize="15dp"
+                android:layout_height="match_parent"
+                android:text="Rate" />
+            <TextView
+                android:id="@+id/trated"
+                android:textSize="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="data"
+                android:gravity="right"/>
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+
+            <TextView
+                android:id="@+id/tratet"
+                android:layout_width="140dp"
+                android:textSize="15dp"
+                android:layout_height="match_parent"
+                android:text="RTime"/>
+            <TextView
+                android:id="@+id/tratetd"
+                android:layout_width="match_parent"
+                android:textSize="15dp"
+                android:layout_height="wrap_content"
+                android:text="data"
+                android:gravity="right" />
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+
+            <TextView
+                android:id="@+id/tpcs"
+                android:layout_width="140dp"
+                android:textSize="15dp"
+                android:layout_height="match_parent"
+                android:text="Taka/Pcs"/>
+            <TextView
+                android:id="@+id/tpcsd"
+                android:layout_width="match_parent"
+                android:textSize="15dp"
+                android:layout_height="wrap_content"
+                android:text="data"
+                android:gravity="right" />
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+
+            <TextView
+                android:id="@+id/tweight"
+                android:layout_width="140dp"
+                android:textSize="15dp"
+                android:layout_height="match_parent"
+                android:text="Cut" />
+            <TextView
+                android:id="@+id/tweightd"
+                android:layout_width="match_parent"
+                android:textSize="15dp"
+                android:layout_height="wrap_content"
+                android:text="data"
+                android:gravity="right" />
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+
+            <TextView
+                android:id="@+id/tmtr"
+                android:layout_width="140dp"
+                android:textSize="15dp"
+                android:layout_height="match_parent"
+                android:text="Mtr/Qty"/>
+            <TextView
+                android:id="@+id/tmtrd"
+                android:layout_width="match_parent"
+                android:textSize="15dp"
+                android:layout_height="wrap_content"
+                android:text="data"
+                android:gravity="right" />
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/blue"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+
+            <TextView
+                android:id="@+id/tchamt"
+                android:textSize="16dp"
+                android:layout_width="140dp"
+                android:layout_height="match_parent"
+                android:text="Ch. Amount"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:shadowColor="@color/black"
+                android:shadowDx="-3"
+                android:shadowDy="3"
+                android:shadowRadius="2"/>
+            <TextView
+                android:id="@+id/tchamtd"
+                android:layout_width="match_parent"
+                android:textSize="16dp"
+                android:gravity="right"
+                android:layout_height="wrap_content"
+                android:text="data"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:shadowColor="@color/black"
+                android:shadowDx="-3"
+                android:shadowDy="3"
+                android:shadowRadius="2"/>
+        </TableRow>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

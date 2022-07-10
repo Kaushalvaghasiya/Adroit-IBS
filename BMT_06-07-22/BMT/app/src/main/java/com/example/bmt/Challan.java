@@ -1,0 +1,525 @@
+package com.example.bmt;
+
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+
+import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.icu.util.Calendar;
+import android.os.Build;
+import android.os.Bundle;
+import android.text.Editable;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.GridView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.Spinner;
+import android.widget.TextView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Dictionary;
+import java.util.Hashtable;
+import java.util.List;
+
+public class Challan extends AppCompatActivity {
+    SharedPreferences pref;
+    Connection con;
+    String fdate,tdate;
+    cadapter cada;
+    cgadapter cgada;
+    cyadapter cyada;
+    DateFormat adate,sdate;
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    @SuppressLint("ResourceAsColor")
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_challan);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowCustomEnabled(true);
+        actionBar.setTitle("");
+        LayoutInflater inflator = (LayoutInflater) this .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View v = inflator.inflate(R.layout.custom_imgview, null);
+        actionBar.setCustomView(v);
+        TextView tcp = findViewById(R.id.tcp);
+        Spannable wordtoSpan = new SpannableString("Copyright 2022 Adro'iT iBS. All rights reserved.");
+        wordtoSpan.setSpan(new ForegroundColorSpan(Color.BLUE), 15, 26, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        tcp.setText(wordtoSpan);
+        sdate = new SimpleDateFormat("yyyy-MM-dd");
+        adate = new SimpleDateFormat("dd-MM-yyyy");
+        Date date = new Date();
+        tdate=sdate.format(date);
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.add(Calendar.MONTH, -1);
+        date = cal.getTime();
+        fdate=sdate.format(date);
+        pref = getSharedPreferences("user_details",MODE_PRIVATE);
+        Spinner tfname = (Spinner) findViewById(R.id.tcname);
+        Dictionary data;
+        data= new Hashtable();
+        List<String> list = new ArrayList<String>();
+        try {
+            ConnectionHelper conhelper = new ConnectionHelper();
+            con = conhelper.connectionclass();
+            if (con != null) {
+                String softype = pref.getString("soft_type", null);
+                String fc = pref.getString("fcode", null);
+                String q = "select FirmName,FirmNo,update_dttm from Firm_mst where Cust_Code='" + fc + "' and IsActive=1";
+                Statement st = con.createStatement();
+                ResultSet rs = st.executeQuery(q);
+                while (rs.next()) {
+                    String udate = rs.getString("update_dttm");
+                    Date date1 = sdate.parse(udate.split(" ")[0]);
+                    String uutdate = adate.format(date1);
+                    data.put(rs.getString("FirmName") + " (" + uutdate + " " + udate.split(" ")[1] + ")", rs.getString("FirmNo"));
+                    list.add(rs.getString("FirmName") + " (" + uutdate + " " + udate.split(" ")[1] + ")");
+                }
+                ArrayAdapter aa = new ArrayAdapter(Challan.this, R.layout.spinner_list, list);
+                aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                tfname.setAdapter(aa);
+                tfname.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        SharedPreferences.Editor editor = pref.edit();
+                        editor.putString("fname", tfname.getItemAtPosition(position).toString());
+                        editor.putString("fno", data.get(tfname.getItemAtPosition(position)).toString());
+                        editor.apply();
+                        getdata();
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+                        tfname.setSelection(tfname.getFirstVisiblePosition());
+                    }
+                });
+            }
+        }
+        catch (Exception e){
+            Log.e("error",e.getMessage());
+        }
+        getdata();
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.add_fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+                View popupView = inflater.inflate(R.layout.filter, null);
+                TextView btype=popupView.findViewById(R.id.tbtype);
+                btype.setVisibility(View.INVISIBLE);
+                Spinner sp=popupView.findViewById(R.id.tbtyped);
+                sp.setVisibility(View.INVISIBLE);
+                // create the popup window
+                int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+                int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+                boolean focusable = true; // lets taps outside the popup also dismiss it
+                final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+                popupWindow.showAtLocation(v,Gravity.CENTER, 0, 50);
+                EditText edfdate= (EditText) popupView.findViewById(R.id.fdated);
+                EditText edtdate= (EditText) popupView.findViewById(R.id.tdated);
+                Date date = null;
+                try {
+                    date = sdate.parse(fdate);
+                    String ffdate = adate.format(date);
+                    edfdate.setText(ffdate);
+                    date = sdate.parse(tdate);
+                    String ttdate = adate.format(date);
+                    edtdate.setText(ttdate);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                edfdate.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        final Calendar c = Calendar.getInstance();
+                        int mYear, mMonth, mDay;
+                        mYear = c.get(Calendar.YEAR);
+                        mMonth = c.get(Calendar.MONTH);
+                        mDay = c.get(Calendar.DAY_OF_MONTH);
+                        DatePickerDialog datePickerDialog = new DatePickerDialog(Challan.this,R.style.DialogTheme, new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year,
+                                                  int monthOfYear, int dayOfMonth) {
+                                edfdate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                            }
+                        }, mYear, mMonth, mDay);
+                        datePickerDialog.show();
+                        datePickerDialog.getButton(DatePickerDialog.BUTTON_POSITIVE).setTextColor(R.color.blue);
+                        datePickerDialog.getButton(DatePickerDialog.BUTTON_NEGATIVE).setTextColor(R.color.blue);
+                    }
+                });
+                edtdate.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        final Calendar c = Calendar.getInstance();
+                        int mYear, mMonth, mDay;
+                        mYear = c.get(Calendar.YEAR);
+                        mMonth = c.get(Calendar.MONTH);
+                        mDay = c.get(Calendar.DAY_OF_MONTH);
+                        DatePickerDialog datePickerDialog = new DatePickerDialog(Challan.this,R.style.DialogTheme, new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year,
+                                                  int monthOfYear, int dayOfMonth) {
+                                edtdate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                            }
+                        }, mYear, mMonth, mDay);
+                        datePickerDialog.show();
+                        datePickerDialog.getButton(DatePickerDialog.BUTTON_POSITIVE).setTextColor(R.color.blue);
+                        datePickerDialog.getButton(DatePickerDialog.BUTTON_NEGATIVE).setTextColor(R.color.blue);
+                    }
+                });
+                Button bc=(Button) popupView.findViewById(R.id.bclose);
+                bc.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popupWindow.dismiss();
+                    }
+                });
+                Button ba=(Button) popupView.findViewById(R.id.bapply);
+                ba.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        try {
+                            EditText edfdate = (EditText)popupView.findViewById(R.id.fdated);
+                            Date date = adate.parse(edfdate.getText().toString());
+                            fdate = sdate.format(date);
+                            EditText edtdate = (EditText)popupView.findViewById(R.id.tdated);
+                            date = adate.parse(edtdate.getText().toString());
+                            tdate = sdate.format(date);
+                            getdata();
+                            popupWindow.dismiss();
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+            }
+        });
+    }
+    public void getdata() {
+        GridView gvdata = (GridView) findViewById(R.id.gvdata);
+        String fno = pref.getString("fno", null);
+        try {
+            ConnectionHelper conhelper = new ConnectionHelper();
+            con = conhelper.connectionclass();
+            String softtype=pref.getString("soft_type",null);
+            if (softtype.equals("G")) {
+                ArrayList<ChallanCardG> ArrayList = new ArrayList<ChallanCardG>();
+                if (con != null) {
+                    String q = "select  * from ChalanMst_View_G where BillDate between '" + fdate + "' and '" + tdate + "' and FirmNo='" + fno + "' order by BillDate desc,BillNo desc;";
+                    Statement st = con.createStatement();
+                    ResultSet rs = st.executeQuery(q);
+                    while (rs.next()) {
+                        String bdate=rs.getString("billdate").split(" ")[0];
+                        Date date = sdate.parse(bdate);
+                        bdate = adate.format(date);
+                        ArrayList.add(new ChallanCardG(rs.getString("AcName"), rs.getString("Deli_Party"),
+                                rs.getString("Transport"), rs.getString("BillNo"),
+                                bdate, rs.getString("Notes"),
+                                rs.getString("RTime"), rs.getString("TotTaka"),
+                                rs.getString("TotWt"), rs.getString("TotMtrs"),
+                                rs.getString("BillAmount"),rs.getString("C_Id")));
+                    }
+                }
+                cgada= new cgadapter(this, ArrayList);
+                gvdata.setAdapter(cgada);
+                gvdata.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        ChallanCardG ele = (ChallanCardG) gvdata.getItemAtPosition(position);
+                        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+                        View popupView = inflater.inflate(R.layout.challan_popupcard_g, null);
+                        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+                        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+                        boolean focusable = true; // lets taps outside the popup also dismiss it
+                        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+                        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 50);
+                        TextView tcname = popupView.findViewById(R.id.tcname);
+                        tcname.setText(ele.tcname);
+                        TextView tchnod = popupView.findViewById(R.id.tchnod);
+                        tchnod.setText(ele.chno);
+                        TextView tchdd = popupView.findViewById(R.id.tchdd);
+                        tchdd.setText(ele.chd);
+                        TextView tpcsd = popupView.findViewById(R.id.tpcsd);
+                        tpcsd.setText(ele.pcs);
+                        TextView ttotwtd = popupView.findViewById(R.id.ttotwtd);
+                        ttotwtd.setText(ele.weight);
+                        TextView ttomtrsd = popupView.findViewById(R.id.ttomtrsd);
+                        ttomtrsd.setText(ele.mtr);
+                        TextView tchamtd = popupView.findViewById(R.id.tchamtd);
+                        tchamtd.setText(ele.chamt);
+                        TextView tdepd = popupView.findViewById(R.id.tdepd);
+                        tdepd.setText(ele.dp);
+                        Button bc = popupView.findViewById(R.id.bclose);
+                        GridView gvdata = popupView.findViewById(R.id.gvdata);
+                        bc.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                popupWindow.dismiss();
+                            }
+                        });
+                        ArrayList<SalesPopUpCardBin> ArrayList = new ArrayList<SalesPopUpCardBin>();
+                        String q = "select * from chalandtlview_G where Ch_id='"+ele.C_Id+"' and  FirmNo='"+fno+"' order by Srno asc";
+                        try{
+                            Statement st = con.createStatement();
+                            ResultSet rs = st.executeQuery(q);
+                            while (rs.next()) {
+                                ArrayList.add(new SalesPopUpCardBin(
+                                        rs.getString("TakaNO"),rs.getString("Pcs"),rs.getString("Mtrs"),
+                                        rs.getString("Rate"),rs.getString("RC2")));
+                            }
+                            sbinadapter ada = new sbinadapter(getApplicationContext(), ArrayList);
+                            gvdata.setAdapter(ada);
+                        }
+                        catch (Exception e){
+                            Log.e("error",e.getMessage());
+                        }
+                    }
+                });
+            }
+            else if (softtype.equals("Y")) {
+                ArrayList<ChallanCardY> ArrayList = new ArrayList<ChallanCardY>();
+                if (con != null) {
+                    String q = "select  * from ChalanMst_View_G where BillDate between '" + fdate + "' and '" + tdate + "' and FirmNo='" + fno + "' order by BillDate desc,BillNo desc;";
+                    Statement st = con.createStatement();
+                    ResultSet rs = st.executeQuery(q);
+                    while (rs.next()) {
+                        String bdate=rs.getString("billdate").split(" ")[0];
+                        Date date = sdate.parse(bdate);
+                        bdate = adate.format(date);
+                        ArrayList.add(new ChallanCardY(rs.getString("AcName"), rs.getString("Deli_Party"),
+                                rs.getString("Transport"), rs.getString("BillNo"),
+                                bdate, rs.getString("Grade"),
+                                rs.getString("LotNo"), rs.getString("ShadeNO"),
+                                rs.getString("TotTaka"), rs.getString("TotWt"),
+                                rs.getString("TotMtrs"),rs.getString("BillAmount"), rs.getString("C_Id")));
+                    }
+                }
+                cyada= new cyadapter(this, ArrayList);
+                gvdata.setAdapter(cyada);
+                gvdata.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        ChallanCardY ele = (ChallanCardY) gvdata.getItemAtPosition(position);
+                        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+                        View popupView = inflater.inflate(R.layout.challan_popupcard_y, null);
+                        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+                        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+                        boolean focusable = true; // lets taps outside the popup also dismiss it
+                        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+                        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 50);
+                        TextView tcname = popupView.findViewById(R.id.tcname);
+                        tcname.setText(ele.tcname);
+                        TextView tchnod = popupView.findViewById(R.id.tchnod);
+                        tchnod.setText(ele.chno);
+                        TextView tchdd = popupView.findViewById(R.id.tchdd);
+                        tchdd.setText(ele.chd);
+                        TextView tcrtnd = popupView.findViewById(R.id.tcrtnd);
+                        tcrtnd.setText(ele.totcr);
+                        TextView ttotwtd = popupView.findViewById(R.id.ttotwtd);
+                        ttotwtd.setText(ele.netwt);
+                        TextView ttotchd = popupView.findViewById(R.id.ttotchd);
+                        ttotchd.setText(ele.totch);
+                        TextView tdepd = popupView.findViewById(R.id.tdepd);
+                        tdepd.setText(ele.dp);
+                        TextView tshd = popupView.findViewById(R.id.tshd);
+                        tshd.setText(ele.shno);
+                        TextView tlotd = popupView.findViewById(R.id.tlotd);
+                        tlotd.setText(ele.lotn);
+                        TextView tgraded = popupView.findViewById(R.id.tgraded);
+                        tgraded.setText(ele.grade);
+                        Button bc = popupView.findViewById(R.id.bclose);
+                        GridView gvdata = popupView.findViewById(R.id.gvdata);
+                        bc.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                popupWindow.dismiss();
+                            }
+                        });
+                        ArrayList<SalesPopUpCardBin> ArrayList = new ArrayList<SalesPopUpCardBin>();
+                        String q = "select * from chalandtlview_G where Ch_id='"+ele.C_Id+"' and  FirmNo='"+fno+"' order by Srno asc";
+                        try{
+                            Statement st = con.createStatement();
+                            ResultSet rs = st.executeQuery(q);
+                            while (rs.next()) {
+                                ArrayList.add(new SalesPopUpCardBin(rs.getString("ProdName"),
+                                        rs.getString("TakaNO"),rs.getString("Pcs"),
+                                        rs.getString("Mtrs"),rs.getString("Grade_D")));
+                            }
+                            sbinadapter ada = new sbinadapter(getApplicationContext(), ArrayList);
+                            gvdata.setAdapter(ada);
+                        }
+                        catch (Exception e){
+                            Log.e("error",e.getMessage());
+                        }
+                    }
+                });
+            }
+            else {
+                ArrayList<ChallanCard> ArrayList = new ArrayList<ChallanCard>();
+                if (con != null) {
+                    String q = "select  * from ChalanMst_View where BillDate between '" + fdate + "' and '" + tdate + "' and FirmNo='" + fno + "' order by BillDate desc,BillNo desc;";
+                    Statement st = con.createStatement();
+                    ResultSet rs = st.executeQuery(q);
+                    while (rs.next()) {
+                        String bdate=rs.getString("billdate").split(" ")[0];
+                        Date date = sdate.parse(bdate);
+                        bdate = adate.format(date);
+                        ArrayList.add(new ChallanCard(rs.getString("AcName"), rs.getString("Deli_Party"),
+                                rs.getString("Transport"), rs.getString("BillNo"),
+                                bdate, rs.getString("Notes"),
+                                rs.getString("Pcs"), rs.getString("Qty"),
+                                rs.getString("BillAmount"), rs.getString("C_Id")));
+                    }
+                }
+                cada = new cadapter(this, ArrayList);
+                gvdata.setAdapter(cada);
+                gvdata.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        ChallanCard ele = (ChallanCard) gvdata.getItemAtPosition(position);
+                        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+                        View popupView = inflater.inflate(R.layout.challan_popupcard_y, null);
+                        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+                        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+                        boolean focusable = true; // lets taps outside the popup also dismiss it
+                        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+                        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 50);
+                        TextView tcname = popupView.findViewById(R.id.tcname);
+                        tcname.setText(ele.tcname);
+                        TextView tchnod = popupView.findViewById(R.id.tchnod);
+                        tchnod.setText(ele.chno);
+                        TextView tchdd = popupView.findViewById(R.id.tchdd);
+                        tchdd.setText(ele.chd);
+                        TextView ttotchd = popupView.findViewById(R.id.ttotchd);
+                        ttotchd.setText(ele.chamt);
+                        TextView tdepd = popupView.findViewById(R.id.tdepd);
+                        tdepd.setText(ele.dp);
+                        Button bc = popupView.findViewById(R.id.bclose);
+                        GridView gvdata = popupView.findViewById(R.id.gvdata);
+                        bc.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                popupWindow.dismiss();
+                            }
+                        });
+                        ArrayList<SalesPopUpCardBin> ArrayList = new ArrayList<SalesPopUpCardBin>();
+                        String q = "select * from chalandtlview where Ch_id='"+ele.C_Id+"' and  FirmNo='"+fno+"' order by Srno asc";
+                        try{
+                            Statement st = con.createStatement();
+                            ResultSet rs = st.executeQuery(q);
+                            while (rs.next()) {
+                                ArrayList.add(new SalesPopUpCardBin(
+                                        rs.getString("PM"),rs.getString("Pcs"),rs.getString("Mtrs")
+                                                ,rs.getString("Rate"),rs.getString("Amt")));
+                            }
+                            sbinadapter ada = new sbinadapter(getApplicationContext(), ArrayList);
+                            gvdata.setAdapter(ada);
+                        }
+                        catch (Exception e){
+                            Log.e("error",e.getMessage());
+                        }
+                    }
+                });
+            }
+        } catch (Exception e) {
+            Log.e("error", e.getMessage());
+        }
+    }
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.sample_menu, menu);
+        MenuItem se = menu.findItem(R.id.search);
+        SearchView searchView = (SearchView) se.getActionView();
+        searchView.setMaxWidth(Integer.MAX_VALUE);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                String softtype=pref.getString("soft_type",null);
+                if(softtype.equals("G")){
+                    cgada.getFilter().filter(newText);
+                }
+                else if(softtype.equals("Y")){
+                    cyada.getFilter().filter(newText);
+                }
+                else{
+                    cada.getFilter().filter(newText);
+                }
+                return true;
+            }
+        });
+        MenuItem item1 = menu.findItem(R.id.Sales);
+        Intent intent1 = new Intent(this, Sales.class);
+        item1.setIntent(intent1);
+        MenuItem item2 = menu.findItem(R.id.Purchase);
+        Intent intent2 = new Intent(this, Purchase.class);
+        item2.setIntent(intent2);
+        MenuItem item3 = menu.findItem(R.id.Receivable);
+        Intent intent3 = new Intent(this, Receivable.class);
+        item3.setIntent(intent3);
+        MenuItem item4 = menu.findItem(R.id.Payable);
+        Intent intent4 = new Intent(this, Payable.class);
+        item4.setIntent(intent4);
+        MenuItem item5 = menu.findItem(R.id.Ledger);
+        Intent intent5 = new Intent(this, Ledger.class);
+        item5.setIntent(intent5);
+        MenuItem item6 = menu.findItem(R.id.Challan);
+        Intent intent6 = new Intent(this, Challan.class);
+        item6.setIntent(intent6);
+        MenuItem item7 = menu.findItem(R.id.About_us);
+        Intent intent7 = new Intent(this, About_us.class);
+        item7.setIntent(intent7);
+        MenuItem item8 = menu.findItem(R.id.home);
+        Intent intent8 = new Intent(this, mainact.class);
+        item8.setIntent(intent8);
+        return true;
+    }
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.Logout) {
+            pref = getSharedPreferences("user_details",MODE_PRIVATE);
+            SharedPreferences.Editor editor = pref.edit();
+            editor.clear();
+            editor.apply();
+            startActivity(new Intent(this,mainactivity1.class));
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+}

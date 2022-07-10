@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_margin="20dp"
+        android:background="@color/blue">
+
+        <TextView
+            android:id="@+id/tcname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:text="Data"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="12dp"
+            android:shadowColor="@color/black"
+            android:shadowDx="-3"
+            android:shadowDy="3"
+            android:shadowRadius="2"/>
+
+
+        <TableRow
+            android:id="@+id/tr1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tcname"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp">
+
+            <TextView
+                android:id="@+id/tbno"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bill No. : "
+                android:textColor="@color/white"
+                android:textSize="8dp"></TextView>
+
+            <TextView
+                android:id="@+id/tbnod"
+                android:layout_width="130dp"
+                android:textColor="@color/white"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:textSize="8dp" />
+
+            <TextView
+                android:id="@+id/tbdate"
+                android:layout_width="wrap_content"
+                android:textColor="@color/white"
+                android:layout_height="wrap_content"
+                android:text="Bill Date : "
+                android:textSize="8dp"></TextView>
+
+            <TextView
+                android:id="@+id/tbdated"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:ems="10"
+                android:textSize="8dp" />
+        </TableRow>
+
+        <TableLayout
+            android:id="@+id/tt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_below="@+id/tr1"
+            android:stretchColumns="*">
+        <TableRow
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tdata1"
+                android:layout_width="wrap_content"
+                android:textAlignment="center"
+                android:layout_height="wrap_content"
+                android:text="Crtn"
+                android:textColor="@color/white"
+                android:textSize="8dp"></TextView>
+
+            <TextView
+                android:id="@+id/tdata2"
+                android:layout_width="wrap_content"
+                android:textAlignment="center"
+                android:layout_height="wrap_content"
+                android:text="Chese"
+                android:textColor="@color/white"
+                android:textSize="8dp"></TextView>
+
+            <TextView
+                android:id="@+id/tdata3"
+                android:textAlignment="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Net Wt."
+                android:textColor="@color/white"
+                android:textSize="8dp"></TextView>
+
+            <TextView
+                android:id="@+id/tdata4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:text="Rate"
+                android:textColor="@color/white"
+                android:textSize="8dp"></TextView>
+
+            <TextView
+                android:id="@+id/tdata5"
+                android:layout_width="wrap_content"
+                android:textAlignment="center"
+                android:layout_height="wrap_content"
+                android:text="Amount"
+                android:textColor="@color/white"
+                android:textSize="8dp"></TextView>
+        </TableRow>
+        </TableLayout>
+        <com.example.bmt.MyGridView
+            android:id="@+id/gvdata"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tt"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:numColumns="1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.504"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tt"
+            app:layout_constraintVertical_bias="0.332" />
+
+
+        <TableRow
+            android:id="@+id/tr2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/gvdata"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp">
+
+            <TextView
+                android:id="@+id/ttotq"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:text="Tot. Box"
+                android:textColor="@color/white"
+                android:textSize="8dp"></TextView>
+            <TextView
+                android:id="@+id/ttotqd"
+                android:layout_height="wrap_content"
+                android:text="data"
+                android:gravity="right"
+                android:textColor="@color/white"
+                android:textSize="8dp"></TextView>
+        </TableRow>
+        <TableRow
+            android:id="@+id/tr3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tr2"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp">
+
+            <TextView
+                android:id="@+id/ttotwt"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:text="Tot. Net Wt."
+                android:textColor="@color/white"
+                android:textSize="8dp"></TextView>
+            <TextView
+                android:id="@+id/ttotwtd"
+                android:layout_height="wrap_content"
+                android:text="data"
+                android:gravity="right"
+                android:textColor="@color/white"
+                android:textSize="8dp"></TextView>
+        </TableRow>
+        <TableRow
+            android:id="@+id/tr4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tr3"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp">
+
+            <TextView
+                android:id="@+id/ttaxa"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:text="Taxable Amount"
+                android:textColor="@color/white"
+                android:textSize="8dp"></TextView>
+            <TextView
+                android:id="@+id/ttaxad"
+                android:layout_height="wrap_content"
+                android:text="data"
+                android:gravity="right"
+                android:textColor="@color/white"
+                android:textSize="8dp"></TextView>
+        </TableRow>
+        <TableRow
+            android:id="@+id/tr5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tr4"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp">
+
+            <TextView
+                android:id="@+id/tgsta"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:text="GST Amount"
+                android:textColor="@color/white"
+                android:textSize="8dp"></TextView>
+            <TextView
+                android:id="@+id/tgstad"
+                android:layout_height="wrap_content"
+                android:text="data"
+                android:gravity="right"
+                android:textColor="@color/white"
+                android:textSize="8dp"></TextView>
+        </TableRow>
+        <TableRow
+            android:id="@+id/tr6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tr5"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp">
+
+            <TextView
+                android:id="@+id/tbilla"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:text="Bill Amount"
+                android:textColor="@color/white"
+                android:textSize="8dp"></TextView>
+            <TextView
+                android:id="@+id/tbillad"
+                android:layout_height="wrap_content"
+                android:text="data"
+                android:gravity="right"
+                android:textColor="@color/white"
+                android:textSize="8dp"></TextView>
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tr5"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:gravity="right">
+            <Button
+                android:id="@+id/bclose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:textSize="10dp"
+                android:backgroundTint="@color/red"
+                android:text="Close"
+                android:shadowColor="@color/black"
+                android:shadowDx="-3"
+                android:shadowDy="3"
+                android:shadowRadius="2"/>
+        </TableRow>
+
+    </RelativeLayout>
+</ScrollView>

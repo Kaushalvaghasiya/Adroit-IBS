@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--XML implementation of Card Layout-->
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardElevation="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tcname"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Sales Yaan"
+            android:textSize="18dp"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:background="@color/lightyellow" />
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+
+            <TextView
+                android:id="@+id/tbillt"
+                android:layout_width="140dp"
+                android:layout_height="match_parent"
+                android:text="Bill Type"
+                android:textSize="15dp" />
+            <TextView
+                android:id="@+id/tbilltd"
+                android:layout_width="match_parent"
+                android:textSize="15dp"
+                android:layout_height="wrap_content"
+                android:text="data"
+                android:textColor="@color/oblue"
+                android:gravity="right"/>
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+
+            <TextView
+                android:id="@+id/tbillno"
+                android:layout_width="140dp"
+                android:layout_height="match_parent"
+                android:text="Bill No"
+                android:textSize="15dp" />
+            <TextView
+                android:id="@+id/tbillnod"
+                android:textSize="15dp"
+                android:layout_height="wrap_content"
+                android:text="data"
+                android:gravity="right"/>
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+
+            <TextView
+                android:id="@+id/tchno"
+                android:textSize="15dp"
+                android:layout_width="140dp"
+                android:layout_height="match_parent"
+                android:text="Ch No"/>
+            <TextView
+                android:id="@+id/tchnod"
+                android:textSize="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="data"
+                android:gravity="right"/>
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+
+            <TextView
+                android:id="@+id/tbilld"
+                android:layout_width="140dp"
+                android:textSize="15dp"
+                android:layout_height="match_parent"
+                android:text="Bill Date"/>
+            <TextView
+                android:id="@+id/tbilldd"
+                android:layout_width="match_parent"
+                android:textSize="15dp"
+                android:gravity="right"
+                android:layout_height="wrap_content"
+                android:text="data"/>
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+
+            <TextView
+                android:id="@+id/tbox"
+                android:layout_width="140dp"
+                android:textSize="15dp"
+                android:layout_height="match_parent"
+                android:text="Box"/>
+            <TextView
+                android:id="@+id/tboxd"
+                android:layout_width="match_parent"
+                android:textSize="15dp"
+                android:gravity="right"
+                android:layout_height="wrap_content"
+                android:text="data"/>
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+
+            <TextView
+                android:id="@+id/tch"
+                android:layout_width="140dp"
+                android:textSize="15dp"
+                android:layout_height="match_parent"
+                android:text="Chese"/>
+            <TextView
+                android:id="@+id/tchd"
+                android:layout_width="match_parent"
+                android:textSize="15dp"
+                android:gravity="right"
+                android:layout_height="wrap_content"
+                android:text="data" />
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+
+            <TextView
+                android:id="@+id/tnetwt"
+                android:layout_width="140dp"
+                android:textSize="15dp"
+                android:layout_height="match_parent"
+                android:text="Net Wt."
+                android:textColor="@color/red"/>
+            <TextView
+                android:id="@+id/tnetwtd"
+                android:textSize="15dp"
+                android:gravity="right"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/red"
+                android:text="data"/>
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+
+            <TextView
+                android:id="@+id/ttaxa"
+                android:layout_width="140dp"
+                android:textSize="15dp"
+                android:layout_height="match_parent"
+                android:text="Taxable Amt" />
+            <TextView
+                android:id="@+id/ttaxad"
+                android:layout_width="match_parent"
+                android:textSize="15dp"
+                android:gravity="right"
+                android:layout_height="wrap_content"
+                android:text="data" />
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+
+            <TextView
+                android:id="@+id/tgsta"
+                android:layout_width="140dp"
+                android:textSize="15dp"
+                android:layout_height="match_parent"
+                android:text="GST Amt"/>
+            <TextView
+                android:id="@+id/tgstad"
+                android:layout_width="match_parent"
+                android:textSize="15dp"
+                android:gravity="right"
+                android:layout_height="wrap_content"
+                android:text="data"/>
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/blue"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+
+            <TextView
+                android:id="@+id/tbilla"
+                android:textSize="16dp"
+                android:layout_width="140dp"
+                android:layout_height="match_parent"
+                android:text="Bill Amount"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:shadowColor="@color/black"
+                android:shadowDx="-3"
+                android:shadowDy="3"
+                android:shadowRadius="2"/>
+            <TextView
+                android:id="@+id/tbillad"
+                android:layout_width="match_parent"
+                android:textSize="16dp"
+                android:gravity="right"
+                android:layout_height="wrap_content"
+                android:text="data"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:shadowColor="@color/black"
+                android:shadowDx="-3"
+                android:shadowDy="3"
+                android:shadowRadius="2"/>
+        </TableRow>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--XML implementation of Card Layout-->
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="50pt"
+    app:cardElevation="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tcname"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/app_name"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="18dp"
+            android:background="@color/lightyellow" />
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+
+            <TextView
+                android:id="@+id/tbillt"
+                android:layout_width="140dp"
+                android:textSize="15dp"
+                android:layout_height="match_parent"
+                android:text="Bill Type"/>
+            <TextView
+                android:id="@+id/tbilltd"
+                android:textSize="15dp"
+                android:layout_height="wrap_content"
+                android:text="data"
+                android:gravity="right" />
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+
+            <TextView
+                android:id="@+id/tbillno"
+                android:layout_width="140dp"
+                android:layout_height="match_parent"
+                android:text="Bill No"
+                android:textSize="15dp"/>
+            <TextView
+                android:id="@+id/tbillnod"
+                android:layout_width="match_parent"
+                android:textSize="15dp"
+                android:layout_height="wrap_content"
+                android:text="data"
+                android:gravity="right" />
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+
+            <TextView
+                android:id="@+id/tbilld"
+                android:textSize="15dp"
+                android:layout_width="140dp"
+                android:layout_height="match_parent"
+                android:text="Bill Date"/>
+            <TextView
+                android:id="@+id/tbilldd"
+                android:textSize="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="data"
+                android:gravity="right" />
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+
+            <TextView
+                android:id="@+id/tpcs"
+                android:layout_width="140dp"
+                android:textSize="15dp"
+                android:layout_height="match_parent"
+                android:text="Taka/Pcs" />
+            <TextView
+                android:id="@+id/tpcsd"
+                android:textSize="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="data"
+                android:gravity="right"/>
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+
+            <TextView
+                android:id="@+id/tcut"
+                android:layout_width="140dp"
+                android:textSize="15dp"
+                android:layout_height="match_parent"
+                android:text="Cut" />
+            <TextView
+                android:id="@+id/tcutd"
+                android:textSize="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="data"
+                android:gravity="right"/>
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+
+            <TextView
+                android:id="@+id/tqty"
+                android:layout_width="140dp"
+                android:textSize="15dp"
+                android:layout_height="match_parent"
+                android:text="Mtr/Qty"/>
+            <TextView
+                android:id="@+id/tqtyd"
+                android:layout_width="match_parent"
+                android:textSize="15dp"
+                android:layout_height="wrap_content"
+                android:text="data"
+                android:gravity="right" />
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+
+            <TextView
+                android:id="@+id/ttaxa"
+                android:layout_width="140dp"
+                android:textSize="15dp"
+                android:layout_height="match_parent"
+                android:text="Taxable Amt" />
+            <TextView
+                android:id="@+id/ttaxad"
+                android:layout_width="match_parent"
+                android:textSize="15dp"
+                android:layout_height="wrap_content"
+                android:text="data"
+                android:gravity="right" />
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+
+            <TextView
+                android:id="@+id/tgsta"
+                android:layout_width="140dp"
+                android:textSize="15dp"
+                android:layout_height="match_parent"
+                android:text="GST Amt" />
+            <TextView
+                android:id="@+id/tgstad"
+                android:layout_width="match_parent"
+                android:textSize="15dp"
+                android:layout_height="wrap_content"
+                android:text="data"
+                android:gravity="right" />
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/blue"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+
+            <TextView
+                android:id="@+id/tbilla"
+                android:textSize="16dp"
+                android:layout_width="140dp"
+                android:layout_height="match_parent"
+                android:text="Bill Amount"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:shadowDx="-3"
+                android:shadowDy="3"
+                android:shadowRadius="2"
+                android:shadowColor="@color/black"
+                />
+            <TextView
+                android:id="@+id/tbillad"
+                android:shadowColor="@color/black"
+                android:layout_width="match_parent"
+                android:textSize="16dp"
+                android:gravity="right"
+                android:layout_height="wrap_content"
+                android:text="data"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:shadowDx="-3"
+                android:shadowDy="3"
+                android:shadowRadius="2"/>
+        </TableRow>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
