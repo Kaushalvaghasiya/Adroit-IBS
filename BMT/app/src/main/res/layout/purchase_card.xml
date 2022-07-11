@@ -92,7 +92,7 @@
                 android:layout_width="140dp"
                 android:textSize="15dp"
                 android:layout_height="match_parent"
-                android:text="Taka/Pcs" />
+                android:text="TK/PC/CTN" />
             <TextView
                 android:id="@+id/tpcsd"
                 android:textSize="15dp"
@@ -101,26 +101,7 @@
                 android:text="data"
                 android:gravity="right"/>
         </TableRow>
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp">
 
-            <TextView
-                android:id="@+id/tcut"
-                android:layout_width="140dp"
-                android:textSize="15dp"
-                android:layout_height="match_parent"
-                android:text="Cut" />
-            <TextView
-                android:id="@+id/tcutd"
-                android:textSize="15dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="data"
-                android:gravity="right"/>
-        </TableRow>
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
