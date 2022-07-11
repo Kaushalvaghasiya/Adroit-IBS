@@ -66,6 +66,7 @@ public class Challan extends AppCompatActivity {
     DateFormat adate,sdate;
     public static ProgressDialog dialog;
     Dictionary data;
+    String gstno;
     List<String> list;
     @RequiresApi(api = Build.VERSION_CODES.N)
     @SuppressLint("ResourceAsColor")
@@ -235,9 +236,16 @@ public class Challan extends AppCompatActivity {
         TextView tfname = (TextView) findViewById(R.id.tcname);
         tfname.setText(pref.getString("fname",null));
         try {
-            ConnectionHelper conhelper = new ConnectionHelper();
-            con = conhelper.connectionclass();
+            ConnectionHelper conhelper= new ConnectionHelper();
+            con=conhelper.connectionclass();
             String softtype=pref.getString("soft_type",null);
+            String q2="select * from Firm_mst where firmno='"+fno+"'";
+            Statement st2 = con.createStatement();
+            ResultSet rs2 = st2.executeQuery(q2);
+            gstno="";
+            while (rs2.next()){
+                gstno=rs2.getString("gstno");
+            }
             if (softtype.equals("G")) {
                 ArrayList<ChallanCardG> ArrayList = new ArrayList<ChallanCardG>();
                 if (con != null) {
@@ -274,12 +282,18 @@ public class Challan extends AppCompatActivity {
                         boolean focusable = true; // lets taps outside the popup also dismiss it
                         final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
                         popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
-                        TextView tcname = popupView.findViewById(R.id.tpnamed);
+                        TextView tcname = popupView.findViewById(R.id.tbpnamed);
                         tcname.setText(ele.tcname);
-                        TextView tchnod = popupView.findViewById(R.id.tbnod);
+                        TextView tchnod = popupView.findViewById(R.id.tchnod);
                         tchnod.setText(ele.chno);
-                        TextView tchdd = popupView.findViewById(R.id.tbdated);
+                        TextView tchdd = popupView.findViewById(R.id.tchdd);
                         tchdd.setText(ele.chd);
+                        TextView tbgstnd = popupView.findViewById(R.id.tbgstnd);
+                        tbgstnd.setText(gstno);
+                        TextView trated = popupView.findViewById(R.id.trated);
+                        trated.setText(ele.rate);
+                        TextView tdpnamed = popupView.findViewById(R.id.tdpnamed);
+                        tdpnamed.setText(ele.dp);
                         Button bc = popupView.findViewById(R.id.bclose);
                         GridView gvdata = popupView.findViewById(R.id.gvdata);
                         bc.setOnClickListener(new View.OnClickListener() {
@@ -294,14 +308,20 @@ public class Challan extends AppCompatActivity {
                             Statement st = con.createStatement();
                             ResultSet rs = st.executeQuery(q);
                             NumberFormat df = new DecimalFormat("#0.000");
-                            NumberFormat df2 = new DecimalFormat("#0.00");
+                            double sumpsc=0,summtr=0;
                             while (rs.next()) {
+                                String psc=rs.getString("Pcs"),mtr=rs.getString("Mtrs");
                                 ArrayList.add(new PurchasePopupCardin(
                                         rs.getString("TakaNO"),df.format(Double.parseDouble(rs.getString("Pcs"))),
                                         df.format(Double.parseDouble(rs.getString("Mtrs"))),
-                                        df2.format(Double.parseDouble(rs.getString("Rate"))),
-                                        rs.getString("RC2")));
+                                        rs.getString("RC2"),
+                                        rs.getString("ProdName")));
+                                sumpsc+=Double.parseDouble(psc);
+                                summtr+=Double.parseDouble(mtr);
                             }
+                            ArrayList.add(new PurchasePopupCardin(
+                                    "Total -->>",df.format(sumpsc),
+                                    df.format(summtr),"",""));
                             pinadapter ada = new pinadapter(getApplicationContext(), ArrayList);
                             gvdata.setAdapter(ada);
                         }

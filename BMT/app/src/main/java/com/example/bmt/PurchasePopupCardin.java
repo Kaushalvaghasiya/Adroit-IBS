@@ -3,23 +3,18 @@ package com.example.bmt;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.ColorSpace;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 
-import com.itextpdf.kernel.colors.ColorConstants;
-import com.itextpdf.kernel.colors.DeviceRgb;
+import java.util.ArrayList;
 
-import java.util.ArrayList;
-import java.util.ArrayList;
 class PurchasePopupCardin {
     String data1,data2,data3,data4,data5;
 
@@ -41,7 +36,7 @@ class pinadapter extends ArrayAdapter<PurchasePopupCardin>{
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View listitemView = convertView;
         if (listitemView == null) {
-            listitemView = LayoutInflater.from(getContext()).inflate(R.layout.purchase_ppcard_in, parent, false);
+            listitemView = LayoutInflater.from(getContext()).inflate(R.layout.challan_ppcard_g_in, parent, false);
         }
         PurchasePopupCardin courseModel = getItem(position);
         TextView data1 = listitemView.findViewById(R.id.tdata1);

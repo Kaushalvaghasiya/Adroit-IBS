@@ -49,7 +49,7 @@
                     android:layout_weight=".5"
                     android:layout_height="wrap_content"
                     android:text="Mtrs"
-                    android:textAlignment="center"
+                    android:gravity="right"
                     android:textColor="@color/black"
                     android:textSize="9dp"></TextView>
 
@@ -58,7 +58,7 @@
                     android:layout_width="0dp"
                     android:layout_weight=".5"
                     android:layout_height="wrap_content"
-                    android:text="Rate"
+                    android:text="Design No."
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="9dp"></TextView>
@@ -68,8 +68,8 @@
                     android:layout_width="0dp"
                     android:layout_weight=".5"
                     android:layout_height="wrap_content"
-                    android:text="Design No."
-                    android:textAlignment="center"
+                    android:text="Quality Name"
+                    android:gravity="right"
                     android:textColor="@color/black"
                     android:textSize="9dp"></TextView>
             </TableRow>

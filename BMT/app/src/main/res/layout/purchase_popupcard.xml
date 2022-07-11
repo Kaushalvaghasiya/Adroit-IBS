@@ -11,7 +11,6 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:background="@drawable/layout_bg">
-
         <TableRow
             android:id="@+id/tr0"
             android:layout_width="match_parent"
@@ -43,43 +42,7 @@
                 android:textSize="13dp" />
 
         </TableRow>
-        <TableRow
-            android:id="@+id/tra1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp">
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="1.2"
-                android:textSize="13dp"></TextView>
-            <TextView
-                android:id="@+id/tchno"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.65"
-                android:text="Challan No. : "
-                android:gravity="right"
-                android:textColor="@color/white"
-                android:textSize="13dp"
-                android:shadowColor="@color/black"
-                android:shadowDx="-3"
-                android:shadowDy="3"
-                android:shadowRadius="2"></TextView>
 
-            <TextView
-                android:id="@+id/tchnod"
-                android:layout_width="0dp"
-                android:layout_weight=".4"
-                android:gravity="right"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:textColor="@color/white"
-                android:textSize="13dp"
-                android:shadowColor="@color/black"
-                android:shadowDx="-3"
-                android:shadowDy="3"
-                android:shadowRadius="2"/>
-        </TableRow>
         <TableRow
             android:id="@+id/tra2"
             android:layout_width="match_parent"
@@ -117,35 +80,31 @@
             android:id="@+id/tra3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tr0"
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp">
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="1.2"
-                android:textSize="10dp"></TextView>
+            android:layout_below="@+id/tra2"
+            android:layout_marginTop="10dp"
+
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
+
             <TextView
                 android:id="@+id/tbno"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
+                android:textColor="@color/white"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.65"
-                android:gravity="right"
+                android:text="Pur. Bill No. : "
+                android:textSize="13dp"
                 android:shadowColor="@color/black"
                 android:shadowDx="-3"
                 android:shadowDy="3"
-                android:shadowRadius="2"
-                android:text="Bill No. : "
-                android:textColor="@color/white"
-                android:textSize="13dp"></TextView>
+                android:shadowRadius="2"></TextView>
 
             <TextView
                 android:id="@+id/tbnod"
                 android:layout_width="0dp"
-                android:layout_weight=".4"
-                android:gravity="right"
+                android:layout_weight=".98"
                 android:layout_height="wrap_content"
-                android:ems="10"
                 android:textColor="@color/white"
+                android:ems="10"
                 android:textSize="13dp"
                 android:shadowColor="@color/black"
                 android:shadowDx="-3"
@@ -162,7 +121,7 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_weight="1.2"
-                android:textSize="10dp">
+                android:textSize="13dp">
 
             </TextView>
 
@@ -266,7 +225,7 @@
                     android:shadowDx="-3"
                     android:shadowDy="3"
                     android:shadowRadius="2"
-                    android:text="Tk/Pc"
+                    android:text="TK/PC/CTN"
                     android:textAlignment="center"
                     android:textColor="@color/white"
                     android:textSize="9dp"
@@ -352,7 +311,7 @@
             android:id="@+id/tr2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tr3"
+            android:layout_below="@+id/gvdata"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp">
 
@@ -381,45 +340,6 @@
                 android:textColor="@color/white"
                 android:textSize="12dp" />
 
-        </TableRow>
-        <TableRow
-            android:id="@+id/tr3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/gvdata"
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp">
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="1.2"
-                android:textSize="10dp"></TextView>
-            <TextView
-                android:id="@+id/tdis"
-                android:layout_width="0dp"
-                android:layout_weight=".65"
-                android:gravity="right"
-                android:textColor="@color/white"
-                android:layout_height="wrap_content"
-                android:text="Discount : "
-                android:textSize="12dp"
-                android:shadowColor="@color/black"
-                android:shadowDx="-3"
-                android:shadowDy="3"
-                android:shadowRadius="2"></TextView>
-
-            <TextView
-                android:id="@+id/tdisd"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight=".4"
-                android:gravity="right"
-                android:shadowColor="@color/black"
-                android:shadowDx="-3"
-                android:shadowDy="3"
-                android:shadowRadius="2"
-                android:textColor="@color/white"
-                android:textSize="12dp" />
-            android:shadowRadius="2"/>
         </TableRow>
         <TableRow
             android:id="@+id/tr4"
@@ -459,7 +379,7 @@
             android:id="@+id/tr5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tr3"
+            android:layout_below="@+id/gvdata"
             android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp">
             <TextView

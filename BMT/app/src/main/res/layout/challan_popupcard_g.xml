@@ -18,10 +18,10 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp">
             <TextView
-                android:id="@+id/tpname"
+                android:id="@+id/tbpname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Party : "
+                android:text="Bill Party : "
                 android:textColor="@color/white"
                 android:textSize="13dp"
                 android:shadowColor="@color/black"
@@ -30,7 +30,40 @@
                 android:shadowRadius="2"></TextView>
 
             <TextView
-                android:id="@+id/tpnamed"
+                android:id="@+id/tbpnamed"
+                android:layout_width="0dp"
+                android:layout_weight=".98"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:shadowColor="@color/black"
+                android:shadowDx="-3"
+                android:shadowDy="3"
+                android:shadowRadius="2"
+                android:textColor="@color/white"
+                android:textSize="13dp" />
+
+        </TableRow>
+        <TableRow
+            android:id="@+id/tr1"
+            android:layout_below="@+id/tr0"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
+            <TextView
+                android:id="@+id/tdpname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Del. Party : "
+                android:textColor="@color/white"
+                android:textSize="13dp"
+                android:shadowColor="@color/black"
+                android:shadowDx="-3"
+                android:shadowDy="3"
+                android:shadowRadius="2"></TextView>
+
+            <TextView
+                android:id="@+id/tdpnamed"
                 android:layout_width="0dp"
                 android:layout_weight=".98"
                 android:layout_height="wrap_content"
@@ -53,11 +86,11 @@
                 android:layout_weight="1.2"
                 android:textSize="13dp"></TextView>
             <TextView
-                android:id="@+id/tchno"
+                android:id="@+id/tbgstn"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.65"
-                android:text="Challan No. : "
+                android:text="GSTIN : "
                 android:gravity="right"
                 android:textColor="@color/white"
                 android:textSize="13dp"
@@ -67,7 +100,7 @@
                 android:shadowRadius="2"></TextView>
 
             <TextView
-                android:id="@+id/tchnod"
+                android:id="@+id/tbgstnd"
                 android:layout_width="0dp"
                 android:layout_weight=".4"
                 android:gravity="right"
@@ -84,16 +117,17 @@
             android:id="@+id/tra2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tr0"
+            android:layout_below="@+id/tr1"
+            android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp">
 
             <TextView
-                android:id="@+id/tgstn"
+                android:id="@+id/tchno"
                 android:layout_width="wrap_content"
                 android:textColor="@color/white"
                 android:layout_height="wrap_content"
-                android:text="GSTIN : "
+                android:text="Challan No. : "
                 android:textSize="13dp"
                 android:shadowColor="@color/black"
                 android:shadowDx="-3"
@@ -101,7 +135,7 @@
                 android:shadowRadius="2"></TextView>
 
             <TextView
-                android:id="@+id/tgstnd"
+                android:id="@+id/tchnod"
                 android:layout_width="0dp"
                 android:layout_weight=".98"
                 android:layout_height="wrap_content"
@@ -117,7 +151,8 @@
             android:id="@+id/tra3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tr0"
+            android:layout_below="@+id/tr1"
+            android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp">
             <TextView
@@ -125,7 +160,7 @@
                 android:layout_weight="1.2"
                 android:textSize="10dp"></TextView>
             <TextView
-                android:id="@+id/tbno"
+                android:id="@+id/tchd"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.65"
@@ -134,12 +169,85 @@
                 android:shadowDx="-3"
                 android:shadowDy="3"
                 android:shadowRadius="2"
-                android:text="Bill No. : "
+                android:text="Challan Date : "
                 android:textColor="@color/white"
                 android:textSize="13dp"></TextView>
 
             <TextView
-                android:id="@+id/tbnod"
+                android:id="@+id/tchdd"
+                android:layout_width="0dp"
+                android:layout_weight=".4"
+                android:gravity="right"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:textColor="@color/white"
+                android:textSize="13dp"
+                android:shadowColor="@color/black"
+                android:shadowDx="-3"
+                android:shadowDy="3"
+                android:shadowRadius="2"/>
+        </TableRow>
+        <TableRow
+            android:id="@+id/tra4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tra2"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
+
+            <TextView
+                android:id="@+id/tbro"
+                android:layout_width="wrap_content"
+                android:textColor="@color/white"
+                android:layout_height="wrap_content"
+                android:text="Broker : "
+                android:textSize="13dp"
+                android:shadowColor="@color/black"
+                android:shadowDx="-3"
+                android:shadowDy="3"
+                android:shadowRadius="2"></TextView>
+
+            <TextView
+                android:id="@+id/tbrod"
+                android:layout_width="0dp"
+                android:layout_weight=".98"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:ems="10"
+                android:textSize="13dp"
+                android:shadowColor="@color/black"
+                android:shadowDx="-3"
+                android:shadowDy="3"
+                android:shadowRadius="2"/>
+        </TableRow>
+        <TableRow
+            android:id="@+id/tra5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tr0"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1.2"
+                android:textSize="10dp"></TextView>
+            <TextView
+                android:id="@+id/tdgstn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.65"
+                android:gravity="right"
+                android:shadowColor="@color/black"
+                android:shadowDx="-3"
+                android:shadowDy="3"
+                android:shadowRadius="2"
+                android:text="GSTIN : "
+                android:textColor="@color/white"
+                android:textSize="13dp"></TextView>
+
+            <TextView
+                android:id="@+id/tdgstnd"
                 android:layout_width="0dp"
                 android:layout_weight=".4"
                 android:gravity="right"
@@ -167,7 +275,7 @@
             </TextView>
 
             <TextView
-                android:id="@+id/tbdate"
+                android:id="@+id/trate"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.65"
@@ -176,12 +284,12 @@
                 android:shadowDx="-3"
                 android:shadowDy="3"
                 android:shadowRadius="2"
-                android:text="Bill Date : "
+                android:text="Rate : "
                 android:textColor="@color/white"
                 android:textSize="13dp"></TextView>
 
             <TextView
-                android:id="@+id/tbdated"
+                android:id="@+id/trated"
                 android:layout_width="0dp"
                 android:layout_weight=".4"
                 android:layout_height="wrap_content"
@@ -213,7 +321,6 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/tsr"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".5"
@@ -228,7 +335,6 @@
                     android:textStyle="bold"></TextView>
 
                 <TextView
-                    android:id="@+id/tdes"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".5"
@@ -243,7 +349,6 @@
                     android:textStyle="bold"></TextView>
 
                 <TextView
-                    android:id="@+id/thsn"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".5"
@@ -251,29 +356,13 @@
                     android:shadowDx="-3"
                     android:shadowDy="3"
                     android:shadowRadius="2"
-                    android:text="Mtrs"
+                    android:text="Meter"
                     android:textAlignment="center"
                     android:textColor="@color/white"
                     android:textSize="9dp"
                     android:textStyle="bold"></TextView>
 
                 <TextView
-                    android:id="@+id/tpcs"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight=".5"
-                    android:shadowColor="@color/black"
-                    android:shadowDx="-3"
-                    android:shadowDy="3"
-                    android:shadowRadius="2"
-                    android:text="Rate"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"
-                    android:textSize="9dp"
-                    android:textStyle="bold"></TextView>
-
-                <TextView
-                    android:id="@+id/tmtr"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".5"
@@ -282,6 +371,20 @@
                     android:shadowDy="3"
                     android:shadowRadius="2"
                     android:text="Design No."
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="9dp"
+                    android:textStyle="bold"></TextView>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".5"
+                    android:shadowColor="@color/black"
+                    android:shadowDx="-3"
+                    android:shadowDy="3"
+                    android:shadowRadius="2"
+                    android:text="Quality Name"
                     android:textAlignment="center"
                     android:textColor="@color/white"
                     android:textSize="9dp"
