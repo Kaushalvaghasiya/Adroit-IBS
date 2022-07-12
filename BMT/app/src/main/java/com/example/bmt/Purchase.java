@@ -274,14 +274,22 @@ public class Purchase extends AppCompatActivity {
                 ResultSet rs = st.executeQuery(q);
                 while (rs.next()) {
                     String bdate=rs.getString("billdate").split(" ")[0];
+                    String pddate=rs.getString("pduedate").split(" ")[0];
                     Date date = sdate.parse(bdate);
                     bdate = adate.format(date);
+                    date = sdate.parse(pddate);
+                    pddate = adate.format(date);
                     NumberFormat df = new DecimalFormat("#0.000");
                     ArrayList.add(new PurchaseCard(rs.getString("acname"), rs.getString("billno"),
                             rs.getString("billtype"),bdate,
                             df.format(Double.parseDouble(rs.getString("qty"))),df.format(Double.parseDouble(rs.getString("pcs"))),
                             rs.getString("taxable_amt"), rs.getString("gstrs"),
-                            rs.getString("billamount"), rs.getString("B_Id"),rs.getString("acId")));
+                            rs.getString("billamount"), rs.getString("B_Id"),rs.getString("acId"),
+                            rs.getString("sgstrs"),
+                            rs.getString("cgstrs"),rs.getString("igstrs"),
+                            rs.getString("tcsrs"),rs.getString("otherrs"),
+                            rs.getString("tdsrs"),rs.getString("crdays"),
+                            pddate,rs.getString("against")));
                 }
                 con.close();
                 purada = new padapter(this, ArrayList);

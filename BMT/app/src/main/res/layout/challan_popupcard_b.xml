@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fadingEdgeLength="10dp"
+    android:requiresFadingEdge="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@drawable/layout_bg">
+
+        <TableRow
+            android:id="@+id/tr0"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp">
+            <TextView
+                android:id="@+id/tbpname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bill Party : "
+                android:textColor="@color/white"
+                android:textSize="13dp"
+                android:shadowColor="@color/black"
+                android:shadowDx="-3"
+                android:shadowDy="3"
+                android:shadowRadius="2"></TextView>
+
+            <TextView
+                android:id="@+id/tbpnamed"
+                android:layout_width="0dp"
+                android:layout_weight=".98"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:shadowColor="@color/black"
+                android:shadowDx="-3"
+                android:shadowDy="3"
+                android:shadowRadius="2"
+                android:textColor="@color/white"
+                android:textSize="13dp" />
+
+        </TableRow>
+        <TableRow
+            android:id="@+id/tr1"
+            android:layout_below="@+id/tr0"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
+            <TextView
+                android:id="@+id/tdpname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Del. Party : "
+                android:textColor="@color/white"
+                android:textSize="13dp"
+                android:shadowColor="@color/black"
+                android:shadowDx="-3"
+                android:shadowDy="3"
+                android:shadowRadius="2"></TextView>
+
+            <TextView
+                android:id="@+id/tdpnamed"
+                android:layout_width="0dp"
+                android:layout_weight=".98"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:shadowColor="@color/black"
+                android:shadowDx="-3"
+                android:shadowDy="3"
+                android:shadowRadius="2"
+                android:textColor="@color/white"
+                android:textSize="13dp" />
+
+        </TableRow>
+        <TableRow
+            android:id="@+id/tra2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tr1"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
+
+            <TextView
+                android:id="@+id/tchno"
+                android:layout_width="wrap_content"
+                android:textColor="@color/white"
+                android:layout_height="wrap_content"
+                android:text="Challan No. : "
+                android:textSize="13dp"
+                android:shadowColor="@color/black"
+                android:shadowDx="-3"
+                android:shadowDy="3"
+                android:shadowRadius="2"></TextView>
+
+            <TextView
+                android:id="@+id/tchnod"
+                android:layout_width="0dp"
+                android:layout_weight=".98"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:ems="10"
+                android:textSize="13dp"
+                android:shadowColor="@color/black"
+                android:shadowDx="-3"
+                android:shadowDy="3"
+                android:shadowRadius="2"/>
+        </TableRow>
+        <TableRow
+            android:id="@+id/tra3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tr1"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1.2"
+                android:textSize="10dp"></TextView>
+            <TextView
+                android:id="@+id/tchd"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.65"
+                android:gravity="right"
+                android:shadowColor="@color/black"
+                android:shadowDx="-3"
+                android:shadowDy="3"
+                android:shadowRadius="2"
+                android:text="Challan Date : "
+                android:textColor="@color/white"
+                android:textSize="13dp"></TextView>
+
+            <TextView
+                android:id="@+id/tchdd"
+                android:layout_width="0dp"
+                android:layout_weight=".4"
+                android:gravity="right"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:textColor="@color/white"
+                android:textSize="13dp"
+                android:shadowColor="@color/black"
+                android:shadowDx="-3"
+                android:shadowDy="3"
+                android:shadowRadius="2"/>
+        </TableRow>
+        <TableRow
+            android:id="@+id/tra4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tra2"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
+
+            <TextView
+                android:id="@+id/tbro"
+                android:layout_width="wrap_content"
+                android:textColor="@color/white"
+                android:layout_height="wrap_content"
+                android:text="Broker : "
+                android:textSize="13dp"
+                android:shadowColor="@color/black"
+                android:shadowDx="-3"
+                android:shadowDy="3"
+                android:shadowRadius="2"></TextView>
+
+            <TextView
+                android:id="@+id/tbrod"
+                android:layout_width="0dp"
+                android:layout_weight=".98"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:ems="10"
+                android:textSize="13dp"
+                android:shadowColor="@color/black"
+                android:shadowDx="-3"
+                android:shadowDy="3"
+                android:shadowRadius="2"/>
+        </TableRow>
+        <TableRow
+            android:id="@+id/tr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tra2"
+            android:layout_margin="10dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1.2"
+                android:textSize="10dp">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/trate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.65"
+                android:gravity="right"
+                android:shadowColor="@color/black"
+                android:shadowDx="-3"
+                android:shadowDy="3"
+                android:shadowRadius="2"
+                android:text="Rate : "
+                android:textColor="@color/white"
+                android:textSize="13dp"></TextView>
+
+            <TextView
+                android:id="@+id/trated"
+                android:layout_width="0dp"
+                android:layout_weight=".4"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:ems="10"
+                android:gravity="right"
+                android:textSize="13dp"
+                android:shadowColor="@color/black"
+                android:shadowDx="-3"
+                android:shadowDy="3"
+                android:shadowRadius="2"/>
+        </TableRow>
+        <TableLayout
+            android:id="@+id/tt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tr"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/gray"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:stretchColumns="*">
+
+            <TableRow
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/tsr"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".007"
+                    android:shadowColor="@color/black"
+                    android:shadowDx="-3"
+                    android:shadowDy="3"
+                    android:shadowRadius="2"
+                    android:text="Sr."
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="9dp"
+                    android:textStyle="bold"></TextView>
+
+                <TextView
+                    android:id="@+id/tdes"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".03"
+                    android:shadowColor="@color/black"
+                    android:shadowDx="-3"
+                    android:shadowDy="3"
+                    android:shadowRadius="2"
+                    android:text="Product Name"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="9dp"
+                    android:textStyle="bold"></TextView>
+
+                <TextView
+                    android:id="@+id/thsn"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".017"
+                    android:shadowColor="@color/black"
+                    android:shadowDx="-3"
+                    android:shadowDy="3"
+                    android:shadowRadius="2"
+                    android:text="Tk/Pc"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="9dp"
+                    android:textStyle="bold"></TextView>
+
+                <TextView
+                    android:id="@+id/tpcs"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".012"
+                    android:shadowColor="@color/black"
+                    android:shadowDx="-3"
+                    android:shadowDy="3"
+                    android:shadowRadius="2"
+                    android:text="Cut"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="9dp"
+                    android:textStyle="bold"></TextView>
+
+                <TextView
+                    android:id="@+id/tmtr"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".02"
+                    android:shadowColor="@color/black"
+                    android:shadowDx="-3"
+                    android:shadowDy="3"
+                    android:shadowRadius="2"
+                    android:text="Mtr/Qty"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="9dp"
+                    android:textStyle="bold"></TextView>
+
+                <TextView
+                    android:id="@+id/tuom"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".01"
+                    android:shadowColor="@color/black"
+                    android:shadowDx="-3"
+                    android:shadowDy="3"
+                    android:shadowRadius="2"
+                    android:text="UOM"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="9dp"
+                    android:textStyle="bold"></TextView>
+
+                <TextView
+                    android:id="@+id/tdata4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".02"
+                    android:shadowColor="@color/black"
+                    android:shadowDx="-3"
+                    android:shadowDy="3"
+                    android:shadowRadius="2"
+                    android:text="Net Rate"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="9dp"
+                    android:textStyle="bold"></TextView>
+
+                <TextView
+                    android:id="@+id/tdata5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".02"
+                    android:shadowColor="@color/black"
+                    android:shadowDx="-3"
+                    android:shadowDy="3"
+                    android:shadowRadius="2"
+                    android:text="Tax. Amt."
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="9dp"
+                    android:textStyle="bold"></TextView>
+            </TableRow>
+        </TableLayout>
+        <com.example.bmt.MyGridView
+            android:id="@+id/gvdata"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tt"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:numColumns="1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.504"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tt"
+            app:layout_constraintVertical_bias="0.332" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_below="@+id/gvdata"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@color/white" />
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/gvdata"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:gravity="right">
+
+            <Button
+                android:id="@+id/bclose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:backgroundTint="@color/red"
+                android:shadowColor="@color/black"
+                android:shadowDx="-3"
+                android:shadowDy="3"
+                android:shadowRadius="2"
+                android:text="Close"
+                android:textSize="11dp" />
+        </TableRow>
+
+    </RelativeLayout>
+</ScrollView>

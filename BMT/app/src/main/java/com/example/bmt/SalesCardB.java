@@ -18,9 +18,10 @@ import androidx.annotation.RequiresApi;
 import java.util.ArrayList;
 import java.util.ArrayList;
 public class SalesCardB {
-    String bno,btype,chno,bdate,qty,pcs,taxa,gsta,bamt,tcname,SB_Id;
+    String bno,btype,chno,bdate,qty,pcs,taxa,gsta,bamt,tcname,SB_Id,sgst,cgst,igst,tcsa,roff,tdsa,crd,pdd,ebilln;
 
-    public SalesCardB(String tcname,String bno, String btype,String chno,String bdate,String qty,String pcs,String taxa,String gsta,String bamt,String SB_Id) {
+    public SalesCardB(String tcname,String bno, String btype,String chno,String bdate,String qty,String pcs,String taxa,String gsta,String bamt,String SB_Id,String sgst,String cgst,String igst,
+                      String tcsa,String roff,String tdsa,String crd,String pdd,String ebilln) {
         this.tcname=tcname;
         this.bno = bno;
         this.btype = btype;
@@ -32,6 +33,15 @@ public class SalesCardB {
         this.gsta = gsta;
         this.bamt = bamt;
         this.SB_Id = SB_Id;
+        this.sgst = sgst;
+        this.cgst = cgst;
+        this.igst = igst;
+        this.tcsa = tcsa;
+        this.roff = roff;
+        this.tdsa = tdsa;
+        this.crd = crd;
+        this.pdd = pdd;
+        this.ebilln = ebilln;
     }
 }
 class sbadapter extends BaseAdapter implements Filterable {

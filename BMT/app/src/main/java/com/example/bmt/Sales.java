@@ -371,8 +371,11 @@ public class Sales extends AppCompatActivity {
                     ResultSet rs = st.executeQuery(q);
                     while (rs.next()) {
                         String bdate=rs.getString("billdate").split(" ")[0];
+                        String pddate=rs.getString("pduedate").split(" ")[0];
                         Date date = sdate.parse(bdate);
                         bdate = adate.format(date);
+                        date = sdate.parse(pddate);
+                        pddate = adate.format(date);
                         NumberFormat df = new DecimalFormat("#0.000");
                         String pcs=rs.getString("pcs"),qty=rs.getString("qty"),
                                 billno=rs.getString("billno"),acid=rs.getString("AcId"),
@@ -382,12 +385,11 @@ public class Sales extends AppCompatActivity {
                                 bdate, df.format(Double.parseDouble(qty)),
                                 df.format(Double.parseDouble(pcs)),
                                 rs.getString("taxable_amt"), rs.getString("gstrs"),
-                                rs.getString("billamount"),acid));
-//                                ,rs.getString("sgstrs"),
-//                                rs.getString("cgstrs"),rs.getString("igstrs"),
-//                                rs.getString("tcstrs"),rs.getString("othertrs"),
-//                                rs.getString("tdstrs"),rs.getString("crdays"),
-//                                rs.getString("pduedate"),rs.getString("against")));
+                                rs.getString("billamount"),acid,rs.getString("sgstrs"),
+                                rs.getString("cgstrs"),rs.getString("igstrs"),
+                                rs.getString("tcsrs"),rs.getString("otherrs"),
+                                rs.getString("tdsrs"),rs.getString("crdays"),
+                                pddate,rs.getString("against")));
                     }
                 }
                 sgada= new sgadapter(this, ArrayList);
@@ -419,23 +421,23 @@ public class Sales extends AppCompatActivity {
                         TextView tchnod = popupView.findViewById(R.id.tchnod);
                         tchnod.setText(ele.chno);
                         TextView sgst = popupView.findViewById(R.id.tsgstd);
-//                        sgst.setText(ele.sgst);
-//                        TextView cgst = popupView.findViewById(R.id.tcgstd);
-//                        cgst.setText(ele.cgst);
-//                        TextView igst = popupView.findViewById(R.id.tigstd);
-//                        igst.setText(ele.igst);
-//                        TextView tcsa = popupView.findViewById(R.id.ttsd);
-//                        tcsa.setText(ele.tcsa);
-//                        TextView roff = popupView.findViewById(R.id.troffd);
-//                        roff.setText(ele.roff);
-//                        TextView tdsa = popupView.findViewById(R.id.ttdsad);
-//                        tdsa.setText(ele.tdsa);
-//                        TextView crd = popupView.findViewById(R.id.tcdaysd);
-//                        crd.setText(ele.crd);
-//                        TextView pdd = popupView.findViewById(R.id.tpddated);
-//                        pdd.setText(ele.pdd);
-//                        TextView ebilln = popupView.findViewById(R.id.tebillnd);
-//                        ebilln.setText(ele.ebilln);
+                        sgst.setText(ele.sgst);
+                        TextView cgst = popupView.findViewById(R.id.tcgstd);
+                        cgst.setText(ele.cgst);
+                        TextView igst = popupView.findViewById(R.id.tigstd);
+                        igst.setText(ele.igst);
+                        TextView tcsa = popupView.findViewById(R.id.ttsd);
+                        tcsa.setText(ele.tcsa);
+                        TextView roff = popupView.findViewById(R.id.troffd);
+                        roff.setText(ele.roff);
+                        TextView tdsa = popupView.findViewById(R.id.ttdsad);
+                        tdsa.setText(ele.tdsa);
+                        TextView crd = popupView.findViewById(R.id.tcdaysd);
+                        crd.setText(ele.crd);
+                        TextView pdd = popupView.findViewById(R.id.tpddated);
+                        pdd.setText(ele.pdd);
+                        TextView ebilln = popupView.findViewById(R.id.tebillnd);
+                        ebilln.setText(ele.ebilln);
                         Button bc = popupView.findViewById(R.id.bclose);
                         GridView gvdata = popupView.findViewById(R.id.gvdata);
                         bc.setOnClickListener(new View.OnClickListener() {
@@ -490,8 +492,11 @@ public class Sales extends AppCompatActivity {
                     ResultSet rs = st.executeQuery(q);
                     while (rs.next()) {
                         String bdate=rs.getString("billdate").split(" ")[0];
+                        String pddate=rs.getString("pduedate").split(" ")[0];
                         Date date = sdate.parse(bdate);
                         bdate = adate.format(date);
+                        date = sdate.parse(pddate);
+                        pddate = adate.format(date);
                         NumberFormat df = new DecimalFormat("#0.000");
                         String pcs=rs.getString("pcs"),qty=rs.getString("qty"),
                                 billno=rs.getString("billno"),acid=rs.getString("AcId");
@@ -500,12 +505,12 @@ public class Sales extends AppCompatActivity {
                                 bdate, df.format(Double.parseDouble(qty)),
                                 df.format(Double.parseDouble(pcs)),
                                 rs.getString("taxable_amt"), rs.getString("gstrs"),
-                                rs.getString("billamount"),acid));
-//                                ,rs.getString("sgstrs"),
-//                                rs.getString("cgstrs"),rs.getString("igstrs"),
-//                                rs.getString("tcstrs"),rs.getString("othertrs"),
-//                                rs.getString("tdstrs"),rs.getString("crdays"),
-//                                rs.getString("pduedate"),rs.getString("against")));
+                                rs.getString("billamount"),acid
+                                ,rs.getString("sgstrs"),
+                                rs.getString("cgstrs"),rs.getString("igstrs"),
+                                rs.getString("tcsrs"),rs.getString("otherrs"),
+                                rs.getString("tdsrs"),rs.getString("crdays"),
+                                pddate,rs.getString("against")));
                     }
                 }
                 sbada= new sbadapter(this, ArrayList);
@@ -537,23 +542,23 @@ public class Sales extends AppCompatActivity {
                         TextView tchnod = popupView.findViewById(R.id.tchnod);
                         tchnod.setText(ele.chno);
                         TextView sgst = popupView.findViewById(R.id.tsgstd);
-//                        sgst.setText(ele.sgst);
-//                        TextView cgst = popupView.findViewById(R.id.tcgstd);
-//                        cgst.setText(ele.cgst);
-//                        TextView igst = popupView.findViewById(R.id.tigstd);
-//                        igst.setText(ele.igst);
-//                        TextView tcsa = popupView.findViewById(R.id.ttsd);
-//                        tcsa.setText(ele.tcsa);
-//                        TextView roff = popupView.findViewById(R.id.troffd);
-//                        roff.setText(ele.roff);
-//                        TextView tdsa = popupView.findViewById(R.id.ttdsad);
-//                        tdsa.setText(ele.tdsa);
-//                        TextView crd = popupView.findViewById(R.id.tcdaysd);
-//                        crd.setText(ele.crd);
-//                        TextView pdd = popupView.findViewById(R.id.tpddated);
-//                        pdd.setText(ele.pdd);
-//                        TextView ebilln = popupView.findViewById(R.id.tebillnd);
-//                        ebilln.setText(ele.ebilln);
+                        sgst.setText(ele.sgst);
+                        TextView cgst = popupView.findViewById(R.id.tcgstd);
+                        cgst.setText(ele.cgst);
+                        TextView igst = popupView.findViewById(R.id.tigstd);
+                        igst.setText(ele.igst);
+                        TextView tcsa = popupView.findViewById(R.id.ttsd);
+                        tcsa.setText(ele.tcsa);
+                        TextView roff = popupView.findViewById(R.id.troffd);
+                        roff.setText(ele.roff);
+                        TextView tdsa = popupView.findViewById(R.id.ttdsad);
+                        tdsa.setText(ele.tdsa);
+                        TextView crd = popupView.findViewById(R.id.tcdaysd);
+                        crd.setText(ele.crd);
+                        TextView pdd = popupView.findViewById(R.id.tpddated);
+                        pdd.setText(ele.pdd);
+                        TextView ebilln = popupView.findViewById(R.id.tebillnd);
+                        ebilln.setText(ele.ebilln);
                         Button bc = popupView.findViewById(R.id.bclose);
                         GridView gvdata = popupView.findViewById(R.id.gvdata);
                         bc.setOnClickListener(new View.OnClickListener() {

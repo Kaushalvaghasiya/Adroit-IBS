@@ -21,9 +21,9 @@ public class SalesCardG {
     String bno,btype,chno,bdate,totmrts,pcs,taxa,gsta,bamt,tcname,AcId,sgst,cgst,igst,tcsa,roff,tdsa,crd,pdd,ebilln;
 
     public SalesCardG(String tcname,String bno, String btype,String chno,String bdate,String totmrts,String pcs,
-                      String taxa, String gsta,String bamt,String AcId){
-//            ,String sgst,String cgst,String igst,
-//                      String tcsa,String roff,String tdsa,String crd,String pdd,String ebilln) {
+                      String taxa, String gsta,String bamt,String AcId
+            ,String sgst,String cgst,String igst,
+                      String tcsa,String roff,String tdsa,String crd,String pdd,String ebilln) {
         this.tcname=tcname;
         this.bno = bno;
         this.btype = btype;
@@ -35,15 +35,15 @@ public class SalesCardG {
         this.gsta = gsta;
         this.bamt = bamt;
         this.AcId = AcId;
-//        this.sgst = sgst;
-//        this.cgst = cgst;
-//        this.igst = igst;
-//        this.tcsa = tcsa;
-//        this.roff = roff;
-//        this.tdsa = tdsa;
-//        this.crd = crd;
-//        this.pdd = pdd;
-//        this.ebilln = ebilln;
+        this.sgst = sgst;
+        this.cgst = cgst;
+        this.igst = igst;
+        this.tcsa = tcsa;
+        this.roff = roff;
+        this.tdsa = tdsa;
+        this.crd = crd;
+        this.pdd = pdd;
+        this.ebilln = ebilln;
 
     }
 }

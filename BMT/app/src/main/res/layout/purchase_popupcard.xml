@@ -372,7 +372,7 @@
                 android:shadowDy="3"
                 android:shadowRadius="2"
                 android:textColor="@color/white"
-                android:textSize="10dp" />
+                android:textSize="12dp" />
 
         </TableRow>
         <TableRow
@@ -441,7 +441,11 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:textColor="@color/white"
-                android:textSize="10dp" />
+                android:textSize="12dp"
+                android:shadowColor="@color/black"
+                android:shadowDx="-3"
+                android:shadowDy="3"
+                android:shadowRadius="2" />
 
         </TableRow>
         <TableRow

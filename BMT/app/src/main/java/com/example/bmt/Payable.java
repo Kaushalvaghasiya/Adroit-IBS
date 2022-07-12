@@ -311,12 +311,19 @@ public class Payable extends AppCompatActivity {
                         NumberFormat df2 = new DecimalFormat("#0.00");
                         while (rs.next()) {
                             String bdate=rs.getString("BillDate").split(" ")[0];
+                            String billamt=rs.getString("BillAmount"),pamt=rs.getString("PaidAmt"),uamt=rs.getString("UnPaidAmt");
                             Date date = sdate.parse(bdate);
                             bdate = adate.format(date);
-                            String billamt=rs.getString("BillAmount"),pamt=rs.getString("PaidAmt"),uamt=rs.getString("UnPaidAmt");
+                            Date pduedate=sdate.parse(rs.getString("pduedate"));
+                            Date tilldate = sdate.parse(tdate);
+                            long difference_In_Time = tilldate.getTime() - pduedate.getTime();
+                            long difference_In_Days = (difference_In_Time / (1000 * 60 * 60 * 24)) % 365;
+                            Double intamt = (difference_In_Days*18*Double.parseDouble(billamt))/36500;
+                            DecimalFormat df = new DecimalFormat();
+                            df.setMaximumFractionDigits(2);
                             ArrayList.add(new RecPopupCardin(bdate,rs.getString("BillNO"),df2.format(Double.parseDouble(billamt))
                                     ,rs.getString("days"), df2.format(Double.parseDouble(pamt)), df2.format(Double.parseDouble(uamt))
-                                    , ""));
+                                    , String.valueOf(df.format(intamt))));
                             sumbamt+=Double.parseDouble(billamt);
                             sumpamt+=Double.parseDouble(pamt);
                             sumuamt+=Double.parseDouble(uamt);
@@ -417,13 +424,7 @@ public class Payable extends AppCompatActivity {
                                         table.addCell(new Cell().add(new Paragraph(rs.getString("days"))).setBorder(Border.NO_BORDER).setBackgroundColor(b ? new DeviceRgb(232,232,232) : ColorConstants.WHITE));
                                         table.addCell(new Cell().add(new Paragraph(rs.getString("paidamt"))).setBorder(Border.NO_BORDER).setBackgroundColor(b ? new DeviceRgb(232,232,232) : ColorConstants.WHITE));
                                         table.addCell(new Cell().add(new Paragraph(rs.getString("unpaidamt"))).setBorder(Border.NO_BORDER).setBackgroundColor(b ? new DeviceRgb(232,232,232) : ColorConstants.WHITE));
-                                        String q1 = "select * from Billmst where FirmNo='"+fno+"' and billno='"+bno+"';";
-                                        Statement st1 = con.createStatement();
-                                        ResultSet rs1 = st1.executeQuery(q1);
-                                        Date pduedate = bdate;
-                                        while (rs1.next()) {
-                                            pduedate=sdate.parse(rs1.getString("pduedate"));
-                                        }
+                                        Date pduedate=sdate.parse(rs.getString("pduedate"));
                                         Date tilldate = sdate.parse(tdate);
                                         long difference_In_Time = tilldate.getTime() - pduedate.getTime();
                                         long difference_In_Days = (difference_In_Time / (1000 * 60 * 60 * 24)) % 365;

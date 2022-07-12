@@ -324,7 +324,7 @@ public class Challan extends AppCompatActivity {
             else if (softtype.equals("B")){
                 ArrayList<ChallanCardG> ArrayList = new ArrayList<ChallanCardG>();
                 if (con != null) {
-                    String q = "select  * from ChalanMst_View_G where BillDate between '" + fdate + "' and '" + tdate + "' and FirmNo='" + fno + "' order by BillDate desc,BillNo desc;";
+                    String q = "select  * from ChalanMst_View where BillDate between '" + fdate + "' and '" + tdate + "' and FirmNo='" + fno + "' order by BillDate desc,BillNo desc;";
                     Statement st = con.createStatement();
                     ResultSet rs = st.executeQuery(q);
                     while (rs.next()) {
@@ -351,7 +351,7 @@ public class Challan extends AppCompatActivity {
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         ChallanCardG ele = (ChallanCardG) gvdata.getItemAtPosition(position);
                         LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-                        View popupView = inflater.inflate(R.layout.challan_popupcard_g, null);
+                        View popupView = inflater.inflate(R.layout.challan_popupcard_b, null);
                         int width = LinearLayout.LayoutParams.MATCH_PARENT;
                         int height = LinearLayout.LayoutParams.WRAP_CONTENT;
                         boolean focusable = true; // lets taps outside the popup also dismiss it
@@ -375,27 +375,31 @@ public class Challan extends AppCompatActivity {
                                 popupWindow.dismiss();
                             }
                         });
-                        ArrayList<PurchasePopupCardin> ArrayList = new ArrayList<PurchasePopupCardin>();
-                        String q = "select * from chalandtlview_G where Ch_id='"+ele.C_Id+"' and  FirmNo='"+fno+"' order by Srno asc";
+                        ArrayList<SalesPopUpCardGin> ArrayList = new ArrayList<SalesPopUpCardGin>();
+                        String q = "select * from chalandtlview where Ch_id='"+ele.C_Id+"' and  FirmNo='"+fno+"' order by Srno asc";
                         try{
                             Statement st = con.createStatement();
                             ResultSet rs = st.executeQuery(q);
                             NumberFormat df = new DecimalFormat("#0.00");
-                            double sumpsc=0,summtr=0;
+                            double sumpsc=0,summtr=0,suma=0;
+                            int i=1;
                             while (rs.next()) {
                                 String psc=rs.getString("Pcs"),mtr=rs.getString("Mtrs");
-                                ArrayList.add(new PurchasePopupCardin(
-                                        rs.getString("TakaNO"),rs.getString("Pcs").split("\\.")[0],
-                                        df.format(Double.parseDouble(rs.getString("Mtrs"))),
-                                        rs.getString("RC2"),
-                                        rs.getString("ProdName")));
+                                String billa=rs.getString("billamount");
+                                ArrayList.add(new SalesPopUpCardGin(String.valueOf(i),
+                                        rs.getString("prodname"),rs.getString("Pcs").split("\\.")[0],
+                                        "0.00", df.format(Double.parseDouble(rs.getString("Mtrs"))),"",
+                                        rs.getString("rate"),
+                                        rs.getString("billamount")));
+                                i++;
+                                suma+=Double.parseDouble(billa);
                                 sumpsc+=Double.parseDouble(psc);
                                 summtr+=Double.parseDouble(mtr);
                             }
-                            ArrayList.add(new PurchasePopupCardin(
-                                    "Total -->>",String.valueOf((int)sumpsc),
-                                    df.format(summtr),"",""));
-                            pinadapter ada = new pinadapter(getApplicationContext(), ArrayList);
+                            ArrayList.add(new SalesPopUpCardGin("",
+                                    "Total -->>",String.valueOf((int)sumpsc),"",
+                                    df.format(summtr),"","",df.format(suma)));
+                            sginadapter ada = new sginadapter(getApplicationContext(), ArrayList);
                             gvdata.setAdapter(ada);
                         }
                         catch (Exception e){

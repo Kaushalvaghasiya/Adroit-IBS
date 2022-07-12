@@ -18,9 +18,10 @@ import androidx.annotation.RequiresApi;
 import java.util.ArrayList;
 
 public class PurchaseCard {
-    String bno,btype,bdate,qty,pcs,taxa,gsta,bamt,tcname,B_Id,acid;
+    String bno,btype,bdate,qty,pcs,taxa,gsta,bamt,tcname,B_Id,acid,sgst,cgst,igst,tcsa,roff,tdsa,crd,pdd,ebilln;
 
-    public PurchaseCard(String tcname,String bno, String btype,String bdate,String qty,String pcs,String taxa,String gsta,String bamt,String B_Id,String acid) {
+    public PurchaseCard(String tcname,String bno, String btype,String bdate,String qty,String pcs,String taxa,String gsta,String bamt,String B_Id,String acid,String sgst,String cgst,String igst,
+                        String tcsa,String roff,String tdsa,String crd,String pdd,String ebilln) {
         this.tcname=tcname;
         this.bno = bno;
         this.btype = btype;
@@ -32,6 +33,15 @@ public class PurchaseCard {
         this.bamt = bamt;
         this.B_Id=B_Id;
         this.acid=acid;
+        this.sgst = sgst;
+        this.cgst = cgst;
+        this.igst = igst;
+        this.tcsa = tcsa;
+        this.roff = roff;
+        this.tdsa = tdsa;
+        this.crd = crd;
+        this.pdd = pdd;
+        this.ebilln = ebilln;
     }
 }
 class padapter extends BaseAdapter implements Filterable {

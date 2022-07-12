@@ -302,12 +302,19 @@ public class Receivable extends AppCompatActivity {
                         NumberFormat df2 = new DecimalFormat("#0.00");
                         while (rs.next()) {
                             String bdate=rs.getString("BillDate").split(" ")[0];
+                            String billamt=rs.getString("BillAmount"),pamt=rs.getString("PaidAmt"),uamt=rs.getString("UnPaidAmt");
                             Date date = sdate.parse(bdate);
                             bdate = adate.format(date);
-                            String billamt=rs.getString("BillAmount"),pamt=rs.getString("PaidAmt"),uamt=rs.getString("UnPaidAmt");
+                            Date pduedate=sdate.parse(rs.getString("pduedate"));
+                            Date tilldate = sdate.parse(tdate);
+                            long difference_In_Time = tilldate.getTime() - pduedate.getTime();
+                            long difference_In_Days = (difference_In_Time / (1000 * 60 * 60 * 24)) % 365;
+                            Double intamt = (difference_In_Days*18*Double.parseDouble(billamt))/36500;
+                            DecimalFormat df = new DecimalFormat();
+                            df.setMaximumFractionDigits(2);
                             ArrayList.add(new RecPopupCardin(bdate,rs.getString("BillNO"),df2.format(Double.parseDouble(billamt))
                                     ,rs.getString("days"), df2.format(Double.parseDouble(pamt)), df2.format(Double.parseDouble(uamt))
-                                    , ""));
+                                    , String.valueOf(df.format(intamt))));
                             sumbamt+=Double.parseDouble(billamt);
                             sumpamt+=Double.parseDouble(pamt);
                             sumuamt+=Double.parseDouble(uamt);
