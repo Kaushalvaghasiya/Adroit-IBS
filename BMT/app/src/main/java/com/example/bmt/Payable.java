@@ -13,6 +13,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.fonts.Font;
+import android.graphics.fonts.FontFamily;
 import android.icu.util.Calendar;
 import android.net.Uri;
 import android.os.Build;
@@ -44,8 +46,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.itextpdf.io.font.FontConstants;
+import com.itextpdf.io.font.FontProgram;
+import com.itextpdf.io.font.FontProgramFactory;
+import com.itextpdf.io.font.PdfEncodings;
 import com.itextpdf.kernel.colors.ColorConstants;
 import com.itextpdf.kernel.colors.DeviceRgb;
+import com.itextpdf.kernel.font.PdfFont;
+import com.itextpdf.kernel.font.PdfFontFactory;
+import com.itextpdf.kernel.font.PdfTrueTypeFont;
 import com.itextpdf.kernel.geom.PageSize;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
@@ -345,7 +354,8 @@ public class Payable extends AppCompatActivity {
                             // first row
                             String fname = pref.getString("fname", null);
                             Cell cell1 = new Cell(1, 7);
-                            cell1.add(new Paragraph(fname.split("\\(")[0]).setFontSize(17).setBold().setFontColor(ColorConstants.BLUE));
+                            PdfFont font = PdfFontFactory.createFont(FontConstants.TIMES_ROMAN);
+                            cell1.add(new Paragraph(fname.split("\\(")[0]).setFontSize(17).setBold().setFontColor(ColorConstants.BLUE).setFont(font));
                             String fno = pref.getString("fno", null);
                             try {
                                 ConnectionHelper conhelper = new ConnectionHelper();

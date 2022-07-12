@@ -66,7 +66,6 @@ public class Challan extends AppCompatActivity {
     DateFormat adate,sdate;
     public static ProgressDialog dialog;
     Dictionary data;
-    String gstno;
     List<String> list;
     @RequiresApi(api = Build.VERSION_CODES.N)
     @SuppressLint("ResourceAsColor")
@@ -239,13 +238,6 @@ public class Challan extends AppCompatActivity {
             ConnectionHelper conhelper= new ConnectionHelper();
             con=conhelper.connectionclass();
             String softtype=pref.getString("soft_type",null);
-            String q2="select * from Firm_mst where firmno='"+fno+"'";
-            Statement st2 = con.createStatement();
-            ResultSet rs2 = st2.executeQuery(q2);
-            gstno="";
-            while (rs2.next()){
-                gstno=rs2.getString("gstno");
-            }
             if (softtype.equals("G")) {
                 ArrayList<ChallanCardG> ArrayList = new ArrayList<ChallanCardG>();
                 if (con != null) {
@@ -288,8 +280,6 @@ public class Challan extends AppCompatActivity {
                         tchnod.setText(ele.chno);
                         TextView tchdd = popupView.findViewById(R.id.tchdd);
                         tchdd.setText(ele.chd);
-                        TextView tbgstnd = popupView.findViewById(R.id.tbgstnd);
-                        tbgstnd.setText(gstno);
                         TextView trated = popupView.findViewById(R.id.trated);
                         trated.setText(ele.rate);
                         TextView tdpnamed = popupView.findViewById(R.id.tdpnamed);
@@ -307,12 +297,12 @@ public class Challan extends AppCompatActivity {
                         try{
                             Statement st = con.createStatement();
                             ResultSet rs = st.executeQuery(q);
-                            NumberFormat df = new DecimalFormat("#0.000");
+                            NumberFormat df = new DecimalFormat("#0.00");
                             double sumpsc=0,summtr=0;
                             while (rs.next()) {
                                 String psc=rs.getString("Pcs"),mtr=rs.getString("Mtrs");
                                 ArrayList.add(new PurchasePopupCardin(
-                                        rs.getString("TakaNO"),df.format(Double.parseDouble(rs.getString("Pcs"))),
+                                        rs.getString("TakaNO"),rs.getString("Pcs").split("\\.")[0],
                                         df.format(Double.parseDouble(rs.getString("Mtrs"))),
                                         rs.getString("RC2"),
                                         rs.getString("ProdName")));
@@ -320,7 +310,90 @@ public class Challan extends AppCompatActivity {
                                 summtr+=Double.parseDouble(mtr);
                             }
                             ArrayList.add(new PurchasePopupCardin(
-                                    "Total -->>",df.format(sumpsc),
+                                    "Total -->>",String.valueOf((int)sumpsc),
+                                    df.format(summtr),"",""));
+                            pinadapter ada = new pinadapter(getApplicationContext(), ArrayList);
+                            gvdata.setAdapter(ada);
+                        }
+                        catch (Exception e){
+                            Log.e("error",e.getMessage());
+                        }
+                    }
+                });
+            }
+            else if (softtype.equals("B")){
+                ArrayList<ChallanCardG> ArrayList = new ArrayList<ChallanCardG>();
+                if (con != null) {
+                    String q = "select  * from ChalanMst_View_G where BillDate between '" + fdate + "' and '" + tdate + "' and FirmNo='" + fno + "' order by BillDate desc,BillNo desc;";
+                    Statement st = con.createStatement();
+                    ResultSet rs = st.executeQuery(q);
+                    while (rs.next()) {
+                        String bdate=rs.getString("billdate").split(" ")[0];
+                        Date date = sdate.parse(bdate);
+                        bdate = adate.format(date);
+                        NumberFormat df = new DecimalFormat("#0.000");
+                        NumberFormat df2 = new DecimalFormat("#0.00");
+                        ArrayList.add(new ChallanCardG(rs.getString("AcName"), rs.getString("Deli_Party"),
+                                rs.getString("Transport"), rs.getString("BillNo"),
+                                bdate, df2.format(Double.parseDouble(rs.getString("Notes"))),
+                                rs.getString("RTime"), df.format(Double.parseDouble(rs.getString("TotTaka"))),
+                                df.format(Double.parseDouble(rs.getString("TotWt"))), df.format(Double.parseDouble(rs.getString("TotMtrs"))),
+                                rs.getString("BillAmount"),rs.getString("C_Id")));
+                    }
+                }
+                cgada= new cgadapter(this, ArrayList);
+                LinearLayout ll = findViewById(R.id.btnLay);
+                paging p = new paging(this,ll,10,cgada,gvdata,"cgada");
+                p.Btnfooter();
+                p.addata();
+                gvdata.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        ChallanCardG ele = (ChallanCardG) gvdata.getItemAtPosition(position);
+                        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+                        View popupView = inflater.inflate(R.layout.challan_popupcard_g, null);
+                        int width = LinearLayout.LayoutParams.MATCH_PARENT;
+                        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+                        boolean focusable = true; // lets taps outside the popup also dismiss it
+                        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+                        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+                        TextView tcname = popupView.findViewById(R.id.tbpnamed);
+                        tcname.setText(ele.tcname);
+                        TextView tchnod = popupView.findViewById(R.id.tchnod);
+                        tchnod.setText(ele.chno);
+                        TextView tchdd = popupView.findViewById(R.id.tchdd);
+                        tchdd.setText(ele.chd);
+                        TextView trated = popupView.findViewById(R.id.trated);
+                        trated.setText(ele.rate);
+                        TextView tdpnamed = popupView.findViewById(R.id.tdpnamed);
+                        tdpnamed.setText(ele.dp);
+                        Button bc = popupView.findViewById(R.id.bclose);
+                        GridView gvdata = popupView.findViewById(R.id.gvdata);
+                        bc.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                popupWindow.dismiss();
+                            }
+                        });
+                        ArrayList<PurchasePopupCardin> ArrayList = new ArrayList<PurchasePopupCardin>();
+                        String q = "select * from chalandtlview_G where Ch_id='"+ele.C_Id+"' and  FirmNo='"+fno+"' order by Srno asc";
+                        try{
+                            Statement st = con.createStatement();
+                            ResultSet rs = st.executeQuery(q);
+                            NumberFormat df = new DecimalFormat("#0.00");
+                            double sumpsc=0,summtr=0;
+                            while (rs.next()) {
+                                String psc=rs.getString("Pcs"),mtr=rs.getString("Mtrs");
+                                ArrayList.add(new PurchasePopupCardin(
+                                        rs.getString("TakaNO"),rs.getString("Pcs").split("\\.")[0],
+                                        df.format(Double.parseDouble(rs.getString("Mtrs"))),
+                                        rs.getString("RC2"),
+                                        rs.getString("ProdName")));
+                                sumpsc+=Double.parseDouble(psc);
+                                summtr+=Double.parseDouble(mtr);
+                            }
+                            ArrayList.add(new PurchasePopupCardin(
+                                    "Total -->>",String.valueOf((int)sumpsc),
                                     df.format(summtr),"",""));
                             pinadapter ada = new pinadapter(getApplicationContext(), ArrayList);
                             gvdata.setAdapter(ada);

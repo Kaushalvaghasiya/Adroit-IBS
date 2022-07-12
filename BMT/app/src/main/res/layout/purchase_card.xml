@@ -92,7 +92,7 @@
                 android:layout_width="140dp"
                 android:textSize="15dp"
                 android:layout_height="match_parent"
-                android:text="TK/PC/CTN" />
+                android:text="Tk/Pc/Ctn" />
             <TextView
                 android:id="@+id/tpcsd"
                 android:textSize="15dp"

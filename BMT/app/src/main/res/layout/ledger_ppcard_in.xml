@@ -26,9 +26,9 @@
                 <TextView
                     android:id="@+id/tdata1"
                     android:layout_width="0dp"
-                    android:layout_weight=".3"
+                    android:layout_weight=".25"
                     android:layout_height="wrap_content"
-                    android:text="Taka No."
+                    android:text="Date"
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="9dp"></TextView>
@@ -37,18 +37,18 @@
                     android:id="@+id/tdata2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Pcs"
-                    android:layout_weight=".25"
-                    android:textAlignment="center"
+                    android:text="Particulars &amp; Voucher Type &amp; Voucher no. "
+                    android:layout_weight=".5"
+                    android:gravity="left"
                     android:textColor="@color/black"
                     android:textSize="9dp"></TextView>
 
                 <TextView
                     android:id="@+id/tdata3"
                     android:layout_width="0dp"
-                    android:layout_weight=".25"
+                    android:layout_weight=".2"
                     android:layout_height="wrap_content"
-                    android:text="Mtrs"
+                    android:text="Debit"
                     android:gravity="right"
                     android:textColor="@color/black"
                     android:textSize="9dp"></TextView>
@@ -56,22 +56,23 @@
                 <TextView
                     android:id="@+id/tdata4"
                     android:layout_width="0dp"
-                    android:layout_weight=".25"
+                    android:layout_weight=".2"
                     android:layout_height="wrap_content"
-                    android:text="Design No."
-                    android:textAlignment="center"
+                    android:text="Credit"
+                    android:gravity="right"
                     android:textColor="@color/black"
                     android:textSize="9dp"></TextView>
 
                 <TextView
                     android:id="@+id/tdata5"
                     android:layout_width="0dp"
-                    android:layout_weight=".5"
+                    android:layout_weight=".2"
                     android:layout_height="wrap_content"
-                    android:text="Quality Name"
+                    android:text="Balance"
                     android:gravity="right"
                     android:textColor="@color/black"
                     android:textSize="9dp"></TextView>
+
             </TableRow>
         </TableLayout>
     </LinearLayout>

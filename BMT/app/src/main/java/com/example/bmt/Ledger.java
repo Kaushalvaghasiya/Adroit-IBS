@@ -270,43 +270,53 @@ public class Ledger extends AppCompatActivity {
                 LedgerCard ele = (LedgerCard)gvdata.getItemAtPosition(position);
                 LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
                 View popupView = inflater.inflate(R.layout.ledger_popupcard, null);
-                int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+                int width = LinearLayout.LayoutParams.MATCH_PARENT;
                 int height = LinearLayout.LayoutParams.WRAP_CONTENT;
                 boolean focusable = true; // lets taps outside the popup also dismiss it
                 final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
-                popupWindow.showAtLocation(view,Gravity.CENTER, 0, 50);
-                TextView tcname = popupView.findViewById(R.id.tcname);
-                tcname.setText(ele.tcname);
-                TextView tphone = popupView.findViewById(R.id.tphone);
-                tphone.setText(ele.Phone);
-                String q = "select * from Acc_Ledger where FirmNo='"+fno+"' and AcId='"+ele.AcId+"';";
+                popupWindow.showAtLocation(view,Gravity.CENTER, 0, 0);
+                TextView tlednod = popupView.findViewById(R.id.tlednod);
+                tlednod.setText(ele.LedgerId+"  "+ele.tcname);
+                TextView tcityd= popupView.findViewById(R.id.tcityd);
+                tcityd.setText(ele.city);
+                GridView gvdata = popupView.findViewById(R.id.gvdata);
+                ArrayList<LedgerPopupCardin> ArrayList = new ArrayList<LedgerPopupCardin>();
                 try {
                     ConnectionHelper conhelper = new ConnectionHelper();
                     con = conhelper.connectionclass();
                     if (con != null) {
+                        String q = "select ((select  OpBalance From  Acc_Ledger where FirmNO= '"+fno+"' and AcId= '"+ele.AcId+"')+" +
+                                "(select abs(sum(DrAmt)-sum(CrAmt)) as Bal From HeadDtl3  where FirmNO= '"+fno+"' and AccId= '"+ele.AcId+"' and  Transdate <'"+tdate+"')) as opbal;";
                         Statement st = con.createStatement();
                         ResultSet rs = st.executeQuery(q);
-                        while (rs.next()) {
-                            TextView tbal = popupView.findViewById(R.id.tbald);
-                            tbal.setText(rs.getString("OpBalance"));
-                            TextView tdeb = popupView.findViewById(R.id.tdebd);
-                            tdeb.setText(rs.getString("Debit_BetDt"));
-                            TextView tcre = popupView.findViewById(R.id.tcred);
-                            tcre.setText(rs.getString("Credit_BetDt"));
-                            TextView tcbal = popupView.findViewById(R.id.tcbald);
-                            tcbal.setText(rs.getString("ClBalance"));
-                            TextView tctype = popupView.findViewById(R.id.tctyped);
-                            TextView ttype = popupView.findViewById(R.id.ttyped);
-                            String type = (rs.getString("ClType"));
-                            if (type.equals("C")) {
-                                tctype.setText("Credit");
-                                ttype.setText("Credit");
-                            } else {
-                                tctype.setText("Debit");
-                                ttype.setText("Debit");
-                            }
+                        while (rs.next()){
+                            String opbal=rs.getString("opbal");
+                            if(rs.wasNull())opbal="0";
+                            Date date = sdate.parse(fdate);
+                            String fdt = adate.format(date);
+                            ArrayList.add(new LedgerPopupCardin(fdt,"Op. Balance-","","",opbal));
                         }
-                        con.close();
+                        q = "select  Transdate,Descr, DrAmt,CrAmt ,Abs(DrAmt-CrAmt) as Bal, " +
+                                "Case when DrAmt-CrAmt>0 then 'Dr' else 'Cr' end  as Baltype From HeadDtl3  where FirmNO= '"+fno+"' and AccId= '"+ele.AcId+"' and  Transdate Between '"+fdate+"'  and '"+tdate+"';";
+                        st = con.createStatement();
+                        rs = st.executeQuery(q);
+                        double sumc=0,sumd=0,sumb=0;
+                        while (rs.next()) {
+                            String bdt = rs.getString("Transdate").split(" ")[0];
+                            Date date = sdate.parse(bdt);
+                            bdt = adate.format(date);
+                            String c=rs.getString("cramt"),d=rs.getString("dramt"),b=rs.getString("bal");
+                            ArrayList.add(new LedgerPopupCardin(bdt,rs.getString("Descr"),rs.getString("dramt"),rs.getString("cramt"),rs.getString("bal")+rs.getString("baltype")));
+                            sumb+=Double.parseDouble(b);
+                            sumc+=Double.parseDouble(c);
+                            sumd+=Double.parseDouble(d);
+                        }
+                        Date date = sdate.parse(tdate);
+                        String tdt = adate.format(date);
+                        ArrayList.add(new LedgerPopupCardin("","Total -->> ",String.valueOf(sumd),String.valueOf(sumc),""));
+                        ArrayList.add(new LedgerPopupCardin("","Closing Balance Dt. -->> ",tdt,"", sumb +(((sumd-sumc)>0)?"Dr":"Cr")));
+                        ledinadapter ad= new ledinadapter(Ledger.this,ArrayList);
+                        gvdata.setAdapter(ad);
                     }
                 }
                 catch (Exception e){
