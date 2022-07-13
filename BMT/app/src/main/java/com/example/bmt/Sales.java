@@ -77,7 +77,6 @@ public class Sales extends AppCompatActivity {
     DateFormat adate,sdate;
     Dictionary data;
     List<String> list;
-    String gstno;
     public static ProgressDialog dialog;
     @Override
     protected void onResume() {
@@ -266,13 +265,6 @@ public class Sales extends AppCompatActivity {
             ConnectionHelper conhelper= new ConnectionHelper();
             con=conhelper.connectionclass();
             String softtype=pref.getString("soft_type",null);
-            String q2="select * from Firm_mst where firmno='"+fno+"'";
-            Statement st2 = con.createStatement();
-            ResultSet rs2 = st2.executeQuery(q2);
-            gstno="";
-            while (rs2.next()){
-                gstno=rs2.getString("gstno");
-            }
             if (softtype.equals("Y")) {
                 ArrayList<SalesCardY> ArrayList = new ArrayList<SalesCardY>();
                 if (con != null) {
@@ -389,7 +381,7 @@ public class Sales extends AppCompatActivity {
                                 rs.getString("cgstrs"),rs.getString("igstrs"),
                                 rs.getString("tcsrs"),rs.getString("otherrs"),
                                 rs.getString("tdsrs"),rs.getString("crdays"),
-                                pddate,rs.getString("against")));
+                                pddate,rs.getString("against"),rs.getString("gstin")));
                     }
                 }
                 sgada= new sgadapter(this, ArrayList);
@@ -417,7 +409,7 @@ public class Sales extends AppCompatActivity {
                         TextView tbillad = popupView.findViewById(R.id.ttbilld);
                         tbillad.setText(ele.bamt);
                         TextView tgstnd = popupView.findViewById(R.id.tgstnd);
-                        tgstnd.setText(gstno);
+                        tgstnd.setText(ele.gstin);
                         TextView tchnod = popupView.findViewById(R.id.tchnod);
                         tchnod.setText(ele.chno);
                         TextView sgst = popupView.findViewById(R.id.tsgstd);
@@ -461,8 +453,8 @@ public class Sales extends AppCompatActivity {
                                 sumpcs+=Double.parseDouble(pcs);
                                 summtr+=Double.parseDouble(mtr);
                                 sumamt+=Double.parseDouble(amt);
-                                ArrayList.add(new SalesPopUpCardGin(String.valueOf(i), rs.getString("Prodname"), "-", df0.format(Double.parseDouble(rs.getString("Pcs")))
-                                        , df.format(Double.parseDouble(rs.getString("Mtrs"))), "-", df2.format(Double.parseDouble(rs.getString("Rate_Disc")))
+                                ArrayList.add(new SalesPopUpCardGin(String.valueOf(i), rs.getString("Prodname"), rs.getString("hsncode"), df.format(Double.parseDouble(rs.getString("Pcs")))
+                                        , df.format(Double.parseDouble(rs.getString("Mtrs"))), rs.getString("unit"), df2.format(Double.parseDouble(rs.getString("Rate_Disc")))
                                         , df2.format(Double.parseDouble(rs.getString("Amt")))));
                                 i++;
                             }
@@ -510,7 +502,7 @@ public class Sales extends AppCompatActivity {
                                 rs.getString("cgstrs"),rs.getString("igstrs"),
                                 rs.getString("tcsrs"),rs.getString("otherrs"),
                                 rs.getString("tdsrs"),rs.getString("crdays"),
-                                pddate,rs.getString("against")));
+                                pddate,rs.getString("against"),rs.getString("gstin")));
                     }
                 }
                 sbada= new sbadapter(this, ArrayList);
@@ -529,6 +521,10 @@ public class Sales extends AppCompatActivity {
                         boolean focusable = true; // lets taps outside the popup also dismiss it
                         final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
                         popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+                        TextView tpcs = popupView.findViewById(R.id.tpcs);
+                        tpcs.setText("Pcs");
+                        TextView tmtr = popupView.findViewById(R.id.tmtr);
+                        tmtr.setText("Qty");
                         TextView tcname = popupView.findViewById(R.id.tpnamed);
                         tcname.setText(ele.tcname);
                         TextView tbnod = popupView.findViewById(R.id.tbnod);
@@ -538,7 +534,7 @@ public class Sales extends AppCompatActivity {
                         TextView tbillad = popupView.findViewById(R.id.ttbilld);
                         tbillad.setText(ele.bamt);
                         TextView tgstnd = popupView.findViewById(R.id.tgstnd);
-                        tgstnd.setText(gstno);
+                        tgstnd.setText(ele.gstin);
                         TextView tchnod = popupView.findViewById(R.id.tchnod);
                         tchnod.setText(ele.chno);
                         TextView sgst = popupView.findViewById(R.id.tsgstd);
@@ -575,20 +571,20 @@ public class Sales extends AppCompatActivity {
                             int i = 1;
                             NumberFormat df = new DecimalFormat("#0.000");
                             NumberFormat df2 = new DecimalFormat("#0.00");
-                            NumberFormat df0 = new DecimalFormat("#0");
                             double sumpcs = 0, summtr = 0, sumamt = 0;
                             while (rs.next()) {
                                 String pcs = rs.getString("Pcs"), mtr = rs.getString("Mtrs"), amt = rs.getString("Amt");
                                 sumpcs += Double.parseDouble(pcs);
                                 summtr += Double.parseDouble(mtr);
                                 sumamt += Double.parseDouble(amt);
-                                ArrayList.add(new SalesPopUpCardGin(String.valueOf(i), rs.getString("Prodname"), "-", df0.format(Double.parseDouble(rs.getString("Pcs")))
-                                        , df.format(Double.parseDouble(rs.getString("Mtrs"))), "-", df2.format(Double.parseDouble(rs.getString("Rate_Disc")))
-                                        , df2.format(Double.parseDouble(rs.getString("Amt")))));
+                                ArrayList.add(new SalesPopUpCardGin(String.valueOf(i), rs.getString("Prodname"), rs.getString("hsncode"),
+                                        df2.format(Double.parseDouble(rs.getString("Pcs"))),
+                                        df2.format(Double.parseDouble(rs.getString("Mtrs"))), rs.getString("unit"), df2.format(Double.parseDouble(rs.getString("Rate_Disc")))
+                                        , df.format(Double.parseDouble(rs.getString("Amt")))));
                                 i++;
                             }
-                            ArrayList.add(new SalesPopUpCardGin("", "Total -->>", "", df0.format(Double.parseDouble(String.valueOf(sumpcs)))
-                                    , df.format(Double.parseDouble(String.valueOf(summtr))), "", ""
+                            ArrayList.add(new SalesPopUpCardGin("", "Total -->>", "", df2.format(Double.parseDouble(String.valueOf(sumpcs)))
+                                    , df2.format(Double.parseDouble(String.valueOf(summtr))), "", ""
                                     , df2.format(Double.parseDouble(String.valueOf(sumamt)))));
                             sginadapter ada = new sginadapter(Sales.this, ArrayList);
                             gvdata.setAdapter(ada);

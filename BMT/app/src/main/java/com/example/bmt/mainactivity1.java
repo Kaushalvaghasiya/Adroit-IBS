@@ -32,7 +32,7 @@ public class mainactivity1 extends AppCompatActivity {
 
     private String getMyPhoneNO() {
 //        b
-        return "3b81f051e3959205";
+        return "044de05fb860f261";
 //        g
 //        return "d1e0998448ccbced";
 //        return Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);

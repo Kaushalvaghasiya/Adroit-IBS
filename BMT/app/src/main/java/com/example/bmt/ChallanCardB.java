@@ -17,30 +17,26 @@ import androidx.annotation.RequiresApi;
 
 import java.util.ArrayList;
 
-public class ChallanCardG {
-    String dp,tra,chno,chd,rate,rtime,pcs,weight,mtr,chamt,tcname,C_Id;
+public class ChallanCardB {
+    String dp,tra,chno,chd,pcs,mtr,chamt,tcname,C_Id;
 
-    public ChallanCardG(String tcname,String dp, String tra,String chno,String chd,
-                        String rate,String rtime,String pcs,String weight,String mtr,String chamt,String C_Id) {
+    public ChallanCardB(String tcname,String dp, String tra,String chno,String chd,String pcs,String mtr,String chamt,String C_Id) {
         this.tcname=tcname;
         this.dp = dp;
         this.tra = tra;
         this.chno = chno;
         this.chd = chd;
-        this.rate = rate;
         this.pcs = pcs;
-        this.rtime = rtime;
-        this.weight = weight;
         this.mtr = mtr;
         this.chamt = chamt;
         this.C_Id = C_Id;
     }
 }
-class cgadapter extends BaseAdapter implements Filterable {
-    ArrayList<ChallanCardG> ArrayList;
-    ArrayList<ChallanCardG> filteredArrayList;
+class cbadapter extends BaseAdapter implements Filterable {
+    ArrayList<ChallanCardB> ArrayList;
+    ArrayList<ChallanCardB> filteredArrayList;
     Context context;
-    public cgadapter(@NonNull Context context, ArrayList<ChallanCardG> ArrayList) {
+    public cbadapter(@NonNull Context context, ArrayList<ChallanCardB> ArrayList) {
         this.ArrayList = ArrayList;
         this.filteredArrayList = ArrayList;
         this.context = context;
@@ -62,18 +58,15 @@ class cgadapter extends BaseAdapter implements Filterable {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View listitemView = convertView;
         if (listitemView == null) {
-            listitemView = LayoutInflater.from(context).inflate(R.layout.challan_card_g, parent, false);
+            listitemView = LayoutInflater.from(context).inflate(R.layout.challan_card_b, parent, false);
         }
-        ChallanCardG courseModel = ArrayList.get(position);
+        ChallanCardB courseModel = ArrayList.get(position);
         TextView tcname = listitemView.findViewById(R.id.tcname);
         TextView dp = listitemView.findViewById(R.id.tdpd);
         TextView tra = listitemView.findViewById(R.id.ttransd);
         TextView chno = listitemView.findViewById(R.id.tchnod);
         TextView chd = listitemView.findViewById(R.id.tchdd);
-        TextView rate = listitemView.findViewById(R.id.trated);
         TextView pcs = listitemView.findViewById(R.id.tpcsd);
-        TextView rtime = listitemView.findViewById(R.id.tratetd);
-        TextView weight = listitemView.findViewById(R.id.tweightd);
         TextView mtr = listitemView.findViewById(R.id.tmtrd);
         TextView chamt = listitemView.findViewById(R.id.tchamtd);
         tcname.setText(courseModel.tcname);
@@ -81,10 +74,7 @@ class cgadapter extends BaseAdapter implements Filterable {
         tra.setText(courseModel.tra);
         chno.setText(courseModel.chno);
         chd.setText(courseModel.chd);
-        rate.setText(courseModel.rate);
         pcs.setText(courseModel.pcs);
-        rtime.setText(courseModel.rtime);
-        weight.setText(courseModel.weight);
         mtr.setText(courseModel.mtr);
         chamt.setText(courseModel.chamt);
         return listitemView;
@@ -103,8 +93,8 @@ class cgadapter extends BaseAdapter implements Filterable {
                 }
                 else{
                     String search = constraint.toString().toUpperCase();
-                    ArrayList<ChallanCardG> searchreasult= new ArrayList<>();
-                    for(ChallanCardG s: filteredArrayList){
+                    ArrayList<ChallanCardB> searchreasult= new ArrayList<>();
+                    for(ChallanCardB s: filteredArrayList){
                         if(s.tcname.contains(search)){
                             searchreasult.add(s);
                         }
@@ -116,7 +106,7 @@ class cgadapter extends BaseAdapter implements Filterable {
             }
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
-                ArrayList = (ArrayList<ChallanCardG>) results.values;
+                ArrayList = (ArrayList<ChallanCardB>) results.values;
                 notifyDataSetChanged();
             }
         };

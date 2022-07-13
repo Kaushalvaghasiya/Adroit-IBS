@@ -113,7 +113,7 @@
                 android:layout_width="wrap_content"
                 android:textSize="15dp"
                 android:layout_height="wrap_content"
-                android:text="Nos"/>
+                android:text="Pcs"/>
             <TextView
                 android:id="@+id/tpcsd"
                 android:layout_width="fill_parent"
@@ -133,7 +133,7 @@
                 android:layout_width="wrap_content"
                 android:textSize="15dp"
                 android:layout_height="wrap_content"
-                android:text="Cut/Cal"/>
+                android:text="Cal."/>
             <TextView
                 android:id="@+id/tcald"
                 android:layout_width="fill_parent"
@@ -150,12 +150,14 @@
 
             <TextView
                 android:id="@+id/tqty"
+                android:textColor="@color/red"
                 android:layout_width="wrap_content"
                 android:textSize="15dp"
                 android:layout_height="wrap_content"
                 android:text="Qty"/>
             <TextView
                 android:id="@+id/tqtyd"
+                android:textColor="@color/red"
                 android:textSize="15dp"
                 android:gravity="right"
                 android:layout_width="fill_parent"

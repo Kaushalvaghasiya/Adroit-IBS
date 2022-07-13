@@ -108,6 +108,7 @@ public class paging {
         else if(type.equals("sbada"))sd= new sbadapter(ctx, sort);
         else if(type.equals("cgada"))sd= new cgadapter(ctx, sort);
         else if(type.equals("cyada"))sd= new cyadapter(ctx, sort);
+        else if(type.equals("cbada"))sd= new cbadapter(ctx, sort);
         else if(type.equals("cada"))sd= new cadapter(ctx, sort);
         else if(type.equals("lada"))sd= new ladapter(ctx, sort);
         else if(type.equals("purada"))sd= new padapter(ctx, sort);

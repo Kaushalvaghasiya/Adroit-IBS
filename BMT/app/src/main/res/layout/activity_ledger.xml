@@ -79,23 +79,22 @@
                     app:layout_constraintStart_toStartOf="parent" />
             </androidx.cardview.widget.CardView>
 
-            <com.example.bmt.MyGridView
-                android:id="@+id/gvdata"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10pt"
-                android:nestedScrollingEnabled="true"
-                android:layout_below="@+id/cdv2"
-                android:paddingTop="15dp"
-                android:layout_marginRight="10pt"
-                android:numColumns="1"
-                android:verticalSpacing="5dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.504"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cdv2"
-                app:layout_constraintVertical_bias="0.332" />
+        <com.example.bmt.MyGridView
+            android:id="@+id/gvdata"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/cdv2"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:numColumns="1"
+            android:verticalSpacing="5dp"
+            android:nestedScrollingEnabled="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.504"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cdv2"
+            app:layout_constraintVertical_bias="0.332" />
 
         <HorizontalScrollView
             android:layout_width="match_parent"

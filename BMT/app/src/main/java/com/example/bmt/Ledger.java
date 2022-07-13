@@ -285,7 +285,7 @@ public class Ledger extends AppCompatActivity {
                     ConnectionHelper conhelper = new ConnectionHelper();
                     con = conhelper.connectionclass();
                     if (con != null) {
-                        String q = "select ((select  OpBalance From  Acc_Ledger where FirmNO= '"+fno+"' and AcId= '"+ele.AcId+"')+" +
+                        String q = "select ((select OpBalance From  Acc_Ledger where FirmNO= '"+fno+"' and AcId= '"+ele.AcId+"')+" +
                                 "(select abs(sum(DrAmt)-sum(CrAmt)) as Bal From HeadDtl3  where FirmNO= '"+fno+"' and AccId= '"+ele.AcId+"' and  Transdate <'"+tdate+"')) as opbal;";
                         Statement st = con.createStatement();
                         ResultSet rs = st.executeQuery(q);
@@ -306,7 +306,7 @@ public class Ledger extends AppCompatActivity {
                             Date date = sdate.parse(bdt);
                             bdt = adate.format(date);
                             String c=rs.getString("cramt"),d=rs.getString("dramt"),b=rs.getString("bal");
-                            ArrayList.add(new LedgerPopupCardin(bdt,rs.getString("Descr"),rs.getString("dramt"),rs.getString("cramt"),rs.getString("bal")+rs.getString("baltype")));
+                            ArrayList.add(new LedgerPopupCardin(bdt,rs.getString("Descr"),rs.getString("dramt"),rs.getString("cramt"),rs.getString("bal")+" "+rs.getString("baltype")));
                             sumb+=Double.parseDouble(b);
                             sumc+=Double.parseDouble(c);
                             sumd+=Double.parseDouble(d);
@@ -314,7 +314,7 @@ public class Ledger extends AppCompatActivity {
                         Date date = sdate.parse(tdate);
                         String tdt = adate.format(date);
                         ArrayList.add(new LedgerPopupCardin("","Total -->> ",String.valueOf(sumd),String.valueOf(sumc),""));
-                        ArrayList.add(new LedgerPopupCardin("","Closing Balance Dt. -->> ",tdt,"", sumb +(((sumd-sumc)>0)?"Dr":"Cr")));
+                        ArrayList.add(new LedgerPopupCardin("","Closing Balance Dt. -->> ",tdt,"", sumb +(((sumd-sumc)>0)?" Dr":" Cr")));
                         ledinadapter ad= new ledinadapter(Ledger.this,ArrayList);
                         gvdata.setAdapter(ad);
                     }

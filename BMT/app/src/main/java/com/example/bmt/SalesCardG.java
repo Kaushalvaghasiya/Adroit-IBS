@@ -18,12 +18,12 @@ import androidx.annotation.RequiresApi;
 import java.util.ArrayList;
 
 public class SalesCardG {
-    String bno,btype,chno,bdate,totmrts,pcs,taxa,gsta,bamt,tcname,AcId,sgst,cgst,igst,tcsa,roff,tdsa,crd,pdd,ebilln;
+    String bno,btype,chno,bdate,totmrts,pcs,taxa,gsta,bamt,tcname,AcId,sgst,cgst,igst,tcsa,roff,tdsa,crd,pdd,ebilln,gstin;
 
     public SalesCardG(String tcname,String bno, String btype,String chno,String bdate,String totmrts,String pcs,
                       String taxa, String gsta,String bamt,String AcId
             ,String sgst,String cgst,String igst,
-                      String tcsa,String roff,String tdsa,String crd,String pdd,String ebilln) {
+                      String tcsa,String roff,String tdsa,String crd,String pdd,String ebilln,String gstin) {
         this.tcname=tcname;
         this.bno = bno;
         this.btype = btype;
@@ -44,7 +44,7 @@ public class SalesCardG {
         this.crd = crd;
         this.pdd = pdd;
         this.ebilln = ebilln;
-
+        this.gstin=gstin;
     }
 }
 class sgadapter extends BaseAdapter implements Filterable {

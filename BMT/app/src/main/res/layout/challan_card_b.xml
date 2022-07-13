@@ -110,73 +110,13 @@
             android:paddingRight="5dp">
 
             <TextView
-                android:id="@+id/trate"
-                android:layout_width="140dp"
-                android:textSize="15dp"
-                android:layout_height="match_parent"
-                android:text="Rate" />
-            <TextView
-                android:id="@+id/trated"
-                android:textSize="15dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="data"
-                android:gravity="right"/>
-        </TableRow>
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp">
-
-            <TextView
-                android:id="@+id/tratet"
-                android:layout_width="140dp"
-                android:textSize="15dp"
-                android:layout_height="match_parent"
-                android:text="RTime"/>
-            <TextView
-                android:id="@+id/tratetd"
-                android:layout_width="match_parent"
-                android:textSize="15dp"
-                android:layout_height="wrap_content"
-                android:text="data"
-                android:gravity="right" />
-        </TableRow>
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp">
-
-            <TextView
                 android:id="@+id/tpcs"
                 android:layout_width="140dp"
                 android:textSize="15dp"
                 android:layout_height="match_parent"
-                android:text="Taka/Pcs"/>
+                android:text="Pcs"/>
             <TextView
                 android:id="@+id/tpcsd"
-                android:layout_width="match_parent"
-                android:textSize="15dp"
-                android:layout_height="wrap_content"
-                android:text="data"
-                android:gravity="right" />
-        </TableRow>
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp">
-
-            <TextView
-                android:id="@+id/tweight"
-                android:layout_width="140dp"
-                android:textSize="15dp"
-                android:layout_height="match_parent"
-                android:text="Cut/Cal" />
-            <TextView
-                android:id="@+id/tweightd"
                 android:layout_width="match_parent"
                 android:textSize="15dp"
                 android:layout_height="wrap_content"
@@ -194,7 +134,7 @@
                 android:layout_width="140dp"
                 android:textSize="15dp"
                 android:layout_height="match_parent"
-                android:text="Mtr/Qty"/>
+                android:text="Qty"/>
             <TextView
                 android:id="@+id/tmtrd"
                 android:layout_width="match_parent"

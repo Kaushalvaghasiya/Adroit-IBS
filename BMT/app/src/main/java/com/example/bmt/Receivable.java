@@ -289,6 +289,14 @@ public class Receivable extends AppCompatActivity {
                 tpnamed.setText(ele.tcname);
                 TextView tphone = popupView.findViewById(R.id.tphoned);
                 tphone.setText(ele.phone);
+                TextView tinfod=popupView.findViewById(R.id.tinfod);
+                Date date = null;
+                try {
+                    date = sdate.parse(tdate);
+                    tinfod.setText("Int. Cal. As on : ("+adate.format(date)+") @ 18%/Year.");
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                };
                 GridView gvdata=(GridView) popupView.findViewById(R.id.gvdata);
                 ArrayList<RecPopupCardin> ArrayList = new ArrayList<RecPopupCardin>();
                 String q = "select * from SalBillMst_Outstand where FirmNo='"+fno+"' and AcId='"+ele.AcId+"' order by BillNO asc;";
@@ -303,7 +311,7 @@ public class Receivable extends AppCompatActivity {
                         while (rs.next()) {
                             String bdate=rs.getString("BillDate").split(" ")[0];
                             String billamt=rs.getString("BillAmount"),pamt=rs.getString("PaidAmt"),uamt=rs.getString("UnPaidAmt");
-                            Date date = sdate.parse(bdate);
+                            date = sdate.parse(bdate);
                             bdate = adate.format(date);
                             Date pduedate=sdate.parse(rs.getString("pduedate"));
                             Date tilldate = sdate.parse(tdate);
@@ -344,6 +352,8 @@ public class Receivable extends AppCompatActivity {
                             Document doc = new Document(pdfDoc, new PageSize(595, 842));
                             doc.setMargins(0, 0, 0, 0);
 
+                            Date date = sdate.parse(tdate);
+                            doc.add(new Paragraph(("Int. Cal. As on : ("+adate.format(date)+") @ 18%/Year.")).setFontSize(8).setMarginLeft(30));
                             Table table = new Table(new float[7]).useAllAvailableWidth();
                             table.setMargin(30);
                             table.setTextAlignment(TextAlignment.CENTER);
@@ -373,7 +383,7 @@ public class Receivable extends AppCompatActivity {
                                     }
                                     cell1.add(new Paragraph("OUTSTANDING (RECEIVABLE)").setFontSize(12));
                                     String atdate = tdate;
-                                    Date date = sdate.parse(atdate);
+                                    date = sdate.parse(atdate);
                                     atdate = adate.format(date);
                                     cell1.add(new Paragraph("Till : " + atdate).setFontSize(12).setBold());
                                     cell1.setTextAlignment(TextAlignment.CENTER);
@@ -452,7 +462,7 @@ public class Receivable extends AppCompatActivity {
                             }
                             doc.add(table);
                             SimpleDateFormat formatter = new SimpleDateFormat("hh:mm:ss dd-MM-yyyy");
-                            Date date = new Date();
+                            date = new Date();
                             String tdate = formatter.format(date);
                             doc.add(new Paragraph("Copyright © Designed & Developed by Adro'iT iBS [www.adroit-ibs.com] 97126 77357 \t PDF On : " + tdate).setFontSize(8).setMarginLeft(30).setMarginTop(-20));
                             doc.close();

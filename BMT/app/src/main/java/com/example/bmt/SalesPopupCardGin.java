@@ -66,9 +66,13 @@ class sginadapter extends ArrayAdapter<SalesPopUpCardGin>{
         CardView cdv= listitemView.findViewById(R.id.cdv);
         if(position%2!=0)cdv.setCardBackgroundColor(Color.parseColor("#EBEECD"));
         if(position==ArrayList.size()-1){
+            data1.setTextColor(Color.parseColor("#F44336"));
             data2.setTextColor(Color.parseColor("#F44336"));
+            data3.setTextColor(Color.parseColor("#F44336"));
             data4.setTextColor(Color.parseColor("#F44336"));
             data5.setTextColor(Color.parseColor("#F44336"));
+            data6.setTextColor(Color.parseColor("#F44336"));
+            data7.setTextColor(Color.parseColor("#F44336"));
             data8.setTextColor(Color.parseColor("#F44336"));
         }
         return listitemView;

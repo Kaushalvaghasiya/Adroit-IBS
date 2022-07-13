@@ -18,10 +18,10 @@ import androidx.annotation.RequiresApi;
 import java.util.ArrayList;
 
 public class PurchaseCard {
-    String bno,btype,bdate,qty,pcs,taxa,gsta,bamt,tcname,B_Id,acid,sgst,cgst,igst,tcsa,roff,tdsa,crd,pdd,ebilln;
+    String bno,btype,bdate,qty,pcs,taxa,gsta,bamt,tcname,B_Id,acid,sgst,cgst,igst,tcsa,roff,tdsa,crd,pdd,ebilln,softtype,gstin;
 
     public PurchaseCard(String tcname,String bno, String btype,String bdate,String qty,String pcs,String taxa,String gsta,String bamt,String B_Id,String acid,String sgst,String cgst,String igst,
-                        String tcsa,String roff,String tdsa,String crd,String pdd,String ebilln) {
+                        String tcsa,String roff,String tdsa,String crd,String pdd,String ebilln,String softtype,String gstin) {
         this.tcname=tcname;
         this.bno = bno;
         this.btype = btype;
@@ -42,6 +42,8 @@ public class PurchaseCard {
         this.crd = crd;
         this.pdd = pdd;
         this.ebilln = ebilln;
+        this.softtype = softtype;
+        this.gstin=gstin;
     }
 }
 class padapter extends BaseAdapter implements Filterable {
@@ -93,6 +95,14 @@ class padapter extends BaseAdapter implements Filterable {
         taxa.setText(courseModel.taxa);
         gsta.setText(courseModel.gsta);
         bamt.setText(courseModel.bamt);
+        if(courseModel.softtype.equals("B")){
+            TextView tpcs=listitemView.findViewById(R.id.tpcs);
+            tpcs.setVisibility(View.GONE);
+            TextView tpcsd=listitemView.findViewById(R.id.tpcsd);
+            tpcsd.setVisibility(View.GONE);
+            TextView tmtr=listitemView.findViewById(R.id.tqty);
+            tmtr.setText("Qty");
+        }
         return listitemView;
     }
 

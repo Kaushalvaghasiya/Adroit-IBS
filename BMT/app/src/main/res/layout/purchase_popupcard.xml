@@ -241,7 +241,7 @@
                     android:shadowDy="3"
                     android:shadowRadius="2"
                     android:text="Mtr/Qty"
-                    android:textAlignment="center"
+                    android:gravity="right"
                     android:textColor="@color/white"
                     android:textSize="9dp"
                     android:textStyle="bold"></TextView>
@@ -271,7 +271,7 @@
                     android:shadowDy="3"
                     android:shadowRadius="2"
                     android:text="Net Rate"
-                    android:textAlignment="center"
+                    android:gravity="right"
                     android:textColor="@color/white"
                     android:textSize="9dp"
                     android:textStyle="bold"></TextView>
@@ -286,7 +286,7 @@
                     android:shadowDy="3"
                     android:shadowRadius="2"
                     android:text="Tax. Amt."
-                    android:textAlignment="center"
+                    android:gravity="right"
                     android:textColor="@color/white"
                     android:textSize="9dp"
                     android:textStyle="bold"></TextView>
@@ -300,6 +300,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:numColumns="1"
+            android:nestedScrollingEnabled="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.504"
@@ -480,7 +481,12 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
                 android:ems="10"
-                android:textSize="12dp" />
+                android:gravity="right"
+                android:textSize="12dp"
+                android:shadowColor="@color/black"
+                android:shadowDx="-3"
+                android:shadowDy="3"
+                android:shadowRadius="2" />
         </TableRow>
         <TableRow
             android:id="@+id/tr7"
@@ -557,7 +563,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
                 android:ems="10"
-                android:textSize="10dp"
+                android:textSize="12dp"
                 android:gravity="right"
                 android:shadowColor="@color/black"
                 android:shadowDx="-3"
@@ -615,8 +621,7 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_weight="1.2"
-                android:textSize="10dp"></TextView>
-            s
+                android:textSize="12dp"></TextView>
 
             <TextView
                 android:id="@+id/ttbill"

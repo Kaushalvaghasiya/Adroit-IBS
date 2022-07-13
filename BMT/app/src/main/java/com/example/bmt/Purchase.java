@@ -63,7 +63,6 @@ public class Purchase extends AppCompatActivity {
     DateFormat adate,sdate;
     Dictionary data;
     List<String> list;
-    String gstno;
     public static ProgressDialog dialog;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -255,13 +254,6 @@ public class Purchase extends AppCompatActivity {
             ConnectionHelper conhelper= new ConnectionHelper();
             con=conhelper.connectionclass();
             String softtype=pref.getString("soft_type",null);
-            String q2="select * from Firm_mst where firmno='"+fno+"'";
-            Statement st2 = con.createStatement();
-            ResultSet rs2 = st2.executeQuery(q2);
-            gstno="";
-            while (rs2.next()){
-                gstno=rs2.getString("gstno");
-            }
             if (con != null) {
                 String q="";
                 if(btype.equals("All")) {
@@ -289,7 +281,7 @@ public class Purchase extends AppCompatActivity {
                             rs.getString("cgstrs"),rs.getString("igstrs"),
                             rs.getString("tcsrs"),rs.getString("otherrs"),
                             rs.getString("tdsrs"),rs.getString("crdays"),
-                            pddate,rs.getString("against")));
+                            pddate,rs.getString("against"),softtype,rs.getString("gstin")));
                 }
                 con.close();
                 purada = new padapter(this, ArrayList);
@@ -315,9 +307,31 @@ public class Purchase extends AppCompatActivity {
                         TextView tbdated = popupView.findViewById(R.id.tbdated);
                         tbdated.setText(ele.bdate);
                         TextView tgstnd = popupView.findViewById(R.id.tgstnd);
-                        tgstnd.setText(gstno);
+                        tgstnd.setText(ele.gstin);
                         TextView tbillad = popupView.findViewById(R.id.ttbilld);
                         tbillad.setText(ele.bamt);
+                        TextView sgst = popupView.findViewById(R.id.tsgstd);
+                        sgst.setText(ele.sgst);
+                        TextView cgst = popupView.findViewById(R.id.tcgstd);
+                        cgst.setText(ele.cgst);
+                        TextView igst = popupView.findViewById(R.id.tigstd);
+                        igst.setText(ele.igst);
+                        TextView tcsa = popupView.findViewById(R.id.ttsd);
+                        tcsa.setText(ele.tcsa);
+                        TextView roff = popupView.findViewById(R.id.troffd);
+                        roff.setText(ele.roff);
+                        TextView tdsa = popupView.findViewById(R.id.ttdsad);
+                        tdsa.setText(ele.tdsa);
+                        TextView crd = popupView.findViewById(R.id.tcdaysd);
+                        crd.setText(ele.crd);
+                        TextView pdd = popupView.findViewById(R.id.tpddated);
+                        pdd.setText(ele.pdd);
+                        if(softtype.equals("B")){
+                            TextView tpsc=popupView.findViewById(R.id.tpcs);
+                            tpsc.setVisibility(View.GONE);
+                            TextView tmtr=popupView.findViewById(R.id.tmtr);
+                            tmtr.setText("Qty");
+                        }
                         Button bc = popupView.findViewById(R.id.bclose);
                         GridView gvdata = popupView.findViewById(R.id.gvdata);
                         bc.setOnClickListener(new View.OnClickListener() {
@@ -326,7 +340,7 @@ public class Purchase extends AppCompatActivity {
                                 popupWindow.dismiss();
                             }
                         });
-                        ArrayList<SalesPopUpCardGin> ArrayList = new ArrayList<>();
+                        ArrayList<PurchasePopupCardin> ArrayList = new ArrayList<>();
                         String q = "select * from Billdtl_view where B_MstId='"+ele.B_Id+"' and AcId='"+ele.acid+"' and  FirmNo='"+fno+"' order by Srno asc;";
                         try {
                             ConnectionHelper conhelper = new ConnectionHelper();
@@ -343,16 +357,16 @@ public class Purchase extends AppCompatActivity {
                                 sumpcs+=Double.parseDouble(pcs);
                                 summtr+=Double.parseDouble(mtr);
                                 sumamt+=Double.parseDouble(amt);
-                                ArrayList.add(new SalesPopUpCardGin(String.valueOf(i), rs.getString("Prodname"), "-", df0.format(Double.parseDouble(rs.getString("Pcs")))
-                                        , df.format(Double.parseDouble(rs.getString("Mtrs"))), "-", df2.format(Double.parseDouble(rs.getString("Rate_Disc")))
-                                        , df2.format(Double.parseDouble(rs.getString("Amt")))));
+                                ArrayList.add(new PurchasePopupCardin(String.valueOf(i), rs.getString("Prodname"), rs.getString("hsncode"), (softtype.equals("B"))?"":df0.format(Double.parseDouble(rs.getString("Pcs")))
+                                        , df.format(Double.parseDouble(rs.getString("Mtrs"))), rs.getString("unit"), df2.format(Double.parseDouble(rs.getString("Rate_Disc")))
+                                        , df2.format(Double.parseDouble(rs.getString("Amt"))),softtype));
                                 i++;
                             }
                             con.close();
-                            ArrayList.add(new SalesPopUpCardGin("", "Total -->>", "", df0.format(Double.parseDouble(String.valueOf(sumpcs)))
+                            ArrayList.add(new PurchasePopupCardin("", "Total -->>", "", df0.format(Double.parseDouble(String.valueOf(sumpcs)))
                                     , df.format(Double.parseDouble(String.valueOf(summtr))), "",""
-                                    , df2.format(Double.parseDouble(String.valueOf(sumamt)))));
-                            sginadapter ada = new sginadapter(Purchase.this, ArrayList);
+                                    , df2.format(Double.parseDouble(String.valueOf(sumamt))),softtype));
+                            pinadapter ada = new pinadapter(Purchase.this, ArrayList);
                             gvdata.setAdapter(ada);
                         }
                         catch (Exception e){
