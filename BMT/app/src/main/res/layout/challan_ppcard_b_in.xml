@@ -56,20 +56,19 @@
                 <TextView
                     android:id="@+id/tdata4"
                     android:layout_width="0dp"
-                    android:layout_weight=".012"
+                    android:layout_weight=".015"
                     android:layout_height="wrap_content"
                     android:text="Qty"
-                    android:gravity="right"
+                    android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="9dp"></TextView>
-
                 <TextView
                     android:id="@+id/tdata5"
                     android:layout_width="0dp"
-                    android:layout_weight=".01"
+                    android:layout_weight=".015"
                     android:layout_height="wrap_content"
                     android:text="UOM"
-                    android:gravity="right"
+                    android:gravity="center"
                     android:textColor="@color/black"
                     android:textSize="9dp"></TextView>
 
@@ -86,7 +85,7 @@
                 <TextView
                     android:id="@+id/tdata7"
                     android:layout_width="0dp"
-                    android:layout_weight=".021"
+                    android:layout_weight=".02"
                     android:layout_height="wrap_content"
                     android:text="Tax. Amt."
                     android:gravity="right"

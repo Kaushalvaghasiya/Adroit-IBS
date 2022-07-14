@@ -17,7 +17,7 @@
             android:id="@+id/tcname"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/app_name"
+            android:text="Payable &amp; Recievable"
             android:textSize="18dp"
             android:textAlignment="center"
             android:textColor="@color/black"

@@ -331,16 +331,16 @@ public class Sales extends AppCompatActivity {
                                 popupWindow.dismiss();
                             }
                         });
-                        ArrayList<SalesPopUpCardBin> ArrayList = new ArrayList<SalesPopUpCardBin>();
+                        ArrayList<SalesPopUpCardYin> ArrayList = new ArrayList<SalesPopUpCardYin>();
                         String q = "select * from salbilldtl_view where billno='"+ele.bno+"' and AcId='"+ele.AcId+"' and  FirmNo='"+fno+"' order by Srno asc;";
                         try{
                             Statement st = con.createStatement();
                             ResultSet rs = st.executeQuery(q);
                             while (rs.next()) {
-                                ArrayList.add(new SalesPopUpCardBin(
+                                ArrayList.add(new SalesPopUpCardYin(
                                         rs.getString("Pcs"),rs.getString("Qty1"),rs.getString("Mtrs"),rs.getString("Rate_Disc"),rs.getString("Amt")));
                             }
-                            sbinadapter ada = new sbinadapter(getApplicationContext(), ArrayList);
+                            syinadapter ada = new syinadapter(getApplicationContext(), ArrayList);
                             gvdata.setAdapter(ada);
                         }
                         catch (Exception e){
@@ -458,7 +458,7 @@ public class Sales extends AppCompatActivity {
                                         , df2.format(Double.parseDouble(rs.getString("Amt")))));
                                 i++;
                             }
-                            ArrayList.add(new SalesPopUpCardGin("", "Total -->>", "", df0.format(Double.parseDouble(String.valueOf(sumpcs)))
+                            ArrayList.add(new SalesPopUpCardGin("", "Total -->>", "", df.format(Double.parseDouble(String.valueOf(sumpcs)))
                                     , df.format(Double.parseDouble(String.valueOf(summtr))), "",""
                                     , df2.format(Double.parseDouble(String.valueOf(sumamt)))));
                             sginadapter ada = new sginadapter(Sales.this, ArrayList);
@@ -500,7 +500,7 @@ public class Sales extends AppCompatActivity {
                                 rs.getString("billamount"),acid
                                 ,rs.getString("sgstrs"),
                                 rs.getString("cgstrs"),rs.getString("igstrs"),
-                                rs.getString("tcsrs"),rs.getString("otherrs"),
+                                rs.getString("tcsrs"),rs.getString("otherp"),
                                 rs.getString("tdsrs"),rs.getString("crdays"),
                                 pddate,rs.getString("against"),rs.getString("gstin")));
                     }
@@ -515,16 +515,12 @@ public class Sales extends AppCompatActivity {
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         SalesCardB ele = (SalesCardB) gvdata.getItemAtPosition(position);
                         LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-                        View popupView = inflater.inflate(R.layout.sales_popupcard_g, null, false);
+                        View popupView = inflater.inflate(R.layout.sales_popupcard_b, null, false);
                         int width = LinearLayout.LayoutParams.MATCH_PARENT;
                         int height = LinearLayout.LayoutParams.WRAP_CONTENT;
                         boolean focusable = true; // lets taps outside the popup also dismiss it
                         final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
                         popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
-                        TextView tpcs = popupView.findViewById(R.id.tpcs);
-                        tpcs.setText("Pcs");
-                        TextView tmtr = popupView.findViewById(R.id.tmtr);
-                        tmtr.setText("Qty");
                         TextView tcname = popupView.findViewById(R.id.tpnamed);
                         tcname.setText(ele.tcname);
                         TextView tbnod = popupView.findViewById(R.id.tbnod);
@@ -563,7 +559,7 @@ public class Sales extends AppCompatActivity {
                                 popupWindow.dismiss();
                             }
                         });
-                        ArrayList<SalesPopUpCardGin> ArrayList = new ArrayList<>();
+                        ArrayList<SalesPopUpCardBin> ArrayList = new ArrayList<>();
                         String q = "select * from salbilldtl_view where billno='" + ele.bno + "' and AcId='" + ele.SB_Id + "' and  FirmNo='" + fno + "' order by Srno asc;";
                         try {
                             Statement st = con.createStatement();
@@ -571,22 +567,20 @@ public class Sales extends AppCompatActivity {
                             int i = 1;
                             NumberFormat df = new DecimalFormat("#0.000");
                             NumberFormat df2 = new DecimalFormat("#0.00");
-                            double sumpcs = 0, summtr = 0, sumamt = 0;
+                            double summtr = 0, sumamt = 0;
                             while (rs.next()) {
                                 String pcs = rs.getString("Pcs"), mtr = rs.getString("Mtrs"), amt = rs.getString("Amt");
-                                sumpcs += Double.parseDouble(pcs);
                                 summtr += Double.parseDouble(mtr);
                                 sumamt += Double.parseDouble(amt);
-                                ArrayList.add(new SalesPopUpCardGin(String.valueOf(i), rs.getString("Prodname"), rs.getString("hsncode"),
-                                        df2.format(Double.parseDouble(rs.getString("Pcs"))),
-                                        df2.format(Double.parseDouble(rs.getString("Mtrs"))), rs.getString("unit"), df2.format(Double.parseDouble(rs.getString("Rate_Disc")))
-                                        , df.format(Double.parseDouble(rs.getString("Amt")))));
+                                ArrayList.add(new SalesPopUpCardBin(String.valueOf(i), rs.getString("Prodname"), rs.getString("hsncode"),
+                                        df.format(Double.parseDouble(rs.getString("Mtrs"))), rs.getString("unit"), df2.format(Double.parseDouble(rs.getString("SRate")))
+                                        , df2.format(Double.parseDouble(rs.getString("Amt")))));
                                 i++;
                             }
-                            ArrayList.add(new SalesPopUpCardGin("", "Total -->>", "", df2.format(Double.parseDouble(String.valueOf(sumpcs)))
-                                    , df2.format(Double.parseDouble(String.valueOf(summtr))), "", ""
+                            ArrayList.add(new SalesPopUpCardBin("", "Total -->>", ""
+                                    , df.format(Double.parseDouble(String.valueOf(summtr))), "", ""
                                     , df2.format(Double.parseDouble(String.valueOf(sumamt)))));
-                            sginadapter ada = new sginadapter(Sales.this, ArrayList);
+                            sbinadapter ada = new sbinadapter(Sales.this, ArrayList);
                             gvdata.setAdapter(ada);
                         } catch (Exception e) {
                             Log.e("error", e.getMessage());

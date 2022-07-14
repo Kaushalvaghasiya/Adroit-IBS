@@ -169,7 +169,8 @@
 
             <TableRow
                 android:layout_width="0dp"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp">
 
                 <TextView
                     android:id="@+id/tsr"
@@ -241,7 +242,7 @@
                     android:shadowDy="3"
                     android:shadowRadius="2"
                     android:text="Mtr/Qty"
-                    android:gravity="right"
+                    android:gravity="center"
                     android:textColor="@color/white"
                     android:textSize="9dp"
                     android:textStyle="bold"></TextView>
@@ -250,13 +251,13 @@
                     android:id="@+id/tuom"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight=".01"
+                    android:layout_weight=".015"
                     android:shadowColor="@color/black"
                     android:shadowDx="-3"
                     android:shadowDy="3"
                     android:shadowRadius="2"
                     android:text="UOM"
-                    android:textAlignment="center"
+                    android:gravity="right"
                     android:textColor="@color/white"
                     android:textSize="9dp"
                     android:textStyle="bold"></TextView>
@@ -280,7 +281,7 @@
                     android:id="@+id/tdata5"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight=".02"
+                    android:layout_weight=".021"
                     android:shadowColor="@color/black"
                     android:shadowDx="-3"
                     android:shadowDy="3"

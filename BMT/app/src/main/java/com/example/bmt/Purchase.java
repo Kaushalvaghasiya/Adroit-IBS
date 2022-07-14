@@ -279,7 +279,7 @@ public class Purchase extends AppCompatActivity {
                             rs.getString("billamount"), rs.getString("B_Id"),rs.getString("acId"),
                             rs.getString("sgstrs"),
                             rs.getString("cgstrs"),rs.getString("igstrs"),
-                            rs.getString("tcsrs"),rs.getString("otherrs"),
+                            rs.getString("tcsrs"),(softtype.equals("B")||softtype.equals("M"))?rs.getString("otherp"):rs.getString("otherrs"),
                             rs.getString("tdsrs"),rs.getString("crdays"),
                             pddate,rs.getString("against"),softtype,rs.getString("gstin")));
                 }

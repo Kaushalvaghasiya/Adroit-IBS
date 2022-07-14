@@ -15,7 +15,6 @@ import android.graphics.Color;
 import android.icu.util.Calendar;
 import android.os.Build;
 import android.os.Bundle;
-import android.text.Editable;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
@@ -29,7 +28,6 @@ import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -293,7 +291,7 @@ public class Challan extends AppCompatActivity {
                                 popupWindow.dismiss();
                             }
                         });
-                        ArrayList<ChallanPopupCardin> ArrayList = new ArrayList<ChallanPopupCardin>();
+                        ArrayList<ChallanPopupCardGin> ArrayList = new ArrayList<ChallanPopupCardGin>();
                         String q = "select * from chalandtlview_G where Ch_id='"+ele.C_Id+"' and  FirmNo='"+fno+"' order by Srno asc";
                         try{
                             Statement st = con.createStatement();
@@ -302,9 +300,9 @@ public class Challan extends AppCompatActivity {
                             double sumpsc=0,summtr=0;
                             int i=1;
                             while (rs.next()) {
-                                String psc=rs.getString("Pcs"),mtr=rs.getString("Mtrs");
-                                ArrayList.add(new ChallanPopupCardin(
-                                        rs.getString("TakaNO"),rs.getString("Pcs").split("\\.")[0],
+                                String psc=rs.getString("pcs"),mtr=rs.getString("Mtrs");
+                                ArrayList.add(new ChallanPopupCardGin(
+                                        rs.getString("TakaNO"),rs.getString("pcs").split("\\.")[0],
                                         df.format(Double.parseDouble(rs.getString("Mtrs"))),
                                         rs.getString("RC2"),
                                         rs.getString("ProdName")));
@@ -312,10 +310,10 @@ public class Challan extends AppCompatActivity {
                                 sumpsc+=Double.parseDouble(psc);
                                 summtr+=Double.parseDouble(mtr);
                             }
-                            ArrayList.add(new ChallanPopupCardin(
+                            ArrayList.add(new ChallanPopupCardGin(
                                     "Total -->>","Pcs="+(int)sumpsc,
                                     "Mtr="+df.format(summtr),"","Taka="+i));
-                            cinadapter ada = new cinadapter(getApplicationContext(), ArrayList);
+                            cginadapter ada = new cginadapter(getApplicationContext(), ArrayList);
                             gvdata.setAdapter(ada);
                         }
                         catch (Exception e){
@@ -338,7 +336,7 @@ public class Challan extends AppCompatActivity {
                         NumberFormat df2 = new DecimalFormat("#0.00");
                         ArrayList.add(new ChallanCardB(rs.getString("AcName"), rs.getString("Deli_Party"),
                                 rs.getString("Transport"), rs.getString("BillNo"),
-                                bdate, df.format(Double.parseDouble(rs.getString("pcs"))), df.format(Double.parseDouble(rs.getString("qty"))),
+                                bdate, df.format(Double.parseDouble(rs.getString("qty_1"))), df.format(Double.parseDouble(rs.getString("qty"))),
                                 rs.getString("BillAmount"),rs.getString("C_Id")));
                     }
                 }
@@ -384,12 +382,12 @@ public class Challan extends AppCompatActivity {
                             double sumpsc=0,summtr=0,suma=0;
                             int i=1;
                             while (rs.next()) {
-                                String psc=rs.getString("Pcs"),mtr=rs.getString("Mtrs");
+                                String psc=rs.getString("qty1"),mtr=rs.getString("Qnty");
                                 String billa=rs.getString("billamount");
                                 ArrayList.add(new ChallanPopupCardBin(String.valueOf(i),
-                                        rs.getString("prodname"),df2.format(Double.parseDouble(rs.getString("Pcs"))),
-                                        df.format(Double.parseDouble(rs.getString("Mtrs"))),"",
-                                        rs.getString("rate"),
+                                        rs.getString("prodname"),df.format(Double.parseDouble(rs.getString("qty1"))),
+                                        df.format(Double.parseDouble(rs.getString("Qnty"))),rs.getString("unit"),
+                                        df2.format(Double.parseDouble(rs.getString("rate"))),
                                         rs.getString("billamount")));
                                 i++;
                                 suma+=Double.parseDouble(billa);
@@ -397,8 +395,8 @@ public class Challan extends AppCompatActivity {
                                 summtr+=Double.parseDouble(mtr);
                             }
                             ArrayList.add(new ChallanPopupCardBin("",
-                                    "Total -->>",df2.format(sumpsc),
-                                    df.format(summtr),"","",df.format(suma)));
+                                    "Total -->>",df.format(sumpsc),
+                                    df.format(summtr),"","",df2.format(suma)));
                             cbinadapter ada = new cbinadapter(getApplicationContext(), ArrayList);
                             gvdata.setAdapter(ada);
                         }
@@ -471,18 +469,18 @@ public class Challan extends AppCompatActivity {
                                 popupWindow.dismiss();
                             }
                         });
-                        ArrayList<SalesPopUpCardBin> ArrayList = new ArrayList<SalesPopUpCardBin>();
+                        ArrayList<SalesPopUpCardYin> ArrayList = new ArrayList<SalesPopUpCardYin>();
                         String q = "select * from chalandtlview_G where Ch_id='"+ele.C_Id+"' and  FirmNo='"+fno+"' order by Srno asc";
                         try{
                             Statement st = con.createStatement();
                             ResultSet rs = st.executeQuery(q);
                             NumberFormat df = new DecimalFormat("#0.000");
                             while (rs.next()) {
-                                ArrayList.add(new SalesPopUpCardBin(rs.getString("ProdName"),
+                                ArrayList.add(new SalesPopUpCardYin(rs.getString("ProdName"),
                                         rs.getString("TakaNO"),df.format(Double.parseDouble(rs.getString("Pcs"))),
                                         df.format(Double.parseDouble(rs.getString("Mtrs"))),rs.getString("Grade_D")));
                             }
-                            sbinadapter ada = new sbinadapter(getApplicationContext(), ArrayList);
+                            syinadapter ada = new syinadapter(getApplicationContext(), ArrayList);
                             gvdata.setAdapter(ada);
                         }
                         catch (Exception e){
@@ -543,19 +541,19 @@ public class Challan extends AppCompatActivity {
                                 popupWindow.dismiss();
                             }
                         });
-                        ArrayList<SalesPopUpCardBin> ArrayList = new ArrayList<SalesPopUpCardBin>();
+                        ArrayList<SalesPopUpCardYin> ArrayList = new ArrayList<SalesPopUpCardYin>();
                         String q = "select * from chalandtlview where Ch_id='"+ele.C_Id+"' and  FirmNo='"+fno+"' order by Srno asc";
                         try{
                             Statement st = con.createStatement();
                             ResultSet rs = st.executeQuery(q);
                             NumberFormat df = new DecimalFormat("#0.000");
                             while (rs.next()) {
-                                ArrayList.add(new SalesPopUpCardBin(
+                                ArrayList.add(new SalesPopUpCardYin(
                                         rs.getString("PM"),df.format(Double.parseDouble(rs.getString("Pcs"))),
                                         df.format(Double.parseDouble(rs.getString("Mtrs"))),
                                         rs.getString("Rate"),rs.getString("Amt")));
                             }
-                            sbinadapter ada = new sbinadapter(getApplicationContext(), ArrayList);
+                            syinadapter ada = new syinadapter(getApplicationContext(), ArrayList);
                             gvdata.setAdapter(ada);
                         }
                         catch (Exception e){

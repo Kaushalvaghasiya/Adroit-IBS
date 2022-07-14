@@ -240,7 +240,8 @@
 
             <TableRow
                 android:layout_width="0dp"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp">
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -278,7 +279,7 @@
                     android:shadowDy="3"
                     android:shadowRadius="2"
                     android:text="Meter"
-                    android:textAlignment="center"
+                    android:gravity="right"
                     android:textColor="@color/white"
                     android:textSize="9dp"
                     android:textStyle="bold"></TextView>
@@ -306,7 +307,7 @@
                     android:shadowDy="3"
                     android:shadowRadius="2"
                     android:text="Quality Name"
-                    android:textAlignment="center"
+                    android:gravity="right"
                     android:textColor="@color/white"
                     android:textSize="9dp"
                     android:textStyle="bold"></TextView>

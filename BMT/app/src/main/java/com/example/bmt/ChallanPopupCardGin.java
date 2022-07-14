@@ -15,10 +15,10 @@ import androidx.cardview.widget.CardView;
 
 import java.util.ArrayList;
 
-class ChallanPopupCardin {
+class ChallanPopupCardGin {
     String data1,data2,data3,data4,data5,data6,data7,data8,softtype;
 
-    public ChallanPopupCardin(String data1,String data2,String data3, String data4,String data5){
+    public ChallanPopupCardGin(String data1, String data2, String data3, String data4, String data5){
         this.data1 = data1;
         this.data2 = data2;
         this.data3 = data3;
@@ -26,9 +26,9 @@ class ChallanPopupCardin {
         this.data5 = data5;
     }
 }
-class cinadapter extends ArrayAdapter<ChallanPopupCardin>{
-    ArrayList<ChallanPopupCardin> ArrayList;
-    public cinadapter(@NonNull Context context, ArrayList<ChallanPopupCardin> ArrayList) {
+class cginadapter extends ArrayAdapter<ChallanPopupCardGin>{
+    ArrayList<ChallanPopupCardGin> ArrayList;
+    public cginadapter(@NonNull Context context, ArrayList<ChallanPopupCardGin> ArrayList) {
         super(context, 0, ArrayList);
         this.ArrayList=ArrayList;
     }
@@ -38,7 +38,7 @@ class cinadapter extends ArrayAdapter<ChallanPopupCardin>{
         if (listitemView == null) {
             listitemView = LayoutInflater.from(getContext()).inflate(R.layout.challan_ppcard_g_in, parent, false);
         }
-        ChallanPopupCardin courseModel = getItem(position);
+        ChallanPopupCardGin courseModel = getItem(position);
         TextView data1 = listitemView.findViewById(R.id.tdata1);
         TextView data2 = listitemView.findViewById(R.id.tdata2);
         TextView data3 = listitemView.findViewById(R.id.tdata3);
@@ -55,6 +55,8 @@ class cinadapter extends ArrayAdapter<ChallanPopupCardin>{
             data1.setTextColor(Color.parseColor("#F44336"));
             data2.setTextColor(Color.parseColor("#F44336"));
             data3.setTextColor(Color.parseColor("#F44336"));
+            data5.setTextColor(Color.parseColor("#F44336"));
+            data4.setTextColor(Color.parseColor("#F44336"));
         }
         return listitemView;
     }

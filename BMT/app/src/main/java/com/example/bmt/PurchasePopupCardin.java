@@ -40,7 +40,7 @@ class pinadapter extends ArrayAdapter<PurchasePopupCardin>{
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View listitemView = convertView;
         if (listitemView == null) {
-            listitemView = LayoutInflater.from(getContext()).inflate(R.layout.sales_ppcard_g_in, parent, false);
+            listitemView = LayoutInflater.from(getContext()).inflate(R.layout.purchase_ppcard_in, parent, false);
         }
         PurchasePopupCardin courseModel = getItem(position);
         TextView data1 = listitemView.findViewById(R.id.tdata1);

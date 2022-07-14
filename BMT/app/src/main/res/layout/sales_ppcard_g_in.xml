@@ -76,10 +76,10 @@
                 <TextView
                     android:id="@+id/tdata6"
                     android:layout_width="0dp"
-                    android:layout_weight=".01"
+                    android:layout_weight=".015"
                     android:layout_height="wrap_content"
                     android:text="UOM"
-                    android:gravity="right"
+                    android:gravity="center"
                     android:textColor="@color/black"
                     android:textSize="9dp"></TextView>
 

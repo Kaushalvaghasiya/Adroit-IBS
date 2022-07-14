@@ -308,7 +308,7 @@ public class Payable extends AppCompatActivity {
                 };
                 GridView gvdata=(GridView) popupView.findViewById(R.id.gvdata);
                 ArrayList<RecPopupCardin> ArrayList = new ArrayList<RecPopupCardin>();
-                String q = "select * from BillMst_Outstand where FirmNo='"+fno+"' and AcId='"+ele.AcId+"' order by BillNO asc;";
+                String q = "select * from BillMst_Outstand where FirmNo='"+fno+"' and AcId='"+ele.AcId+"' order by Billdate;";
                 try{
                     ConnectionHelper conhelper = new ConnectionHelper();
                     con = conhelper.connectionclass();
@@ -361,7 +361,9 @@ public class Payable extends AppCompatActivity {
                             Document doc = new Document(pdfDoc, new PageSize(595, 842));
                             doc.setMargins(0, 0, 0, 0);
                             Date date = sdate.parse(tdate);
-                            doc.add(new Paragraph(("Int. Cal. As on : ("+adate.format(date)+") @ 18%/Year.")).setFontSize(8).setMarginLeft(30));
+                            PdfFont font = PdfFontFactory.createFont(FontConstants.TIMES_ROMAN);
+
+                            doc.add(new Paragraph(("Int. Cal. As on : ("+adate.format(date)+") @ 18%/Year.")).setFontSize(8).setMarginLeft(30).setFont(font));
                             Table table = new Table(new float[7]).useAllAvailableWidth();
                             table.setMargin(30);
                             table.setTextAlignment(TextAlignment.CENTER);
@@ -370,7 +372,6 @@ public class Payable extends AppCompatActivity {
                             // first row
                             String fname = pref.getString("fname", null);
                             Cell cell1 = new Cell(1, 7);
-                            PdfFont font = PdfFontFactory.createFont(FontConstants.TIMES_ROMAN);
                             cell1.add(new Paragraph(fname.split("\\(")[0]).setFontSize(17).setBold().setFontColor(ColorConstants.BLUE).setFont(font));
                             String fno = pref.getString("fno", null);
                             try {
@@ -396,27 +397,28 @@ public class Payable extends AppCompatActivity {
                                     atdate = adate.format(date);
                                     cell1.add(new Paragraph("Till : " + atdate).setFontSize(12).setBold());
                                     cell1.setTextAlignment(TextAlignment.CENTER);
+                                    cell1.setFont(font);
                                     table.addCell(cell1);
                                     Cell cell2 = new Cell(1, 4);
                                     cell2.add(new Paragraph().add(new Paragraph("PARTY : ").setFontSize(10).setBold()).add(new Paragraph(ele.tcname).setBold().setFontColor(ColorConstants.BLUE)));
                                     cell2.add(new Paragraph("PHONE : " + ele.phone).setFontSize(10).setBold());
                                     cell2.setTextAlignment(TextAlignment.LEFT);
+                                    cell2.setFont(font);
                                     table.addCell(cell2);
 
                                     Cell cell3 = new Cell(1, 3);
-                                    cell3.add(new Paragraph("DATA ").setFontSize(10));
                                     cell3.add(new Paragraph("BROKER : ").setFontSize(10));
                                     cell3.setTextAlignment(TextAlignment.CENTER);
                                     cell3.setPadding(4);
+                                    cell3.setFont(font);
                                     table.addCell(cell3);
-//                                    PdfFont body = PdfFontFactory.createFont();
-                                    table.addCell(new Cell().add(new Paragraph("DATE").setBold()).setPaddings(0,10,0,10).setFontColor(ColorConstants.BLUE));
-                                    table.addCell(new Cell().add(new Paragraph("BILL NO").setBold()).setPaddings(0,10,0,10).setFontColor(ColorConstants.BLUE));
-                                    table.addCell(new Cell().add(new Paragraph("BILL AMOUNT").setBold()).setPaddings(0,10,0,10).setFontColor(ColorConstants.BLUE));
-                                    table.addCell(new Cell().add(new Paragraph("DAYS").setBold()).setPaddings(0,10,0,10).setFontColor(ColorConstants.BLUE));
-                                    table.addCell(new Cell().add(new Paragraph("PAID\nAMOUNT").setBold()).setPaddings(0,10,0,10).setFontColor(ColorConstants.BLUE));
-                                    table.addCell(new Cell().add(new Paragraph("UNPAID\nAMOUNT").setBold()).setPaddings(0,10,0,10).setFontColor(ColorConstants.BLUE));
-                                    table.addCell(new Cell().add(new Paragraph("INTEREST\nAMOUNT").setBold()).setPaddings(0,10,0,10).setFontColor(ColorConstants.BLUE));
+                                    table.addCell(new Cell().add(new Paragraph("DATE").setBold()).setPaddings(0,10,0,10).setFontColor(ColorConstants.BLUE).setFont(font));
+                                    table.addCell(new Cell().add(new Paragraph("BILL NO").setBold()).setPaddings(0,10,0,10).setFontColor(ColorConstants.BLUE).setFont(font));
+                                    table.addCell(new Cell().add(new Paragraph("BILL AMOUNT").setBold()).setPaddings(0,10,0,10).setFontColor(ColorConstants.BLUE).setFont(font));
+                                    table.addCell(new Cell().add(new Paragraph("DAYS").setBold()).setPaddings(0,10,0,10).setFontColor(ColorConstants.BLUE).setFont(font));
+                                    table.addCell(new Cell().add(new Paragraph("PAID\nAMOUNT").setBold()).setPaddings(0,10,0,10).setFontColor(ColorConstants.BLUE).setFont(font));
+                                    table.addCell(new Cell().add(new Paragraph("UNPAID\nAMOUNT").setBold()).setPaddings(0,10,0,10).setFontColor(ColorConstants.BLUE).setFont(font));
+                                    table.addCell(new Cell().add(new Paragraph("INTEREST\nAMOUNT").setBold()).setPaddings(0,10,0,10).setFontColor(ColorConstants.BLUE).setFont(font));
 
                                     q = "select * from BillMst_Outstand where FirmNo='" + fno + "' and acname='" + ele.tcname + "' and BillDate <='"+tdate+"' order by AcName;";
                                     st = con.createStatement();
@@ -427,12 +429,12 @@ public class Payable extends AppCompatActivity {
                                         String billamt=rs.getString("billamount"),bno=rs.getString("billno");
                                         Date bdate = sdate.parse(bdt);
                                         bdt = adate.format(bdate);
-                                        table.addCell(new Cell().add(new Paragraph(bdt)).setBorder(Border.NO_BORDER).setBackgroundColor(b ? new DeviceRgb(232,232,232) : ColorConstants.WHITE));
-                                        table.addCell(new Cell().add(new Paragraph(bno)).setBorder(Border.NO_BORDER).setBackgroundColor(b ? new DeviceRgb(232,232,232) : ColorConstants.WHITE));
-                                        table.addCell(new Cell().add(new Paragraph(billamt)).setBorder(Border.NO_BORDER).setBackgroundColor(b ? new DeviceRgb(232,232,232) : ColorConstants.WHITE));
-                                        table.addCell(new Cell().add(new Paragraph(rs.getString("days"))).setBorder(Border.NO_BORDER).setBackgroundColor(b ? new DeviceRgb(232,232,232) : ColorConstants.WHITE));
-                                        table.addCell(new Cell().add(new Paragraph(rs.getString("paidamt"))).setBorder(Border.NO_BORDER).setBackgroundColor(b ? new DeviceRgb(232,232,232) : ColorConstants.WHITE));
-                                        table.addCell(new Cell().add(new Paragraph(rs.getString("unpaidamt"))).setBorder(Border.NO_BORDER).setBackgroundColor(b ? new DeviceRgb(232,232,232) : ColorConstants.WHITE));
+                                        table.addCell(new Cell().add(new Paragraph(bdt)).setBorder(Border.NO_BORDER).setBackgroundColor(b ? new DeviceRgb(232,232,232) : ColorConstants.WHITE).setFont(font));
+                                        table.addCell(new Cell().add(new Paragraph(bno)).setBorder(Border.NO_BORDER).setBackgroundColor(b ? new DeviceRgb(232,232,232) : ColorConstants.WHITE).setFont(font));
+                                        table.addCell(new Cell().add(new Paragraph(billamt)).setBorder(Border.NO_BORDER).setBackgroundColor(b ? new DeviceRgb(232,232,232) : ColorConstants.WHITE).setFont(font));
+                                        table.addCell(new Cell().add(new Paragraph(rs.getString("days"))).setBorder(Border.NO_BORDER).setBackgroundColor(b ? new DeviceRgb(232,232,232) : ColorConstants.WHITE).setFont(font));
+                                        table.addCell(new Cell().add(new Paragraph(rs.getString("paidamt"))).setBorder(Border.NO_BORDER).setBackgroundColor(b ? new DeviceRgb(232,232,232) : ColorConstants.WHITE).setFont(font));
+                                        table.addCell(new Cell().add(new Paragraph(rs.getString("unpaidamt"))).setBorder(Border.NO_BORDER).setBackgroundColor(b ? new DeviceRgb(232,232,232) : ColorConstants.WHITE).setFont(font));
                                         Date pduedate=sdate.parse(rs.getString("pduedate"));
                                         Date tilldate = sdate.parse(tdate);
                                         long difference_In_Time = tilldate.getTime() - pduedate.getTime();
@@ -448,14 +450,14 @@ public class Payable extends AppCompatActivity {
                                     rs = st.executeQuery(q);
                                     while (rs.next()) {
                                         String totb=rs.getString("totalbill");
-                                        table.addCell(new Cell().add(new Paragraph("Total")).setBold().setFontColor(ColorConstants.RED).setBorder(Border.NO_BORDER));
-                                        table.addCell(new Cell().add(new Paragraph(totb)).setBold().setFontColor(ColorConstants.RED).setBorder(Border.NO_BORDER));
+                                        table.addCell(new Cell().add(new Paragraph("Total")).setBold().setFontColor(ColorConstants.RED).setBorder(Border.NO_BORDER).setFont(font));
+                                        table.addCell(new Cell().add(new Paragraph(totb)).setBold().setFontColor(ColorConstants.RED).setBorder(Border.NO_BORDER).setFont(font));
                                         if (!totb.equals("0")) {
-                                            table.addCell(new Cell().add(new Paragraph(rs.getString("billamount"))).setBold().setFontColor(ColorConstants.RED).setBorder(Border.NO_BORDER));
-                                            table.addCell(new Cell().add(new Paragraph("")).setBold().setFontColor(ColorConstants.RED).setBorder(Border.NO_BORDER));
-                                            table.addCell(new Cell().add(new Paragraph(rs.getString("paid_amt"))).setBold().setFontColor(ColorConstants.RED).setBorder(Border.NO_BORDER));
-                                            table.addCell(new Cell().add(new Paragraph(rs.getString("unpaid_amt"))).setBold().setFontColor(ColorConstants.RED).setBorder(Border.NO_BORDER));
-                                            table.addCell(new Cell().add(new Paragraph("")).setBold().setFontColor(ColorConstants.RED).setBorder(Border.NO_BORDER));
+                                            table.addCell(new Cell().add(new Paragraph(rs.getString("billamount"))).setBold().setFontColor(ColorConstants.RED).setBorder(Border.NO_BORDER).setFont(font));
+                                            table.addCell(new Cell().add(new Paragraph("")).setBold().setFontColor(ColorConstants.RED).setBorder(Border.NO_BORDER).setFont(font));
+                                            table.addCell(new Cell().add(new Paragraph(rs.getString("paid_amt"))).setBold().setFontColor(ColorConstants.RED).setBorder(Border.NO_BORDER).setFont(font));
+                                            table.addCell(new Cell().add(new Paragraph(rs.getString("unpaid_amt"))).setBold().setFontColor(ColorConstants.RED).setBorder(Border.NO_BORDER).setFont(font));
+                                            table.addCell(new Cell().add(new Paragraph("")).setBold().setFontColor(ColorConstants.RED).setBorder(Border.NO_BORDER).setFont(font));
                                         }
                                     }
                                 }
@@ -467,7 +469,7 @@ public class Payable extends AppCompatActivity {
                             SimpleDateFormat formatter = new SimpleDateFormat("hh:mm:ss dd-MM-yyyy");
                             date = new Date();
                             String tdate = formatter.format(date);
-                            doc.add(new Paragraph("Copyright © Designed & Developed by Adro'iT iBS [www.adroit-ibs.com] 97126 77357 \t PDF On : " + tdate).setFontSize(8).setMarginLeft(30).setMarginTop(-20));
+                            doc.add(new Paragraph("Copyright © Designed & Developed by Adro'iT iBS [www.adroit-ibs.com] 97126 77357 \t PDF On : " + tdate).setFontSize(8).setMarginLeft(30).setMarginTop(-20).setFont(font));
                             doc.close();
                             Toast.makeText(Payable.this, "Pdf file Created", Toast.LENGTH_SHORT).show();
                         } catch (Exception e) {

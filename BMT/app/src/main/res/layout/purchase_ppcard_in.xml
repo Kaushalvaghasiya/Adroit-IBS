@@ -53,9 +53,18 @@
                     android:textColor="@color/black"
                     android:textSize="9dp"></TextView>
 
-
                 <TextView
                     android:id="@+id/tdata4"
+                    android:layout_width="0dp"
+                    android:layout_weight=".012"
+                    android:layout_height="wrap_content"
+                    android:text="Tk/Pcs."
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="9dp"></TextView>
+
+                <TextView
+                    android:id="@+id/tdata5"
                     android:layout_width="0dp"
                     android:layout_weight=".02"
                     android:layout_height="wrap_content"
@@ -65,17 +74,17 @@
                     android:textSize="9dp"></TextView>
 
                 <TextView
-                    android:id="@+id/tdata5"
+                    android:id="@+id/tdata6"
                     android:layout_width="0dp"
                     android:layout_weight=".015"
                     android:layout_height="wrap_content"
                     android:text="UOM"
-                    android:gravity="center"
+                    android:gravity="right"
                     android:textColor="@color/black"
                     android:textSize="9dp"></TextView>
 
                 <TextView
-                    android:id="@+id/tdata6"
+                    android:id="@+id/tdata7"
                     android:layout_width="0dp"
                     android:layout_weight=".02"
                     android:layout_height="wrap_content"
@@ -85,7 +94,7 @@
                     android:textSize="9dp"></TextView>
 
                 <TextView
-                    android:id="@+id/tdata7"
+                    android:id="@+id/tdata8"
                     android:layout_width="0dp"
                     android:layout_weight=".021"
                     android:layout_height="wrap_content"

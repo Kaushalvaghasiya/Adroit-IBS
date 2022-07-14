@@ -62,6 +62,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -285,36 +287,38 @@ public class Ledger extends AppCompatActivity {
                     ConnectionHelper conhelper = new ConnectionHelper();
                     con = conhelper.connectionclass();
                     if (con != null) {
-                        String q = "select ((select OpBalance From  Acc_Ledger where FirmNO= '"+fno+"' and AcId= '"+ele.AcId+"')+" +
-                                "(select abs(sum(DrAmt)-sum(CrAmt)) as Bal From HeadDtl3  where FirmNO= '"+fno+"' and AccId= '"+ele.AcId+"' and  Transdate <'"+tdate+"')) as opbal;";
+                        String q="exec [LedgerDt_Prc] @FirmNO='"+fno+"',@AccId='"+ele.AcId+"',@FDate='"+fdate+"',@TDate='"+tdate+"';";//
                         Statement st = con.createStatement();
                         ResultSet rs = st.executeQuery(q);
-                        while (rs.next()){
-                            String opbal=rs.getString("opbal");
-                            if(rs.wasNull())opbal="0";
-                            Date date = sdate.parse(fdate);
-                            String fdt = adate.format(date);
-                            ArrayList.add(new LedgerPopupCardin(fdt,"Op. Balance-","","",opbal));
-                        }
-                        q = "select  Transdate,Descr, DrAmt,CrAmt ,Abs(DrAmt-CrAmt) as Bal, " +
-                                "Case when DrAmt-CrAmt>0 then 'Dr' else 'Cr' end  as Baltype From HeadDtl3  where FirmNO= '"+fno+"' and AccId= '"+ele.AcId+"' and  Transdate Between '"+fdate+"'  and '"+tdate+"';";
-                        st = con.createStatement();
-                        rs = st.executeQuery(q);
                         double sumc=0,sumd=0,sumb=0;
+                        String ptype="";
+                        NumberFormat df2 = new DecimalFormat("#0.00");
                         while (rs.next()) {
                             String bdt = rs.getString("Transdate").split(" ")[0];
                             Date date = sdate.parse(bdt);
                             bdt = adate.format(date);
-                            String c=rs.getString("cramt"),d=rs.getString("dramt"),b=rs.getString("bal");
-                            ArrayList.add(new LedgerPopupCardin(bdt,rs.getString("Descr"),rs.getString("dramt"),rs.getString("cramt"),rs.getString("bal")+" "+rs.getString("baltype")));
-                            sumb+=Double.parseDouble(b);
+                            if(rs.getString("descr").equals("Op. Balance--")){
+                                sumb=Double.parseDouble(rs.getString("bal"));
+                                ArrayList.add(new LedgerPopupCardin(bdt,rs.getString("Descr"),rs.getString("dramt"),rs.getString("cramt"),df2.format(sumb)+" "+rs.getString("baltype")));
+                                ptype=rs.getString("baltype");
+                                continue;
+                            }
+                            String c=rs.getString("cramt"),d=rs.getString("dramt");
+                            String btype="";
+                            if(rs.getString("baltype").equals("Dr"))sumb+=Double.parseDouble(rs.getString("dramt"));
+                            else sumb-=Double.parseDouble(rs.getString("cramt"));
+                            double calbal=sumb+Double.parseDouble(d)-Double.parseDouble(c);
+                            if(calbal<0)btype="Cr";
+                            else btype="Dr";
+                            ArrayList.add(new LedgerPopupCardin(bdt,rs.getString("Descr"),rs.getString("dramt"),rs.getString("cramt"),df2.format(Math.abs(sumb))+" "+btype));
+                            ptype=btype;
                             sumc+=Double.parseDouble(c);
                             sumd+=Double.parseDouble(d);
                         }
                         Date date = sdate.parse(tdate);
                         String tdt = adate.format(date);
-                        ArrayList.add(new LedgerPopupCardin("","Total -->> ",String.valueOf(sumd),String.valueOf(sumc),""));
-                        ArrayList.add(new LedgerPopupCardin("","Closing Balance Dt. -->> ",tdt,"", sumb +(((sumd-sumc)>0)?" Dr":" Cr")));
+                        ArrayList.add(new LedgerPopupCardin("","Total -->> ",df2.format(sumd),df2.format(sumc),""));
+                        ArrayList.add(new LedgerPopupCardin("","Closing Balance Dt. -->> ",tdt,"", df2.format(Math.abs(sumb)) +" "+ ptype));
                         ledinadapter ad= new ledinadapter(Ledger.this,ArrayList);
                         gvdata.setAdapter(ad);
                     }

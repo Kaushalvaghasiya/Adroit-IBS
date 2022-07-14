@@ -5,7 +5,6 @@ import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
@@ -61,7 +60,7 @@ class radapter extends BaseAdapter implements Filterable {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View listitemView = convertView;
         if (listitemView == null) {
-            listitemView = LayoutInflater.from(context).inflate(R.layout.rec_card, parent, false);
+            listitemView = LayoutInflater.from(context).inflate(R.layout.pay_rec_card, parent, false);
         }
         RecCard courseModel = ArrayList.get(position);
         TextView tcname = listitemView.findViewById(R.id.tcname);
