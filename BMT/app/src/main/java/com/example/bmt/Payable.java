@@ -364,6 +364,7 @@ public class Payable extends AppCompatActivity {
                             PdfFont font = PdfFontFactory.createFont(FontConstants.TIMES_ROMAN);
 
                             doc.add(new Paragraph(("Int. Cal. As on : ("+adate.format(date)+") @ 18%/Year.")).setFontSize(8).setMarginLeft(30).setFont(font));
+                            doc.add(new Paragraph(("Days Cal. As on : @ Data Loaded Date")).setFontSize(8).setMarginLeft(30).setFont(font));
                             Table table = new Table(new float[7]).useAllAvailableWidth();
                             table.setMargin(30);
                             table.setTextAlignment(TextAlignment.CENTER);

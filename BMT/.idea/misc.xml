@@ -22,13 +22,16 @@
         <entry key="..\:/Users/kaushal/AndroidStudioProjects/BMT/app/src/main/res/layout/challan_card.xml" value="0.5" />
         <entry key="..\:/Users/kaushal/AndroidStudioProjects/BMT/app/src/main/res/layout/challan_card_b.xml" value="0.5" />
         <entry key="..\:/Users/kaushal/AndroidStudioProjects/BMT/app/src/main/res/layout/challan_card_g.xml" value="0.67" />
+        <entry key="..\:/Users/kaushal/AndroidStudioProjects/BMT/app/src/main/res/layout/challan_card_m.xml" value="0.2975630611372381" />
         <entry key="..\:/Users/kaushal/AndroidStudioProjects/BMT/app/src/main/res/layout/challan_card_y.xml" value="0.5" />
         <entry key="..\:/Users/kaushal/AndroidStudioProjects/BMT/app/src/main/res/layout/challan_popupcard.xml" value="0.5" />
         <entry key="..\:/Users/kaushal/AndroidStudioProjects/BMT/app/src/main/res/layout/challan_popupcard_b.xml" value="0.25" />
         <entry key="..\:/Users/kaushal/AndroidStudioProjects/BMT/app/src/main/res/layout/challan_popupcard_g.xml" value="0.33" />
+        <entry key="..\:/Users/kaushal/AndroidStudioProjects/BMT/app/src/main/res/layout/challan_popupcard_m.xml" value="0.2967079948696024" />
         <entry key="..\:/Users/kaushal/AndroidStudioProjects/BMT/app/src/main/res/layout/challan_popupcard_y.xml" value="0.5981012658227848" />
         <entry key="..\:/Users/kaushal/AndroidStudioProjects/BMT/app/src/main/res/layout/challan_ppcard_b_in.xml" value="0.33" />
         <entry key="..\:/Users/kaushal/AndroidStudioProjects/BMT/app/src/main/res/layout/challan_ppcard_g_in.xml" value="0.3625" />
+        <entry key="..\:/Users/kaushal/AndroidStudioProjects/BMT/app/src/main/res/layout/challan_ppcard_m_in.xml" value="0.33" />
         <entry key="..\:/Users/kaushal/AndroidStudioProjects/BMT/app/src/main/res/layout/content_login.xml" value="0.2884963768115942" />
         <entry key="..\:/Users/kaushal/AndroidStudioProjects/BMT/app/src/main/res/layout/content_mainactivity1.xml" value="0.32155797101449274" />
         <entry key="..\:/Users/kaushal/AndroidStudioProjects/BMT/app/src/main/res/layout/context_main.xml" value="0.3211050724637681" />
@@ -40,7 +43,7 @@
         <entry key="..\:/Users/kaushal/AndroidStudioProjects/BMT/app/src/main/res/layout/ledger_ppcard_in.xml" value="0.3625" />
         <entry key="..\:/Users/kaushal/AndroidStudioProjects/BMT/app/src/main/res/layout/mainactivity1.xml" value="0.2296875" />
         <entry key="..\:/Users/kaushal/AndroidStudioProjects/BMT/app/src/main/res/layout/menu_main.xml" value="0.3211050724637681" />
-        <entry key="..\:/Users/kaushal/AndroidStudioProjects/BMT/app/src/main/res/layout/pay_rec_card.xml" value="0.67" />
+        <entry key="..\:/Users/kaushal/AndroidStudioProjects/BMT/app/src/main/res/layout/pay_rec_card.xml" value="0.42323651452282157" />
         <entry key="..\:/Users/kaushal/AndroidStudioProjects/BMT/app/src/main/res/layout/pay_rec_popupcard.xml" value="0.47068538398018167" />
         <entry key="..\:/Users/kaushal/AndroidStudioProjects/BMT/app/src/main/res/layout/pay_rec_ppcard_in.xml" value="0.22864583333333333" />
         <entry key="..\:/Users/kaushal/AndroidStudioProjects/BMT/app/src/main/res/layout/purchase_card.xml" value="0.4221411192214112" />
@@ -51,12 +54,15 @@
         <entry key="..\:/Users/kaushal/AndroidStudioProjects/BMT/app/src/main/res/layout/sales_card.xml" value="0.5" />
         <entry key="..\:/Users/kaushal/AndroidStudioProjects/BMT/app/src/main/res/layout/sales_card_b.xml" value="0.5" />
         <entry key="..\:/Users/kaushal/AndroidStudioProjects/BMT/app/src/main/res/layout/sales_card_g.xml" value="0.67" />
+        <entry key="..\:/Users/kaushal/AndroidStudioProjects/BMT/app/src/main/res/layout/sales_card_m.xml" value="0.3625" />
         <entry key="..\:/Users/kaushal/AndroidStudioProjects/BMT/app/src/main/res/layout/sales_card_y.xml" value="0.5" />
         <entry key="..\:/Users/kaushal/AndroidStudioProjects/BMT/app/src/main/res/layout/sales_popupcard_b.xml" value="0.44639718804920914" />
         <entry key="..\:/Users/kaushal/AndroidStudioProjects/BMT/app/src/main/res/layout/sales_popupcard_g.xml" value="0.67" />
+        <entry key="..\:/Users/kaushal/AndroidStudioProjects/BMT/app/src/main/res/layout/sales_popupcard_m.xml" value="0.2975630611372381" />
         <entry key="..\:/Users/kaushal/AndroidStudioProjects/BMT/app/src/main/res/layout/sales_popupcard_y.xml" value="0.4110032362459547" />
         <entry key="..\:/Users/kaushal/AndroidStudioProjects/BMT/app/src/main/res/layout/sales_ppcard_b_in.xml" value="0.5" />
         <entry key="..\:/Users/kaushal/AndroidStudioProjects/BMT/app/src/main/res/layout/sales_ppcard_g_in.xml" value="0.9" />
+        <entry key="..\:/Users/kaushal/AndroidStudioProjects/BMT/app/src/main/res/layout/sales_ppcard_m_in.xml" value="0.2967079948696024" />
         <entry key="..\:/Users/kaushal/AndroidStudioProjects/BMT/app/src/main/res/layout/sales_ppcard_y_in.xml" value="0.2967079948696024" />
         <entry key="..\:/Users/kaushal/AndroidStudioProjects/BMT/app/src/main/res/layout/spinner_list.xml" value="0.3020833333333333" />
         <entry key="..\:/Users/kaushal/AndroidStudioProjects/BMT/app/src/main/res/layout/splashscreen.xml" value="0.27109375" />

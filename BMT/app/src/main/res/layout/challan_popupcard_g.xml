@@ -245,6 +245,19 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight=".1"
+                    android:shadowColor="@color/black"
+                    android:shadowDx="-3"
+                    android:shadowDy="3"
+                    android:shadowRadius="2"
+                    android:text="Sr."
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="9dp"
+                    android:textStyle="bold"></TextView>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight=".3"
                     android:shadowColor="@color/black"
                     android:shadowDx="-3"

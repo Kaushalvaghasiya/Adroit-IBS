@@ -31,7 +31,7 @@
 
             <TextView
                 android:id="@+id/tdp"
-                android:layout_width="140dp"
+                android:layout_width="wrap_content"
                 android:textSize="15dp"
                 android:layout_height="match_parent"
                 android:text="Delivery Party"/>
@@ -50,7 +50,7 @@
 
             <TextView
                 android:id="@+id/ttrans"
-                android:layout_width="140dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="Transporter"
                 android:textSize="15dp" />
@@ -71,7 +71,7 @@
             <TextView
                 android:id="@+id/tchno"
                 android:textSize="15dp"
-                android:layout_width="140dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="Challan No."/>
             <TextView
@@ -90,7 +90,7 @@
 
             <TextView
                 android:id="@+id/tchd"
-                android:layout_width="140dp"
+                android:layout_width="wrap_content"
                 android:textSize="15dp"
                 android:layout_height="match_parent"
                 android:text="Challan Date"/>
@@ -110,7 +110,7 @@
 
             <TextView
                 android:id="@+id/tgrade"
-                android:layout_width="140dp"
+                android:layout_width="wrap_content"
                 android:textSize="15dp"
                 android:layout_height="match_parent"
                 android:text="Grade" />
@@ -130,7 +130,7 @@
 
             <TextView
                 android:id="@+id/tlot"
-                android:layout_width="140dp"
+                android:layout_width="wrap_content"
                 android:textSize="15dp"
                 android:layout_height="match_parent"
                 android:text="Lot No."/>
@@ -150,7 +150,7 @@
 
             <TextView
                 android:id="@+id/tsh"
-                android:layout_width="140dp"
+                android:layout_width="wrap_content"
                 android:textSize="15dp"
                 android:layout_height="match_parent"
                 android:text="Shade No."/>
@@ -170,7 +170,7 @@
 
             <TextView
                 android:id="@+id/ttotc"
-                android:layout_width="140dp"
+                android:layout_width="wrap_content"
                 android:textSize="15dp"
                 android:layout_height="match_parent"
                 android:text="Cartoon" />
@@ -190,7 +190,7 @@
 
             <TextView
                 android:id="@+id/ttotch"
-                android:layout_width="140dp"
+                android:layout_width="wrap_content"
                 android:textSize="15dp"
                 android:layout_height="match_parent"
                 android:text="Chese"/>
@@ -210,7 +210,7 @@
 
             <TextView
                 android:id="@+id/ttotwt"
-                android:layout_width="140dp"
+                android:layout_width="wrap_content"
                 android:textSize="15dp"
                 android:layout_height="match_parent"
                 android:text="Net Wt."/>
@@ -232,7 +232,7 @@
             <TextView
                 android:id="@+id/trate"
                 android:textSize="15dp"
-                android:layout_width="140dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="Ch. Amount"
                 android:textColor="@color/white"

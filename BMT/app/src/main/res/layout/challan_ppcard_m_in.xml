@@ -26,28 +26,29 @@
                 <TextView
                     android:id="@+id/tdata1"
                     android:layout_width="0dp"
-                    android:layout_weight=".1"
+                    android:layout_weight=".007"
                     android:layout_height="wrap_content"
                     android:text="Sr."
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="9dp"></TextView>
+
                 <TextView
                     android:id="@+id/tdata2"
                     android:layout_width="0dp"
-                    android:layout_weight=".3"
                     android:layout_height="wrap_content"
-                    android:text="Taka No."
-                    android:textAlignment="center"
+                    android:text="Description"
+                    android:layout_weight=".03"
+                    android:gravity="left"
                     android:textColor="@color/black"
                     android:textSize="9dp"></TextView>
 
                 <TextView
                     android:id="@+id/tdata3"
                     android:layout_width="0dp"
+                    android:layout_weight=".017"
                     android:layout_height="wrap_content"
-                    android:text="Pcs"
-                    android:layout_weight=".25"
+                    android:text="Tk/Pc/ctn"
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="9dp"></TextView>
@@ -55,29 +56,49 @@
                 <TextView
                     android:id="@+id/tdata4"
                     android:layout_width="0dp"
-                    android:layout_weight=".25"
+                    android:layout_weight=".012"
                     android:layout_height="wrap_content"
-                    android:text="Mtrs"
-                    android:gravity="right"
+                    android:text="Cut"
+                    android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="9dp"></TextView>
 
                 <TextView
                     android:id="@+id/tdata5"
                     android:layout_width="0dp"
-                    android:layout_weight=".25"
+                    android:layout_weight=".02"
                     android:layout_height="wrap_content"
-                    android:text="Design No."
-                    android:textAlignment="center"
+                    android:text="Mtr/Qty"
+                    android:gravity="right"
                     android:textColor="@color/black"
                     android:textSize="9dp"></TextView>
 
                 <TextView
                     android:id="@+id/tdata6"
                     android:layout_width="0dp"
-                    android:layout_weight=".5"
+                    android:layout_weight=".015"
                     android:layout_height="wrap_content"
-                    android:text="Quality Name"
+                    android:text="UOM"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:textSize="9dp"></TextView>
+
+                <TextView
+                    android:id="@+id/tdata7"
+                    android:layout_width="0dp"
+                    android:layout_weight=".02"
+                    android:layout_height="wrap_content"
+                    android:text="Net Rate"
+                    android:gravity="right"
+                    android:textColor="@color/black"
+                    android:textSize="9dp"></TextView>
+
+                <TextView
+                    android:id="@+id/tdata8"
+                    android:layout_width="0dp"
+                    android:layout_weight=".021"
+                    android:layout_height="wrap_content"
+                    android:text="Tax. Amt."
                     android:gravity="right"
                     android:textColor="@color/black"
                     android:textSize="9dp"></TextView>

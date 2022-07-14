@@ -31,7 +31,7 @@
 
             <TextView
                 android:id="@+id/tdp"
-                android:layout_width="140dp"
+                android:layout_width="wrap_content"
                 android:textSize="15dp"
                 android:layout_height="match_parent"
                 android:text="Delivery Party"/>
@@ -50,7 +50,7 @@
 
             <TextView
                 android:id="@+id/ttrans"
-                android:layout_width="140dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="Transporter"
                 android:textSize="15dp" />
@@ -71,7 +71,7 @@
             <TextView
                 android:id="@+id/tchno"
                 android:textSize="15dp"
-                android:layout_width="140dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="Challan No."/>
             <TextView
@@ -90,7 +90,7 @@
 
             <TextView
                 android:id="@+id/tchd"
-                android:layout_width="140dp"
+                android:layout_width="wrap_content"
                 android:textSize="15dp"
                 android:layout_height="match_parent"
                 android:text="Challan Date"/>
@@ -110,7 +110,7 @@
 
             <TextView
                 android:id="@+id/tnote"
-                android:layout_width="140dp"
+                android:layout_width="wrap_content"
                 android:textSize="15dp"
                 android:layout_height="match_parent"
                 android:text="Rate" />
@@ -130,10 +130,10 @@
 
             <TextView
                 android:id="@+id/tpcs"
-                android:layout_width="140dp"
+                android:layout_width="wrap_content"
                 android:textSize="15dp"
                 android:layout_height="match_parent"
-                android:text="Nos"/>
+                android:text="Tk/Pc/Ctn"/>
             <TextView
                 android:id="@+id/tpcsd"
                 android:layout_width="match_parent"
@@ -145,12 +145,13 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:visibility="gone"
             android:paddingLeft="5dp"
             android:paddingRight="5dp">
 
             <TextView
                 android:id="@+id/tcal"
-                android:layout_width="140dp"
+                android:layout_width="wrap_content"
                 android:textSize="15dp"
                 android:layout_height="match_parent"
                 android:text="Cut/Cal"/>
@@ -170,10 +171,10 @@
 
             <TextView
                 android:id="@+id/tqty"
-                android:layout_width="140dp"
+                android:layout_width="wrap_content"
                 android:textSize="15dp"
                 android:layout_height="match_parent"
-                android:text="Qty"/>
+                android:text="Mtr/Qty"/>
             <TextView
                 android:id="@+id/tqtyd"
                 android:layout_width="match_parent"
@@ -192,7 +193,7 @@
             <TextView
                 android:id="@+id/tchamt"
                 android:textSize="16dp"
-                android:layout_width="140dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="Ch. Amount"
                 android:textColor="@color/white"

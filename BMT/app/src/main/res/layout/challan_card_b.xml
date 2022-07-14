@@ -32,7 +32,7 @@
 
             <TextView
                 android:id="@+id/tdp"
-                android:layout_width="140dp"
+                android:layout_width="wrap_content"
                 android:textSize="15dp"
                 android:layout_height="match_parent"
                 android:text="Delivery Party"/>
@@ -51,7 +51,7 @@
 
             <TextView
                 android:id="@+id/ttrans"
-                android:layout_width="140dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="Transporter"
                 android:textSize="15dp" />
@@ -73,7 +73,7 @@
             <TextView
                 android:id="@+id/tchno"
                 android:textSize="15dp"
-                android:layout_width="140dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="Challan No."/>
             <TextView
@@ -92,7 +92,7 @@
 
             <TextView
                 android:id="@+id/tchd"
-                android:layout_width="140dp"
+                android:layout_width="wrap_content"
                 android:textSize="15dp"
                 android:layout_height="match_parent"
                 android:text="Challan Date"/>
@@ -112,7 +112,7 @@
 
             <TextView
                 android:id="@+id/tpcs"
-                android:layout_width="140dp"
+                android:layout_width="wrap_content"
                 android:textSize="15dp"
                 android:layout_height="match_parent"
                 android:text="Pcs"/>
@@ -132,7 +132,7 @@
 
             <TextView
                 android:id="@+id/tmtr"
-                android:layout_width="140dp"
+                android:layout_width="wrap_content"
                 android:textSize="15dp"
                 android:layout_height="match_parent"
                 android:text="Qty"/>
@@ -154,7 +154,7 @@
             <TextView
                 android:id="@+id/tchamt"
                 android:textSize="16dp"
-                android:layout_width="140dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="Ch. Amount"
                 android:textColor="@color/white"

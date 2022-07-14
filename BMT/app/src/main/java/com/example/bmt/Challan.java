@@ -57,7 +57,7 @@ public class Challan extends AppCompatActivity {
     SharedPreferences pref;
     Connection con;
     String fdate,tdate;
-    cadapter cada;
+    cmadapter cmada;
     cgadapter cgada;
     cbadapter cbada;
     GridView gvdata;
@@ -301,7 +301,7 @@ public class Challan extends AppCompatActivity {
                             int i=1;
                             while (rs.next()) {
                                 String psc=rs.getString("pcs"),mtr=rs.getString("Mtrs");
-                                ArrayList.add(new ChallanPopupCardGin(
+                                ArrayList.add(new ChallanPopupCardGin(String.valueOf(i),
                                         rs.getString("TakaNO"),rs.getString("pcs").split("\\.")[0],
                                         df.format(Double.parseDouble(rs.getString("Mtrs"))),
                                         rs.getString("RC2"),
@@ -310,9 +310,9 @@ public class Challan extends AppCompatActivity {
                                 sumpsc+=Double.parseDouble(psc);
                                 summtr+=Double.parseDouble(mtr);
                             }
-                            ArrayList.add(new ChallanPopupCardGin(
-                                    "Total -->>","Pcs="+(int)sumpsc,
-                                    "Mtr="+df.format(summtr),"","Taka="+i));
+                            ArrayList.add(new ChallanPopupCardGin("",
+                                    "Total -->> Tot. Taka= "+(i-1)," Tot. Pcs="+(int)sumpsc,
+                                    "Tot. Mtrs="+df.format(summtr),"",""));
                             cginadapter ada = new cginadapter(getApplicationContext(), ArrayList);
                             gvdata.setAdapter(ada);
                         }
@@ -436,11 +436,11 @@ public class Challan extends AppCompatActivity {
                         ChallanCardY ele = (ChallanCardY) gvdata.getItemAtPosition(position);
                         LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
                         View popupView = inflater.inflate(R.layout.challan_popupcard_y, null);
-                        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+                        int width = LinearLayout.LayoutParams.MATCH_PARENT;
                         int height = LinearLayout.LayoutParams.WRAP_CONTENT;
                         boolean focusable = true; // lets taps outside the popup also dismiss it
                         final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
-                        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 50);
+                        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
                         TextView tcname = popupView.findViewById(R.id.tcname);
                         tcname.setText(ele.tcname);
                         TextView tchnod = popupView.findViewById(R.id.tchnod);
@@ -489,8 +489,8 @@ public class Challan extends AppCompatActivity {
                     }
                 });
             }
-            else {
-                ArrayList<ChallanCard> ArrayList = new ArrayList<ChallanCard>();
+            else if (softtype.equals("M")) {
+                ArrayList<ChallanCardM> ArrayList = new ArrayList<ChallanCardM>();
                 if (con != null) {
                     String q = "select  * from ChalanMst_View where BillDate between '" + fdate + "' and '" + tdate + "' and FirmNo='" + fno + "' order by BillDate desc,BillNo desc;";
                     Statement st = con.createStatement();
@@ -500,38 +500,36 @@ public class Challan extends AppCompatActivity {
                         Date date = sdate.parse(bdate);
                         bdate = adate.format(date);
                         NumberFormat df = new DecimalFormat("#0.000");
-                        ArrayList.add(new ChallanCard(rs.getString("AcName"), rs.getString("Deli_Party"),
+                        ArrayList.add(new ChallanCardM(rs.getString("AcName"), rs.getString("Deli_Party"),
                                 rs.getString("Transport"), rs.getString("BillNo"),
                                 bdate, rs.getString("Notes"),
                                 df.format(Double.parseDouble(rs.getString("Pcs"))), df.format(Double.parseDouble(rs.getString("Qty"))),
                                 rs.getString("BillAmount"), rs.getString("C_Id")));
                     }
                 }
-                cada = new cadapter(this, ArrayList);
+                cmada = new cmadapter(this, ArrayList);
                 LinearLayout ll = findViewById(R.id.btnLay);
-                paging p = new paging(this,ll,10,cada,gvdata,"cada");
+                paging p = new paging(this,ll,10,cmada,gvdata,"cmada");
                 p.Btnfooter();
                 p.addata();
                 gvdata.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        ChallanCard ele = (ChallanCard) gvdata.getItemAtPosition(position);
+                        ChallanCardM ele = (ChallanCardM) gvdata.getItemAtPosition(position);
                         LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-                        View popupView = inflater.inflate(R.layout.challan_popupcard_y, null);
-                        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+                        View popupView = inflater.inflate(R.layout.challan_popupcard_m, null);
+                        int width = LinearLayout.LayoutParams.MATCH_PARENT;
                         int height = LinearLayout.LayoutParams.WRAP_CONTENT;
                         boolean focusable = true; // lets taps outside the popup also dismiss it
                         final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
-                        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 50);
-                        TextView tcname = popupView.findViewById(R.id.tcname);
+                        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+                        TextView tcname = popupView.findViewById(R.id.tbpnamed);
                         tcname.setText(ele.tcname);
                         TextView tchnod = popupView.findViewById(R.id.tchnod);
                         tchnod.setText(ele.chno);
                         TextView tchdd = popupView.findViewById(R.id.tchdd);
                         tchdd.setText(ele.chd);
-                        TextView ttotchd = popupView.findViewById(R.id.ttotchd);
-                        ttotchd.setText(ele.chamt);
-                        TextView tdepd = popupView.findViewById(R.id.tdepd);
+                        TextView tdepd = popupView.findViewById(R.id.tdpnamed);
                         tdepd.setText(ele.dp);
                         Button bc = popupView.findViewById(R.id.bclose);
                         GridView gvdata = popupView.findViewById(R.id.gvdata);
@@ -541,19 +539,32 @@ public class Challan extends AppCompatActivity {
                                 popupWindow.dismiss();
                             }
                         });
-                        ArrayList<SalesPopUpCardYin> ArrayList = new ArrayList<SalesPopUpCardYin>();
+                        ArrayList<ChallanPopupCardMin> ArrayList = new ArrayList<ChallanPopupCardMin>();
                         String q = "select * from chalandtlview where Ch_id='"+ele.C_Id+"' and  FirmNo='"+fno+"' order by Srno asc";
                         try{
                             Statement st = con.createStatement();
                             ResultSet rs = st.executeQuery(q);
                             NumberFormat df = new DecimalFormat("#0.000");
+                            NumberFormat df2 = new DecimalFormat("#0.00");
+                            int i=1;
+                            double sumpsc=0,summtr=0,suma=0;
                             while (rs.next()) {
-                                ArrayList.add(new SalesPopUpCardYin(
-                                        rs.getString("PM"),df.format(Double.parseDouble(rs.getString("Pcs"))),
-                                        df.format(Double.parseDouble(rs.getString("Mtrs"))),
-                                        rs.getString("Rate"),rs.getString("Amt")));
+                                String psc=rs.getString("qty1"),mtr=rs.getString("Qnty");
+                                String billa=rs.getString("billamount");
+                                ArrayList.add(new ChallanPopupCardMin(String.valueOf(i),
+                                        rs.getString("prodname"),"",df.format(Double.parseDouble(rs.getString("qty1"))),
+                                        df.format(Double.parseDouble(rs.getString("Qnty"))),rs.getString("unit"),
+                                        df2.format(Double.parseDouble(rs.getString("rate"))),
+                                        rs.getString("billamount")));
+                                i++;
+                                suma+=Double.parseDouble(billa);
+                                sumpsc+=Double.parseDouble(psc);
+                                summtr+=Double.parseDouble(mtr);
                             }
-                            syinadapter ada = new syinadapter(getApplicationContext(), ArrayList);
+                            ArrayList.add(new ChallanPopupCardMin("",
+                                    "Total -->>","",df.format(sumpsc),
+                                    df.format(summtr),"","",df2.format(suma)));
+                            cminadapter ada = new cminadapter(getApplicationContext(), ArrayList);
                             gvdata.setAdapter(ada);
                         }
                         catch (Exception e){
@@ -600,9 +611,13 @@ public class Challan extends AppCompatActivity {
                     cyada.getFilter().filter(newText);
                     p = new paging(Challan.this,ll,10,cyada,gvdata,"cyada");
                 }
+                else if(softtype.equals("b")){
+                    cyada.getFilter().filter(newText);
+                    p = new paging(Challan.this,ll,10,cbada,gvdata,"cbada");
+                }
                 else{
-                    cada.getFilter().filter(newText);
-                    p = new paging(Challan.this,ll,10,cada,gvdata,"cada");
+                    cmada.getFilter().filter(newText);
+                    p = new paging(Challan.this,ll,10,cmada,gvdata,"cmada");
                 }
                 p.Btnfooter();
                 p.addata();

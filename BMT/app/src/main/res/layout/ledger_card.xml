@@ -17,7 +17,7 @@
 
             <TextView
                 android:id="@+id/tcnamed"
-                android:layout_width="206dp"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:text="cname"
                 android:textSize="17dp"
@@ -35,7 +35,7 @@
 
             <TextView
                 android:id="@+id/tcityd"
-                android:layout_width="206dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="city"
                 android:textColor="@color/red"

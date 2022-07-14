@@ -31,7 +31,7 @@
 
             <TextView
                 android:id="@+id/tdp"
-                android:layout_width="140dp"
+                android:layout_width="wrap_content"
                 android:textSize="15dp"
                 android:layout_height="match_parent"
                 android:text="Delivery Party"/>
@@ -50,7 +50,7 @@
 
             <TextView
                 android:id="@+id/ttrans"
-                android:layout_width="140dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="Transporter"
                 android:textSize="15dp" />
@@ -72,7 +72,7 @@
             <TextView
                 android:id="@+id/tchno"
                 android:textSize="15dp"
-                android:layout_width="140dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="Challan No."/>
             <TextView
@@ -91,7 +91,7 @@
 
             <TextView
                 android:id="@+id/tchd"
-                android:layout_width="140dp"
+                android:layout_width="wrap_content"
                 android:textSize="15dp"
                 android:layout_height="match_parent"
                 android:text="Challan Date"/>
@@ -111,7 +111,7 @@
 
             <TextView
                 android:id="@+id/trate"
-                android:layout_width="140dp"
+                android:layout_width="wrap_content"
                 android:textSize="15dp"
                 android:layout_height="match_parent"
                 android:text="Rate" />
@@ -131,7 +131,7 @@
 
             <TextView
                 android:id="@+id/tratet"
-                android:layout_width="140dp"
+                android:layout_width="wrap_content"
                 android:textSize="15dp"
                 android:layout_height="match_parent"
                 android:text="RTime"/>
@@ -151,7 +151,7 @@
 
             <TextView
                 android:id="@+id/tpcs"
-                android:layout_width="140dp"
+                android:layout_width="wrap_content"
                 android:textSize="15dp"
                 android:layout_height="match_parent"
                 android:text="Taka/Pcs"/>
@@ -171,7 +171,7 @@
 
             <TextView
                 android:id="@+id/tweight"
-                android:layout_width="140dp"
+                android:layout_width="wrap_content"
                 android:textSize="15dp"
                 android:layout_height="match_parent"
                 android:text="Cut/Cal" />
@@ -191,7 +191,7 @@
 
             <TextView
                 android:id="@+id/tmtr"
-                android:layout_width="140dp"
+                android:layout_width="wrap_content"
                 android:textSize="15dp"
                 android:layout_height="match_parent"
                 android:text="Mtr/Qty"/>
@@ -213,7 +213,7 @@
             <TextView
                 android:id="@+id/tchamt"
                 android:textSize="16dp"
-                android:layout_width="140dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="Ch. Amount"
                 android:textColor="@color/white"

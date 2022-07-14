@@ -30,7 +30,7 @@
 
             <TextView
                 android:id="@+id/tbillt"
-                android:layout_width="140dp"
+                android:layout_width="wrap_content"
                 android:textSize="15dp"
                 android:layout_height="match_parent"
                 android:text="Bill Type"/>
@@ -49,7 +49,7 @@
 
             <TextView
                 android:id="@+id/tbillno"
-                android:layout_width="140dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="Bill No"
                 android:textSize="15dp"/>
@@ -70,7 +70,7 @@
             <TextView
                 android:id="@+id/tbilld"
                 android:textSize="15dp"
-                android:layout_width="140dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="Bill Date"/>
             <TextView
@@ -89,7 +89,7 @@
 
             <TextView
                 android:id="@+id/tpcs"
-                android:layout_width="140dp"
+                android:layout_width="wrap_content"
                 android:textSize="15dp"
                 android:layout_height="match_parent"
                 android:text="Tk/Pc/Ctn" />
@@ -110,7 +110,7 @@
 
             <TextView
                 android:id="@+id/tqty"
-                android:layout_width="140dp"
+                android:layout_width="wrap_content"
                 android:textSize="15dp"
                 android:layout_height="match_parent"
                 android:text="Mtr/Qty"/>
@@ -130,7 +130,7 @@
 
             <TextView
                 android:id="@+id/ttaxa"
-                android:layout_width="140dp"
+                android:layout_width="wrap_content"
                 android:textSize="15dp"
                 android:layout_height="match_parent"
                 android:text="Taxable Amt" />
@@ -150,7 +150,7 @@
 
             <TextView
                 android:id="@+id/tgsta"
-                android:layout_width="140dp"
+                android:layout_width="wrap_content"
                 android:textSize="15dp"
                 android:layout_height="match_parent"
                 android:text="GST Amt" />
@@ -172,7 +172,7 @@
             <TextView
                 android:id="@+id/tbilla"
                 android:textSize="16dp"
-                android:layout_width="140dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="Bill Amount"
                 android:textColor="@color/white"

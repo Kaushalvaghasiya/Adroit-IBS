@@ -299,7 +299,7 @@ public class Ledger extends AppCompatActivity {
                             bdt = adate.format(date);
                             if(rs.getString("descr").equals("Op. Balance--")){
                                 sumb=Double.parseDouble(rs.getString("bal"));
-                                ArrayList.add(new LedgerPopupCardin(bdt,rs.getString("Descr"),rs.getString("dramt"),rs.getString("cramt"),df2.format(sumb)+" "+rs.getString("baltype")));
+                                ArrayList.add(new LedgerPopupCardin("",rs.getString("Descr"),rs.getString("dramt"),rs.getString("cramt"),df2.format(sumb)+" "+rs.getString("baltype")));
                                 ptype=rs.getString("baltype");
                                 continue;
                             }

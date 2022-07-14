@@ -31,7 +31,7 @@
 
             <TextView
                 android:id="@+id/tphone"
-                android:layout_width="140dp"
+                android:layout_width="wrap_content"
                 android:textSize="15dp"
                 android:layout_height="match_parent"
                 android:text="Phone"/>
@@ -50,7 +50,7 @@
 
             <TextView
                 android:id="@+id/ttbill"
-                android:layout_width="140dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="Total Bill"
                 android:textSize="15dp"/>
@@ -71,7 +71,7 @@
             <TextView
                 android:id="@+id/tbilla"
                 android:textSize="15dp"
-                android:layout_width="140dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="Bill Amount"/>
             <TextView
@@ -90,7 +90,7 @@
 
             <TextView
                 android:id="@+id/tpamt"
-                android:layout_width="140dp"
+                android:layout_width="wrap_content"
                 android:textSize="15dp"
                 android:layout_height="match_parent"
                 android:text="Paid Amount"
@@ -112,7 +112,7 @@
 
             <TextView
                 android:id="@+id/tupamt"
-                android:layout_width="140dp"
+                android:layout_width="wrap_content"
                 android:textSize="15dp"
                 android:layout_height="match_parent"
                 android:text="Unpaid Amount"

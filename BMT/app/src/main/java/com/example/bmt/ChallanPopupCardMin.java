@@ -15,10 +15,10 @@ import androidx.cardview.widget.CardView;
 
 import java.util.ArrayList;
 
-class SalesPopUpCardGin {
+class ChallanPopupCardMin {
     String data1,data2,data3,data4,data5,data6,data7,data8;
 
-    public SalesPopUpCardGin(String data1,String data2,String data3, String data4,String data5,String data6,String data7,String data8) {
+    public ChallanPopupCardMin(String data1, String data2, String data3, String data4, String data5, String data6, String data7, String data8) {
         this.data1 = data1;
         this.data2 = data2;
         this.data3 = data3;
@@ -29,9 +29,9 @@ class SalesPopUpCardGin {
         this.data8 = data8;
     }
 }
-class sginadapter extends ArrayAdapter<SalesPopUpCardGin>{
-    ArrayList<SalesPopUpCardGin> ArrayList;
-    public sginadapter(@NonNull Context context, ArrayList<SalesPopUpCardGin> ArrayList) {
+class cminadapter extends ArrayAdapter<ChallanPopupCardMin>{
+    ArrayList<ChallanPopupCardMin> ArrayList;
+    public cminadapter(@NonNull Context context, ArrayList<ChallanPopupCardMin> ArrayList) {
         super(context, 0, ArrayList);
         this.ArrayList=ArrayList;
     }
@@ -39,9 +39,9 @@ class sginadapter extends ArrayAdapter<SalesPopUpCardGin>{
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View listitemView = convertView;
         if (listitemView == null) {
-            listitemView = LayoutInflater.from(getContext()).inflate(R.layout.sales_ppcard_g_in, parent, false);
+            listitemView = LayoutInflater.from(getContext()).inflate(R.layout.sales_ppcard_m_in, parent, false);
         }
-        SalesPopUpCardGin courseModel = getItem(position);
+        ChallanPopupCardMin courseModel = getItem(position);
         TextView data1 = listitemView.findViewById(R.id.tdata1);
         TextView data2 = listitemView.findViewById(R.id.tdata2);
         TextView data3 = listitemView.findViewById(R.id.tdata3);

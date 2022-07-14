@@ -5,7 +5,6 @@ import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
@@ -17,10 +16,10 @@ import androidx.annotation.RequiresApi;
 
 import java.util.ArrayList;
 
-public class ChallanCard {
+public class ChallanCardM {
     String dp,tra,chno,chd,notes,pcs,qty,tcname,chamt,C_Id;
 
-    public ChallanCard(String tcname,String dp, String tra,String chno,String chd,String notes,String pcs,String qty,String chamt,String C_Id) {
+    public ChallanCardM(String tcname, String dp, String tra, String chno, String chd, String notes, String pcs, String qty, String chamt, String C_Id) {
         this.tcname=tcname;
         this.dp = dp;
         this.tra = tra;
@@ -33,11 +32,11 @@ public class ChallanCard {
         this.C_Id = C_Id;
     }
 }
-class cadapter extends BaseAdapter implements Filterable {
-    ArrayList<ChallanCard> ArrayList;
-    ArrayList<ChallanCard> filteredArrayList;
+class cmadapter extends BaseAdapter implements Filterable {
+    ArrayList<ChallanCardM> ArrayList;
+    ArrayList<ChallanCardM> filteredArrayList;
     Context context;
-    public cadapter(@NonNull Context context, ArrayList<ChallanCard> ArrayList) {
+    public cmadapter(@NonNull Context context, ArrayList<ChallanCardM> ArrayList) {
         this.ArrayList = ArrayList;
         this.filteredArrayList = ArrayList;
         this.context = context;
@@ -61,9 +60,9 @@ class cadapter extends BaseAdapter implements Filterable {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View listitemView = convertView;
         if (listitemView == null) {
-            listitemView = LayoutInflater.from(context).inflate(R.layout.challan_card, parent, false);
+            listitemView = LayoutInflater.from(context).inflate(R.layout.challan_card_m, parent, false);
         }
-        ChallanCard courseModel = ArrayList.get(position);
+        ChallanCardM courseModel = ArrayList.get(position);
         TextView tcname = listitemView.findViewById(R.id.tcname);
         TextView dp = listitemView.findViewById(R.id.tdpd);
         TextView tra = listitemView.findViewById(R.id.ttransd);
@@ -98,8 +97,8 @@ class cadapter extends BaseAdapter implements Filterable {
                 }
                 else{
                     String search = constraint.toString().toUpperCase();
-                    ArrayList<ChallanCard> searchreasult= new ArrayList<>();
-                    for(ChallanCard s: filteredArrayList){
+                    ArrayList<ChallanCardM> searchreasult= new ArrayList<>();
+                    for(ChallanCardM s: filteredArrayList){
                         if(s.tcname.contains(search)){
                             searchreasult.add(s);
                         }
@@ -112,7 +111,7 @@ class cadapter extends BaseAdapter implements Filterable {
 
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
-                ArrayList = (ArrayList<ChallanCard>) results.values;
+                ArrayList = (ArrayList<ChallanCardM>) results.values;
                 notifyDataSetChanged();
             }
         };
